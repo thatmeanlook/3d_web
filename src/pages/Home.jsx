@@ -4,6 +4,8 @@ import Loader from '../components/Loader'
 import Island from '../models/Island'
 // import { Sky } from '@react-three/drei'
 import Sky from '../models/Sky'
+import Bird from '../models/Bird'
+import Plane from '../models/Plane'
 
 {/* <div className='absolute top-28 left-0 right-0 z-10 flex items-center justify-center' >
                 POPUP
@@ -41,6 +43,8 @@ const Home = () => {
                     <spotLight />
                     <hemisphereLight skyColor='#b1e1ff' groundColor='#000000' intensity={1} />
 
+
+                    <Bird />
                     <Sky />
 
                     <Island
@@ -49,6 +53,8 @@ const Home = () => {
                         rotation={islandRotation}
 
                     />
+
+                    <Plane />
 
 
                 </Suspense>
