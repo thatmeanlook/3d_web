@@ -9,7 +9,8 @@ Title: Fox's islands
 import React, { useRef, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import islandScene from '../assets/3d/island.glb'
+import islandScene from '../assets/3d/cute_island.glb'
+// import islandScene from '../assets/3d/tree_house.glb'
 import { a } from '@react-spring/three'
 
 const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
@@ -118,16 +119,20 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
 
             // Set the current stage based on the island's orientation
             switch (true) {
-                case normalizedRotation >= 5.45 && normalizedRotation <= 5.85:
+                case normalizedRotation >= 6 && normalizedRotation <= 6.5:
                     setCurrentStage(4);
                     break;
-                case normalizedRotation >= 0.85 && normalizedRotation <= 1.3:
+                case normalizedRotation >= 1.5 && normalizedRotation <= 2:
                     setCurrentStage(3);
                     break;
-                case normalizedRotation >= 2.4 && normalizedRotation <= 2.6:
+                // case normalizedRotation >= 2.4 && normalizedRotation <= 2.6:
+                case normalizedRotation >= 2.8 && normalizedRotation <= 3.3:
+
                     setCurrentStage(2);
                     break;
-                case normalizedRotation >= 4.25 && normalizedRotation <= 4.75:
+                    break;
+                // case normalizedRotation >= 4.25 && normalizedRotation <= 4.75:
+                case normalizedRotation >= 4.25 && normalizedRotation <= 5:
                     setCurrentStage(1);
                     break;
                 default:
@@ -143,51 +148,672 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
     }
 
     return (
+        // <group {...props} dispose={null}>
+        //     <group scale={0.08}
+        //         rotation={[0, 120, 0]}>
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[2.041, -139.81, 0]}
+        //             rotation={[-Math.PI / 2, 0, -0.946]}
+        //             scale={[350, 350, 140]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder001_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[2.041, -139.81, 0]}
+        //             rotation={[-Math.PI / 2, 0, -0.946]}
+        //             scale={[350, 350, 140]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Torus002_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[-36.291, 129.905, -158.527]}
+        //             rotation={[-1.748, 0.301, 0.182]}
+        //             scale={[10.774, 10.895, 9.406]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder002_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[-204.454, 55.698, -170.588]}
+        //             rotation={[-Math.PI / 2, 0, 0]}
+        //             scale={[14.975, 14.975, 43.025]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder003_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[8.86, 44.279, -272.547]}
+        //             rotation={[-Math.PI / 2, 0, 0]}
+        //             scale={[12.135, 12.135, 34.867]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder004_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[-181.622, 49.615, -42.053]}
+        //             rotation={[-Math.PI / 2, 0, 0.744]}
+        //             scale={[9.632, 9.632, 27.675]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder005_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[123.122, 38.646, -211.553]}
+        //             rotation={[-Math.PI / 2, 0, 0.708]}
+        //             scale={[9.239, 9.239, 26.546]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder006_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[-294.693, 43.624, -6.261]}
+        //             rotation={[-Math.PI / 2, 0, -0.518]}
+        //             scale={[11.545, 11.545, 33.172]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder007_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[-109.699, 52.569, -261.662]}
+        //             rotation={[-Math.PI / 2, 0, -2.874]}
+        //             scale={[15.706, 15.706, 45.125]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder008_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[-142.454, 38.456, 124.072]}
+        //             rotation={[0.115, -0.032, -0.528]}
+        //             scale={100.309}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder009_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[92.614, 52.903, 165.46]}
+        //             rotation={[-Math.PI / 2, 0, 0.023]}
+        //             scale={[2.332, 2.332, 29.523]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder012_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[103.392, 36.69, 103.377]}
+        //             rotation={[0.416, -0.613, 0.372]}
+        //             scale={[5.848, 5.867, 15.466]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder010_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[220.728, 24.928, -79.14]}
+        //             rotation={[-Math.PI / 2, 0, 0]}
+        //             scale={[3.464, 3.464, 6.539]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder011_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[-37.824, 18.836, 285.587]}
+        //             rotation={[-Math.PI / 2, 0, 0]}
+        //             scale={[3.825, 3.825, 7.135]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder013_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[-233.198, 12.043, 213.107]}
+        //             rotation={[-Math.PI / 2, 0, 0]}
+        //             scale={[3.163, 3.163, 5.972]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder014_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[63.539, 27.373, -190.155]}
+        //             rotation={[-Math.PI / 2, 0, 0]}
+        //             scale={[4.255, 4.255, 7.937]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder015_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[-159.358, 48.992, 176.075]}
+        //             rotation={[-1.379, -0.559, 0.479]}
+        //             scale={[2.695, 2.695, 5.087]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder016_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[-155.678, 54.336, 110.91]}
+        //             rotation={[-1.809, -0.623, -0.065]}
+        //             scale={[2.253, 2.253, 4.203]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder017_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[293.776, 15.892, 19.905]}
+        //             rotation={[-1.59, -0.026, 0.176]}
+        //             scale={[2.695, 2.695, 5.087]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Cylinder018_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[155.35, 15.203, -227.589]}
+        //             rotation={[-1.638, -0.029, 0.316]}
+        //             scale={[2.503, 2.503, 4.668]}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Sphere004_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[104.184, 66.958, 112.02]}
+        //             rotation={[-Math.PI / 2, 0, -0.195]}
+        //             scale={3.407}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Icosphere004_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[97.795, 346.88, -284.807]}
+        //             rotation={[0.481, -0.124, 2.167]}
+        //             scale={47.776}
+        //         />
+        //         <mesh
+        //             castShadow
+        //             receiveShadow
+        //             geometry={nodes.Icosphere010_Material_0.geometry}
+        //             material={materials.Material}
+        //             position={[-322.135, 343.393, 44.987]}
+        //             rotation={[2.585, -0.515, -1.336]}
+        //             scale={49.018}
+        //         />
+        //     </group>
+        // </group>
         <a.group ref={islandRef} {...props}>
-            <mesh
-                // castShadow
-                // receiveShadow
-                geometry={nodes.polySurface944_tree_body_0.geometry}
-                material={materials.PaletteMaterial001}
-            />
-            <mesh
-                // castShadow
-                // receiveShadow
-                geometry={nodes.polySurface945_tree1_0.geometry}
-                material={materials.PaletteMaterial001}
-            />
-            <mesh
-                // castShadow
-                // receiveShadow
-                geometry={nodes.polySurface946_tree2_0.geometry}
-                material={materials.PaletteMaterial001}
-            />
-            <mesh
-                // castShadow
-                // receiveShadow
-                geometry={nodes.polySurface947_tree1_0.geometry}
-                material={materials.PaletteMaterial001}
-            />
-            <mesh
-                // castShadow
-                // receiveShadow
-                geometry={nodes.polySurface948_tree_body_0.geometry}
-                material={materials.PaletteMaterial001}
-            />
-            <mesh
-                // castShadow
-                // receiveShadow
-                geometry={nodes.polySurface949_tree_body_0.geometry}
-                material={materials.PaletteMaterial001}
-            />
-            <mesh
-                // castShadow
-                // receiveShadow
-                geometry={nodes.pCube11_rocks1_0.geometry}
-                material={materials.PaletteMaterial001}
-            />
+
+            {/* ISLAND 1 */}
+
+            {/* <group
+                scale={2}
+                position={[1, -15, 1]}
+                rotation={[-Math.PI / 2, 0, 0]}
+            >
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_2.geometry}
+                    material={materials.lambert26SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_3.geometry}
+                    material={materials.lambert33SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_4.geometry}
+                    material={materials.lambert33SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_5.geometry}
+                    material={materials.lambert34SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_6.geometry}
+                    material={materials.lambert44SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_7.geometry}
+                    material={materials.lambert45SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_8.geometry}
+                    material={materials.lambert47SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_9.geometry}
+                    material={materials.lambert48SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_10.geometry}
+                    material={materials.initialShadingGroup}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_11.geometry}
+                    material={materials.lambert10SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_12.geometry}
+                    material={materials.lambert11SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_13.geometry}
+                    material={materials.lambert13SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_14.geometry}
+                    material={materials.lambert14SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_15.geometry}
+                    material={materials.lambert15SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_16.geometry}
+                    material={materials.lambert18SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_17.geometry}
+                    material={materials.lambert20SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_18.geometry}
+                    material={materials.lambert21SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_19.geometry}
+                    material={materials.lambert22SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_20.geometry}
+                    material={materials.lambert23SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_21.geometry}
+                    material={materials.lambert24SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_22.geometry}
+                    material={materials.lambert25SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_23.geometry}
+                    material={materials.lambert27SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_24.geometry}
+                    material={materials.lambert28SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_25.geometry}
+                    material={materials.lambert31SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_26.geometry}
+                    material={materials.lambert32SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_27.geometry}
+                    material={materials.lambert35SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_28.geometry}
+                    material={materials.lambert36SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_29.geometry}
+                    material={materials.lambert37SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_30.geometry}
+                    material={materials.lambert38SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_31.geometry}
+                    material={materials.lambert46SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_32.geometry}
+                    material={materials.lambert4SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_33.geometry}
+                    material={materials.lambert50SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_34.geometry}
+                    material={materials.lambert51SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_35.geometry}
+                    material={materials.lambert52SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_36.geometry}
+                    material={materials.lambert56SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_37.geometry}
+                    material={materials.lambert57SG}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_38.geometry}
+                    material={materials.lambert9SG}
+                />
+            </group> */}
+
+
+            {/* ISLAND 2 */}
+
+            <group scale={0.07}
+                position={[0, 0, 0]}
+                rotation={[0, 0.6, 0]}
+            >
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder_Material_0.geometry}
+                    material={materials.Material}
+                    position={[2.041, -139.81, 0]}
+                    rotation={[-Math.PI / 2, 0, -0.946]}
+                    scale={[350, 350, 140]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder001_Material_0.geometry}
+                    material={materials.Material}
+                    position={[2.041, -139.81, 0]}
+                    rotation={[-Math.PI / 2, 0, -0.946]}
+                    scale={[350, 350, 140]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Torus002_Material_0.geometry}
+                    material={materials.Material}
+                    position={[-36.291, 129.905, -158.527]}
+                    rotation={[-1.748, 0.301, 0.182]}
+                    scale={[10.774, 10.895, 9.406]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder002_Material_0.geometry}
+                    material={materials.Material}
+                    position={[-204.454, 55.698, -170.588]}
+                    rotation={[-Math.PI / 2, 0, 0]}
+                    scale={[14.975, 14.975, 43.025]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder003_Material_0.geometry}
+                    material={materials.Material}
+                    position={[8.86, 44.279, -272.547]}
+                    rotation={[-Math.PI / 2, 0, 0]}
+                    scale={[12.135, 12.135, 34.867]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder004_Material_0.geometry}
+                    material={materials.Material}
+                    position={[-181.622, 49.615, -42.053]}
+                    rotation={[-Math.PI / 2, 0, 0.744]}
+                    scale={[9.632, 9.632, 27.675]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder005_Material_0.geometry}
+                    material={materials.Material}
+                    position={[123.122, 38.646, -211.553]}
+                    rotation={[-Math.PI / 2, 0, 0.708]}
+                    scale={[9.239, 9.239, 26.546]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder006_Material_0.geometry}
+                    material={materials.Material}
+                    position={[-294.693, 43.624, -6.261]}
+                    rotation={[-Math.PI / 2, 0, -0.518]}
+                    scale={[11.545, 11.545, 33.172]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder007_Material_0.geometry}
+                    material={materials.Material}
+                    position={[-109.699, 52.569, -261.662]}
+                    rotation={[-Math.PI / 2, 0, -2.874]}
+                    scale={[15.706, 15.706, 45.125]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder008_Material_0.geometry}
+                    material={materials.Material}
+                    position={[-142.454, 38.456, 124.072]}
+                    rotation={[0.115, -0.032, -0.528]}
+                    scale={100.309}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder009_Material_0.geometry}
+                    material={materials.Material}
+                    position={[92.614, 52.903, 165.46]}
+                    rotation={[-Math.PI / 2, 0, 0.023]}
+                    scale={[2.332, 2.332, 29.523]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder012_Material_0.geometry}
+                    material={materials.Material}
+                    position={[103.392, 36.69, 103.377]}
+                    rotation={[0.416, -0.613, 0.372]}
+                    scale={[5.848, 5.867, 15.466]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder010_Material_0.geometry}
+                    material={materials.Material}
+                    position={[220.728, 24.928, -79.14]}
+                    rotation={[-Math.PI / 2, 0, 0]}
+                    scale={[3.464, 3.464, 6.539]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder011_Material_0.geometry}
+                    material={materials.Material}
+                    position={[-37.824, 18.836, 285.587]}
+                    rotation={[-Math.PI / 2, 0, 0]}
+                    scale={[3.825, 3.825, 7.135]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder013_Material_0.geometry}
+                    material={materials.Material}
+                    position={[-233.198, 12.043, 213.107]}
+                    rotation={[-Math.PI / 2, 0, 0]}
+                    scale={[3.163, 3.163, 5.972]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder014_Material_0.geometry}
+                    material={materials.Material}
+                    position={[63.539, 27.373, -190.155]}
+                    rotation={[-Math.PI / 2, 0, 0]}
+                    scale={[4.255, 4.255, 7.937]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder015_Material_0.geometry}
+                    material={materials.Material}
+                    position={[-159.358, 48.992, 176.075]}
+                    rotation={[-1.379, -0.559, 0.479]}
+                    scale={[2.695, 2.695, 5.087]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder016_Material_0.geometry}
+                    material={materials.Material}
+                    position={[-155.678, 54.336, 110.91]}
+                    rotation={[-1.809, -0.623, -0.065]}
+                    scale={[2.253, 2.253, 4.203]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder017_Material_0.geometry}
+                    material={materials.Material}
+                    position={[293.776, 15.892, 19.905]}
+                    rotation={[-1.59, -0.026, 0.176]}
+                    scale={[2.695, 2.695, 5.087]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cylinder018_Material_0.geometry}
+                    material={materials.Material}
+                    position={[155.35, 15.203, -227.589]}
+                    rotation={[-1.638, -0.029, 0.316]}
+                    scale={[2.503, 2.503, 4.668]}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Sphere004_Material_0.geometry}
+                    material={materials.Material}
+                    position={[104.184, 66.958, 112.02]}
+                    rotation={[-Math.PI / 2, 0, -0.195]}
+                    scale={3.407}
+                />
+
+                {/* CLOUDS */}
+                {/* <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Icosphere004_Material_0.geometry}
+                    material={materials.Material}
+                    position={[97.795, 346.88, -284.807]}
+                    rotation={[0.481, -0.124, 2.167]}
+                    scale={47.776}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Icosphere010_Material_0.geometry}
+                    material={materials.Material}
+                    position={[-322.135, 343.393, 44.987]}
+                    rotation={[2.585, -0.515, -1.336]}
+                    scale={49.018}
+                /> */}
+            </group>
+
         </a.group>
     );
+
 }
 
 // useGLTF.preload("/island.glb");

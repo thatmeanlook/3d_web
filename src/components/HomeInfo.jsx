@@ -14,12 +14,16 @@ const InfoBox = ({ text, link, btnText }) => (
 )
 
 const renderContent = {
+    // 0: (
+    //     <br></br>
+    // ),
+
     1: (
         <h1 className='sm:text-xl sm:leading-snug text-center 
         neo-brutalism-blue py-4 px-8 text-white mx-5'>
             Hi, I am <span className='font-semibold'>Minh</span>👋
             <br />
-            A recent grad from UC San Diego and an aspired Frontend Engineer.
+            A recent grad from UC San Diego and an aspiring Frontend Engineer.
             {/* A Frontend Engineer from San Diego. */}
         </h1>
     ),

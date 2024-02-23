@@ -11,6 +11,10 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 
 import scene from '../assets/3d/raccoon.glb'
 
+
+// insert UCSD raccoon vid
+// https://www.reddit.com/r/UCSD/comments/qxc16u/just_some_raccoons/
+
 const Raccoon = ({ currentAnimation, ...props }) => {
     const group = useRef();
     const { nodes, materials, animations } = useGLTF(scene);
