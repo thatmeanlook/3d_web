@@ -3,6 +3,7 @@ import emailjs from '@emailjs/browser';
 import { Canvas } from '@react-three/fiber';
 // import Raccoon from '../models/Raccoon';
 import Loader from '../components/Loader';
+import Raccoon from '../models/Raccoon';
 
 const Contact = () => {
     const formRef = useRef(null);
@@ -101,7 +102,7 @@ const Contact = () => {
                     <directionalLight intensity={2} position={[1, 2, 1]} />
                     <ambientLight intensity={1} />
 
-                    {/* <Suspense fallback={<Loader />}>
+                    <Suspense fallback={<Loader />}>
 
                         <Raccoon
                             currentAnimation={currentAnimation}
@@ -109,7 +110,7 @@ const Contact = () => {
                             rotation={[0, 0, 0]}
                             scale={[1, 1, 1]}
                         />
-                    </Suspense> */}
+                    </Suspense>
 
                 </Canvas>
 
