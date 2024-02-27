@@ -13,8 +13,7 @@ const Plane = ({ isRotating, ...props }) => {
         if (isRotating) {
             actions['Racoon_Walk'].play();
 
-        }
-        else {
+        } else {
             actions['Racoon_Walk'].stop();
         }
 
@@ -22,9 +21,7 @@ const Plane = ({ isRotating, ...props }) => {
 
     return (
         <group
-            position={[2.5, -1.5, 6]}
-            rotation={[0, 0, 0]}
-        >
+            position={[0, -1.2, 1]}>
             <mesh {...props} ref={ref}>
                 <primitive object={scene} />
             </mesh>

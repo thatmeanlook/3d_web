@@ -59,13 +59,9 @@ const Raccoon = ({ currentAnimation, ...props }) => {
                                             <group name="Object_9">
                                                 <primitive object={nodes._rootJoint} />
                                                 <skinnedMesh
-                                                    castShadow
-                                                    receiveShadow
                                                     name="Object_12"
                                                     geometry={nodes.Object_12.geometry}
                                                     material={materials.Racoon}
-                                                    // material-furness={10}
-                                                    // material-color={'red'}
                                                     skeleton={nodes.Object_12.skeleton}
                                                 />
                                                 <group

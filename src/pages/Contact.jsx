@@ -1,7 +1,7 @@
 import React, { Suspense, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { Canvas } from '@react-three/fiber';
-// import Raccoon from '../models/Raccoon';
+import Raccoon from '../models/Raccoon';
 import Loader from '../components/Loader';
 
 const Contact = () => {
@@ -98,10 +98,10 @@ const Contact = () => {
                         far: 1000
                     }}
                 >
-                    <directionalLight intensity={2} position={[1, 2, 1]} />
-                    <ambientLight intensity={1} />
+                    <directionalLight intensity={3} position={[1, 0, 0]} />
+                    <ambientLight intensity={0.2} />
 
-                    {/* <Suspense fallback={<Loader />}>
+                    <Suspense fallback={<Loader />}>
 
                         <Raccoon
                             currentAnimation={currentAnimation}
@@ -109,7 +109,7 @@ const Contact = () => {
                             rotation={[0, 0, 0]}
                             scale={[1, 1, 1]}
                         />
-                    </Suspense> */}
+                    </Suspense>
 
                 </Canvas>
 
