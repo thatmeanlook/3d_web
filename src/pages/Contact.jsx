@@ -3,18 +3,25 @@ import emailjs from '@emailjs/browser';
 import { Canvas } from '@react-three/fiber';
 import Raccoon from '../models/Raccoon';
 import Loader from '../components/Loader';
+import RaccoonNew from '../models/RaccoonNew';
 
 const Contact = () => {
     const formRef = useRef(null);
     const [form, setForm] = useState({ name: '', email: '', message: '' })
     const [isLoading, setIsLoading] = useState(false);
-    const [currentAnimation, setCurrentAnimation] = useState('idle');
+    const [currentAnimation, setCurrentAnimation] = useState('Action_Crawl');
+    // const [currentAnimation, setCurrentAnimation] = useState('Racoon_Idle'); // this old raccoon
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value })
     };
-    const handleFocus = () => setCurrentAnimation('Racoon_Walk');
-    const handleBlur = () => setCurrentAnimation('Racoon_Idle');
+
+    // const handleFocus = () => setCurrentAnimation('Racoon_Walk');
+    // const handleBlur = () => setCurrentAnimation('Racoon_StandUp');
+
+    const handleFocus = () => setCurrentAnimation('Seat');
+    const handleBlur = () => setCurrentAnimation('Land');
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsLoading(true);
@@ -99,7 +106,7 @@ const Contact = () => {
                     }}
                 >
                     <directionalLight intensity={3} position={[1, 0, 0]} />
-                    <ambientLight intensity={0.2} />
+                    <ambientLight intensity={1} />
 
                     <Suspense fallback={<Loader />}>
 
@@ -109,6 +116,16 @@ const Contact = () => {
                             rotation={[0, 0, 0]}
                             scale={[1, 1, 1]}
                         />
+
+                        <RaccoonNew
+                            currentAnimation={currentAnimation}
+                            position={[-2, -3, -5]}
+                            rotation={[0, 0, 0]}
+                            scale={[0.1, 0.1, 0.1]}
+                        />
+
+
+
                     </Suspense>
 
                 </Canvas>
