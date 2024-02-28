@@ -12,14 +12,25 @@ const Plane = ({ isRotating, ...props }) => {
     useEffect(() => {
         console.log(isRotating);
 
-        if (isRotating) {
-            actions['Gallop'].play();
+        if (!isRotating) {
+            actions['Gallop'].stop();
+            actions['Eating'].play();
 
         } else {
-            actions['Gallop'].stop();
-            // actions['Gallop'].fadeOut();
-            actions['Eating'].play();
+            // actions['Gallop'].crossFadeTo(actions['Eating'], 3, true).play();
+            actions['Eating'].stop();
+            actions['Gallop'].play();
         }
+
+
+        /// OK FOR NOW
+        // if (isRotating) {
+        //     actions['Gallop'].play();
+
+        // } else {
+        //     actions['Gallop'].stop();
+        //     actions['Eating'].play();
+        // }
 
     }, [actions, isRotating])
 
@@ -31,6 +42,7 @@ const Plane = ({ isRotating, ...props }) => {
             <mesh {...props} ref={ref}>
                 <primitive object={scene} />
             </mesh>
+            {/* <directionalLight /> */}
         </group>
     )
 }

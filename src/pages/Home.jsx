@@ -40,7 +40,7 @@ const Home = () => {
             screenPosition = [0, -1.5, 0];
 
         } else {
-            screenScale = [0.3, 0.3, 0.3];
+            screenScale = [0.4, 0.4, 0.4];
             screenPosition = [0, -3, -4];
 
         }
@@ -64,18 +64,27 @@ const Home = () => {
                 camera={{ near: 0.1, far: 1000 }}>
 
 
+                <directionalLight
+                    // castShadow:true
+                    position={[1, 1, 4]} intensity={1}
+                />
 
-
-
-                <directionalLight position={[1, 1, 1]} intensity={2} />
-                <ambientLight intensity={0.5} />
+                <ambientLight intensity={1} />
                 <pointLight />
                 <spotLight />
                 <hemisphereLight
                     skyColor='#b1e1ff'
                     groundColor='#000000'
-                    intensity={1}
+                    intensity={2}
                 />
+
+                <ContactShadows
+                    // position={planePosition}
+                    position={[0, -3, 0]}
+                    opacity={0.8} scale={15}
+                    blur={1} far={10}
+                    resolution={256}
+                    color='#000000' />
 
                 <Suspense fallback={<Loader />}>
 
@@ -108,6 +117,9 @@ const Home = () => {
 
 
             </Canvas>
+
+
+
 
 
         </section>
