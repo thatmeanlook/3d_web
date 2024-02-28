@@ -4,12 +4,14 @@ import { Canvas } from '@react-three/fiber';
 import Raccoon from '../models/Raccoon';
 import Loader from '../components/Loader';
 import RaccoonNew from '../models/RaccoonNew';
+import Alpaca from '../models/Alpaca';
+// import Alpaca from '/Alpaca'
 
 const Contact = () => {
     const formRef = useRef(null);
     const [form, setForm] = useState({ name: '', email: '', message: '' })
     const [isLoading, setIsLoading] = useState(false);
-    const [currentAnimation, setCurrentAnimation] = useState('Action_Crawl');
+    const [currentAnimation, setCurrentAnimation] = useState('Idle');
     // const [currentAnimation, setCurrentAnimation] = useState('Racoon_Idle'); // this old raccoon
 
     const handleChange = (e) => {
@@ -19,8 +21,8 @@ const Contact = () => {
     // const handleFocus = () => setCurrentAnimation('Racoon_Walk');
     // const handleBlur = () => setCurrentAnimation('Racoon_StandUp');
 
-    const handleFocus = () => setCurrentAnimation('Seat');
-    const handleBlur = () => setCurrentAnimation('Land');
+    const handleFocus = () => setCurrentAnimation('Eating');
+    const handleBlur = () => setCurrentAnimation('Walk');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -117,13 +119,15 @@ const Contact = () => {
                             scale={[1, 1, 1]}
                         />
 
-                        <RaccoonNew
+                        {/* <RaccoonNew
                             currentAnimation={currentAnimation}
                             position={[-2, -3, -5]}
                             rotation={[0, 0, 0]}
                             scale={[0.1, 0.1, 0.1]}
-                        />
+                        /> */}
 
+
+                        <Alpaca />
 
 
                     </Suspense>
