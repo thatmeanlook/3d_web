@@ -7,6 +7,7 @@ import Sky from '../models/Sky'
 import Bird from '../models/Bird'
 import Plane from '../models/Plane'
 import HomeInfo from '../components/HomeInfo'
+import { ContactShadows } from '@react-three/drei'
 
 
 const Home = () => {
@@ -35,12 +36,12 @@ const Home = () => {
         let screenScale, screenPosition
 
         if (window.innerWidth < 768) {
-            screenScale = [1.5, 1.5, 1.5];
+            screenScale = [0.2, 0.2, 0.2];
             screenPosition = [0, -1.5, 0];
 
         } else {
-            screenScale = [3, 3, 3];
-            screenPosition = [0, -4, -4];
+            screenScale = [0.3, 0.3, 0.3];
+            screenPosition = [0, -3, -4];
 
         }
         return [screenScale, screenPosition]
@@ -62,12 +63,22 @@ const Home = () => {
             <Canvas className={`w-full h-screen bg-transparent ${isRotating ? 'cursor-grabbing' : 'cursor-grab'}`}
                 camera={{ near: 0.1, far: 1000 }}>
 
+
+
+
+
+                <directionalLight position={[1, 1, 1]} intensity={2} />
+                <ambientLight intensity={0.5} />
+                <pointLight />
+                <spotLight />
+                <hemisphereLight
+                    skyColor='#b1e1ff'
+                    groundColor='#000000'
+                    intensity={1}
+                />
+
                 <Suspense fallback={<Loader />}>
-                    <directionalLight position={[1, 1, 1]} intensity={2} />
-                    <ambientLight intensity={0.5} />
-                    <pointLight />
-                    <spotLight />
-                    <hemisphereLight skyColor='#b1e1ff' groundColor='#000000' intensity={1} />
+
 
 
                     <Bird />
@@ -82,11 +93,13 @@ const Home = () => {
                         setCurrentStage={setCurrentStage}
                     />
 
+
                     <Plane
-                        planeScale={planeScale}
-                        planePosition={planePosition}
+                        scale={planeScale}
+                        position={planePosition}
                         isRotating={isRotating}
-                        rotation={[0, 20, 0]}
+                        // setIsRotating={setIsRotating}
+                        rotation={[0, 20.5, 0]}
 
                     />
 

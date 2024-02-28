@@ -5,7 +5,8 @@ import Raccoon from '../models/Raccoon';
 import Loader from '../components/Loader';
 import RaccoonNew from '../models/RaccoonNew';
 import Alpaca from '../models/Alpaca';
-// import Alpaca from '/Alpaca'
+import { Environment, ContactShadows } from '@react-three/drei';
+
 
 const Contact = () => {
     const formRef = useRef(null);
@@ -22,7 +23,7 @@ const Contact = () => {
     // const handleBlur = () => setCurrentAnimation('Racoon_StandUp');
 
     const handleFocus = () => setCurrentAnimation('Gallop');
-    const handleBlur = () => setCurrentAnimation('Attack_Kick');
+    const handleBlur = () => setCurrentAnimation('Walk');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -107,17 +108,25 @@ const Contact = () => {
                         far: 1000
                     }}
                 >
-                    <directionalLight intensity={3} position={[1, 0, 0]} />
-                    <ambientLight intensity={1} />
+                    <directionalLight intensity={2} position={[0, 1, 0]} />
+                    <ambientLight intensity={2} />
+
+                    <Environment preset='sunset' />
+                    <ContactShadows
+                        position={[0, -3, 0]}
+                        opacity={0.6} scale={20}
+                        blur={1} far={10}
+                        resolution={256}
+                        color='#000000' />
 
                     <Suspense fallback={<Loader />}>
 
-                        <Raccoon
+                        {/* <Raccoon
                             currentAnimation={currentAnimation}
                             position={[-2, -3, -5]}
                             rotation={[0, 0, 0]}
                             scale={[1, 1, 1]}
-                        />
+                        /> */}
 
                         {/* <RaccoonNew
                             currentAnimation={currentAnimation}
@@ -129,9 +138,10 @@ const Contact = () => {
 
                         <Alpaca
                             currentAnimation={currentAnimation}
-                            position={[-2, -3, -5]}
-                            rotation={[0, 0, 0]}
-                            scale={[1, 1, 1]} />
+                            position={[1, -3, -5]}
+                            rotation={[0, -0.8, 0]}
+                            scale={[1.2, 1.2, 1.2]}
+                        />
 
 
                     </Suspense>

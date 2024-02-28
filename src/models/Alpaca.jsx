@@ -10,6 +10,7 @@ import { act } from "@react-three/fiber";
 const Alpaca = ({ currentAnimation, ...props }) => {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF(scene);
+  // const { nodes, materials, animations } = useGLTF('/Alpaca.gltf');
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {

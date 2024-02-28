@@ -1,28 +1,32 @@
-import { useRef, useEffect } from 'react'
 
-import planeScene from '../assets/3d/poly_art_raccoon.glb'
-import { useAnimations, useGLTF } from '@react-three/drei'
+
+import React, { useEffect, useRef } from "react";
+import { useGLTF, useAnimations } from "@react-three/drei";
+// import scene from '../assets/3d/Alpaca.glb'
 
 const Plane = ({ isRotating, ...props }) => {
     const ref = useRef();
-    const { scene, animations } = useGLTF(planeScene);
+    const { scene, animations } = useGLTF('/Alpaca.gltf');
     const { actions } = useAnimations(animations, ref);
 
     useEffect(() => {
         console.log(isRotating);
+
         if (isRotating) {
-            actions['Walk_Forward'].play();
+            actions['Gallop'].play();
 
         } else {
-            actions['Land'].play();
+            actions['Gallop'].stop();
+            // actions['Gallop'].fadeOut();
+            actions['Eating'].play();
         }
 
     }, [actions, isRotating])
 
     return (
         <group
-            position={[1, -5.2, -11]}
-            scale={[0.05, 0.05, 0.05]}
+        // position={[1, -5.2, -11]}
+        // scale={[1, 1, 1]}
         >
             <mesh {...props} ref={ref}>
                 <primitive object={scene} />
@@ -32,6 +36,46 @@ const Plane = ({ isRotating, ...props }) => {
 }
 
 export default Plane
+
+
+
+
+/////////////// NEW RACCOON
+
+// import { useRef, useEffect } from 'react'
+
+// import planeScene from '../assets/3d/poly_art_raccoon.glb'
+// import { useAnimations, useGLTF } from '@react-three/drei'
+
+// const Plane = ({ isRotating, ...props }) => {
+//     const ref = useRef();
+//     const { scene, animations } = useGLTF(planeScene);
+//     const { actions } = useAnimations(animations, ref);
+
+//     useEffect(() => {
+//         console.log(isRotating);
+//         if (isRotating) {
+//             actions['Walk_Forward'].play();
+
+//         } else {
+//             actions['Land'].play();
+//         }
+
+//     }, [actions, isRotating])
+
+//     return (
+//         <group
+//             position={[1, -5.2, -11]}
+//             scale={[0.05, 0.05, 0.05]}
+//         >
+//             <mesh {...props} ref={ref}>
+//                 <primitive object={scene} />
+//             </mesh>
+//         </group>
+//     )
+// }
+
+// export default Plane
 
 
 
