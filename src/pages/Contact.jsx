@@ -11,7 +11,7 @@ const Contact = () => {
     const formRef = useRef(null);
     const [form, setForm] = useState({ name: '', email: '', message: '' })
     const [isLoading, setIsLoading] = useState(false);
-    const [currentAnimation, setCurrentAnimation] = useState('Idle');
+    const [currentAnimation, setCurrentAnimation] = useState('Eating');
     // const [currentAnimation, setCurrentAnimation] = useState('Racoon_Idle'); // this old raccoon
 
     const handleChange = (e) => {
@@ -21,8 +21,8 @@ const Contact = () => {
     // const handleFocus = () => setCurrentAnimation('Racoon_Walk');
     // const handleBlur = () => setCurrentAnimation('Racoon_StandUp');
 
-    const handleFocus = () => setCurrentAnimation('Eating');
-    const handleBlur = () => setCurrentAnimation('Walk');
+    const handleFocus = () => setCurrentAnimation('Gallop');
+    const handleBlur = () => setCurrentAnimation('Attack_Kick');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -127,7 +127,11 @@ const Contact = () => {
                         /> */}
 
 
-                        <Alpaca />
+                        <Alpaca
+                            currentAnimation={currentAnimation}
+                            position={[-2, -3, -5]}
+                            rotation={[0, 0, 0]}
+                            scale={[1, 1, 1]} />
 
 
                     </Suspense>
