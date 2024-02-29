@@ -9,6 +9,7 @@ import Plane from '../models/Plane'
 import HomeInfo from '../components/HomeInfo'
 import { ContactShadows } from '@react-three/drei'
 import Balloon from '../models/Balloon'
+import { Environment } from '@react-three/drei'
 
 
 const Home = () => {
@@ -76,16 +77,16 @@ const Home = () => {
 
                 <directionalLight
                     // castShadow:true
-                    position={[1, 1, 4]} intensity={1}
+                    position={[1, 1, 10]} intensity={2}
                 />
-
-                <ambientLight intensity={1} />
+                {/* <Environment preset='sunset' /> */}
+                <ambientLight intensity={0.1} />
                 <pointLight />
                 <spotLight />
                 <hemisphereLight
                     skyColor='#b1e1ff'
                     groundColor='#000000'
-                    intensity={2}
+                    intensity={3}
                 />
 
                 <ContactShadows
@@ -94,7 +95,7 @@ const Home = () => {
                     // position={[0, -3, 0]}
                     // position={[0, -1.5, 0]}
                     position={shadowPosition}
-                    opacity={0.8} scale={15}
+                    opacity={1} scale={15}
                     blur={1} far={10}
                     resolution={256}
                     color='#000000' />
