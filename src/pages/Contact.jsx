@@ -6,7 +6,7 @@ import Loader from '../components/Loader';
 import RaccoonNew from '../models/RaccoonNew';
 import Alpaca from '../models/Alpaca';
 import { Environment, ContactShadows } from '@react-three/drei';
-
+import { Link } from 'react-router-dom';
 
 const Contact = () => {
     const formRef = useRef(null);
@@ -30,6 +30,11 @@ const Contact = () => {
         setIsLoading(true);
 
         emailjs.sendForm
+    };
+
+    const handleAlpacaClick = () => {
+        // Open Google.com in a new tab
+        window.open('https://www.google.com', '_blank');
     };
 
     return (
@@ -135,12 +140,14 @@ const Contact = () => {
                             scale={[0.1, 0.1, 0.1]}
                         /> */}
 
-
                         <Alpaca
                             currentAnimation={currentAnimation}
                             position={[1, -3, -5]}
                             rotation={[0, -0.8, 0]}
                             scale={[1.2, 1.2, 1.2]}
+                            onClick={handleAlpacaClick}
+                        // style={{ cursor: 'pointer' }}
+
                         />
 
 

@@ -8,6 +8,7 @@ import Bird from '../models/Bird'
 import Plane from '../models/Plane'
 import HomeInfo from '../components/HomeInfo'
 import { ContactShadows } from '@react-three/drei'
+import Balloon from '../models/Balloon'
 
 
 const Home = () => {
@@ -33,23 +34,31 @@ const Home = () => {
 
     const adjustPlaneForScreenSize = () => {
 
-        let screenScale, screenPosition
+        let screenScale, screenPosition, shadowPosition
 
         if (window.innerWidth < 768) {
             screenScale = [0.2, 0.2, 0.2];
             screenPosition = [0, -1.5, 0];
+            shadowPosition = [0, -1.5, 0];
 
         } else {
             screenScale = [0.4, 0.4, 0.4];
             screenPosition = [0, -3, -4];
+            shadowPosition = [0, -3, 0];
 
         }
-        return [screenScale, screenPosition]
+        return [screenScale, screenPosition, shadowPosition]
     }
 
 
     const [islandScale, islandPosition, islandRotation] = adjustIslandForScreenSize();
-    const [planeScale, planePosition] = adjustPlaneForScreenSize();
+    const [planeScale, planePosition, shadowPosition] = adjustPlaneForScreenSize();
+
+
+    const handleBalloonClick = () => {
+        // Open "99 red balloon" in a new tab
+        window.open('https://youtu.be/hiwgOWo7mDc?si=ppFvsBFkXo1BVBS6', '_blank');
+    };
 
     return (
         <section className='w-full h-screen relative'>
@@ -81,7 +90,10 @@ const Home = () => {
 
                 <ContactShadows
                     // position={planePosition}
-                    position={[0, -3, 0]}
+
+                    // position={[0, -3, 0]}
+                    // position={[0, -1.5, 0]}
+                    position={shadowPosition}
                     opacity={0.8} scale={15}
                     blur={1} far={10}
                     resolution={256}
@@ -91,7 +103,11 @@ const Home = () => {
 
 
 
-                    <Bird />
+                    {/* <Bird /> */}
+                    <Balloon
+                        onClick={handleBalloonClick}
+                    />
+
                     <Sky isRotating={isRotating} />
 
                     <Island
