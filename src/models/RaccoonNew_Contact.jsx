@@ -46,6 +46,10 @@ const RaccoonNew = ({ currentAnimation, ...props }) => {
         crawlSubClipAction.setEffectiveWeight(1)
         crawlSubClipAction.play();
         console.log('raccoon trimmed', crawlSubClipAction)
+
+
+
+
         return () => {
             mixerInstance.stopAllAction();
         };
