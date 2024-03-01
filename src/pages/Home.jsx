@@ -9,6 +9,8 @@ import Plane from '../models/Plane'
 import HomeInfo from '../components/HomeInfo'
 import { ContactShadows } from '@react-three/drei'
 import Balloon from '../models/Balloon'
+import BalloonBlue from '../models/BalloonBlue'
+import BalloonRed from '../models/BalloonRed'
 import { Environment } from '@react-three/drei'
 
 
@@ -105,9 +107,16 @@ const Home = () => {
 
 
                     {/* <Bird /> */}
-                    <Balloon
+
+                    {/* <Balloon
                         onClick={handleBalloonClick}
-                    />
+                    /> */}
+
+                    <BalloonBlue />
+
+                    {/* <BalloonRed
+                        scale={[0.5, 0.5, 0.5]}
+                    /> */}
 
                     <Sky isRotating={isRotating} />
 
