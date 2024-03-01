@@ -14,7 +14,7 @@ const Alpaca = ({ currentAnimation, ...props }) => {
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    console.log(actions)
+    // console.log(actions)
     actions.Eating.play();
 
 
@@ -22,7 +22,7 @@ const Alpaca = ({ currentAnimation, ...props }) => {
 
     if (actions[currentAnimation]) {
       actions[currentAnimation].play();
-      console.log('current animation: ', currentAnimation);
+      // console.log('current animation: ', currentAnimation);
     }
   }, [actions, currentAnimation])
 

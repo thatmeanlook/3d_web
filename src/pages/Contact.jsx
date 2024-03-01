@@ -7,12 +7,15 @@ import RaccoonNew from '../models/RaccoonNew';
 import Alpaca from '../models/Alpaca';
 import { Environment, ContactShadows } from '@react-three/drei';
 import { Link } from 'react-router-dom';
+import RaccoonNew_Contact from '../models/RaccoonNew_Contact';
 
 const Contact = () => {
     const formRef = useRef(null);
     const [form, setForm] = useState({ name: '', email: '', message: '' })
     const [isLoading, setIsLoading] = useState(false);
-    const [currentAnimation, setCurrentAnimation] = useState('Eating');
+    // const [currentAnimation, setCurrentAnimation] = useState('Eating'); // for Alpaca
+    // const [currentAnimation, setCurrentAnimation] = useState('Stand_Idle'); // for New Raccoon
+    const [currentAnimation, setCurrentAnimation] = useState('Action_Eat'); // for New Raccoon
     // const [currentAnimation, setCurrentAnimation] = useState('Racoon_Idle'); // this old raccoon
 
     const handleChange = (e) => {
@@ -22,8 +25,11 @@ const Contact = () => {
     // const handleFocus = () => setCurrentAnimation('Racoon_Walk');
     // const handleBlur = () => setCurrentAnimation('Racoon_StandUp');
 
-    const handleFocus = () => setCurrentAnimation('Gallop');
-    const handleBlur = () => setCurrentAnimation('Walk');
+    // const handleFocus = () => setCurrentAnimation('Gallop'); // for Alpaca
+    // const handleBlur = () => setCurrentAnimation('Walk');  // for Alpaca
+
+    const handleFocus = () => setCurrentAnimation('Sneak_Idle'); // for Alpaca
+    const handleBlur = () => setCurrentAnimation('Action_Crawl');  // for Alpaca
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -39,6 +45,29 @@ const Contact = () => {
             // window.open('https://www.google.com', '_blank');
             setCurrentAnimation('Eating');
         }, 1000);
+    };
+
+    // const handleRaccoonHover = () => {
+    //     document.body.style.cursor = "grab";
+
+    // }
+
+    const handleRaccoonClick = () => {
+        // document.body.style.cursor = "grabbing";
+        // document.body.style.cursor = "grab";
+        ``
+        // Open Google.com in a new tab
+        setCurrentAnimation('Attack_Arms');
+        // setCurrentAnimation('Jump_In_Place');
+        setTimeout(() => {
+            // window.open('https://www.google.com', '_blank');
+            // setCurrentAnimation('Action_Eat');
+        }, 1000);
+
+        setTimeout(() => {
+            setCurrentAnimation('Action_Eat');
+        }, 1250);
+        // }, 1200); // for Jump
     };
 
     return (
@@ -144,7 +173,19 @@ const Contact = () => {
                             scale={[0.1, 0.1, 0.1]}
                         /> */}
 
-                        <Alpaca
+                        <RaccoonNew_Contact
+                            currentAnimation={currentAnimation}
+                            position={[0, -3, -5]}
+                            rotation={[0, -19.5, 0]}
+                            scale={[0.1, 0.1, 0.1]}
+                            // onHover={handleRaccoonHover}
+                            onClick={handleRaccoonClick}
+                            onPointerEnter={() => document.body.style.cursor = "grab"} // Change cursor on hover
+                            onPointerLeave={() => document.body.style.cursor = "auto"} // Reset cursor on leave
+
+                        />
+
+                        {/* <Alpaca
                             currentAnimation={currentAnimation}
                             position={[1, -3, -5]}
                             rotation={[0, -0.8, 0]}
@@ -152,7 +193,7 @@ const Contact = () => {
                             onClick={handleAlpacaClick}
                         // style={{ cursor: 'pointer' }}
 
-                        />
+                        /> */}
 
 
                     </Suspense>

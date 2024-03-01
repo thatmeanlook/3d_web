@@ -26,28 +26,48 @@ const RaccoonNew = ({ currentAnimation, ...props }) => {
     const mixer = useRef();
 
     useEffect(() => {
-        // actions.Action_Crawl.setDuration(3).play();
         console.log(actions);
         console.log('raccoon action', actions.Action_Crawl)
-        // console.log(actions.Eating)
         const mixerInstance = new AnimationMixer(group.current);
         mixer.current = mixerInstance;
 
         // const crawlClip = actions.Action_Dig.getClip();
         // const crawlClip = actions.Action_Crawl.getClip();
-        const crawlClip = actions.Action_Eat.getClip();
+        // const crawlClip = actions.Action_Eat.getClip();
         // const crawlClip = actions.Roll.getClip();
-        console.log('clip', crawlClip)
-        const crawlSubClip = AnimationUtils.subclip(crawlClip, 'crawl_subClip', 0, 100, true);
-        console.log('subclip', crawlSubClip)
-        const crawlSubClipAction = mixerInstance.clipAction(crawlSubClip);
-        crawlSubClipAction.enabled = true;
-        crawlSubClipAction.setEffectiveTimeScale(1)
-        crawlSubClipAction.setEffectiveWeight(1)
-        crawlSubClipAction.play();
-        console.log('raccoon trimmed', crawlSubClipAction)
+
+        // console.log('clip', crawlClip)
+        // const crawlSubClip = AnimationUtils.subclip(crawlClip, 'crawl_subClip', 0, 100, true);
+        // console.log('subclip', crawlSubClip)
+        // const crawlSubClipAction = mixerInstance.clipAction(crawlSubClip);
+        // crawlSubClipAction.enabled = true;
+
+        // crawlSubClipAction.play();
+        // console.log('raccoon trimmed', crawlSubClipAction)
 
 
+
+        Object.values(actions).forEach((action) => action.stop());
+
+        if (actions[currentAnimation]) {
+            console.log('current animation', currentAnimation);
+            console.log('current action:', actions[currentAnimation]);
+
+            const crawlClip = actions[currentAnimation].getClip();
+
+            console.log('clip', crawlClip)
+            const crawlSubClip = AnimationUtils.subclip(crawlClip, 'crawl_subClip', 0, 1000, true);
+            console.log('subclip', crawlSubClip)
+            const crawlSubClipAction = mixerInstance.clipAction(crawlSubClip);
+            crawlSubClipAction.enabled = true;
+
+            if (currentAnimation == 'Jump_In_Place') {
+                crawlSubClipAction.setDuration(1.2);
+            }
+            crawlSubClipAction.play();
+
+            console.log('current animation: ', currentAnimation);
+        }
 
 
         return () => {
