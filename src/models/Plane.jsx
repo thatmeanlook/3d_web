@@ -12,7 +12,7 @@ const Plane = ({ isRotating, ...props }) => {
     useEffect(() => {
         console.log(isRotating);
 
-        if (!isRotating) {
+        if (isRotating) {
             actions['Gallop'].stop();
             actions['Eating'].play();
 

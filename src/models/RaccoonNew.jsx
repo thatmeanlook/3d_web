@@ -6,32 +6,113 @@ Source: https://sketchfab.com/3d-models/poly-art-raccoon-093e7d8dba2c47118aff112
 Title: Poly Art Raccoon
 */
 
-import React, { useEffect, useRef } from "react";
-import { useGLTF, useAnimations } from "@react-three/drei";
+import React, { useEffect, useRef } from 'react'
+import { useGLTF, useAnimations } from '@react-three/drei'
+import { AnimationMixer, AnimationUtils } from 'three'
+import { Clock } from 'three'
+import { useFrame } from '@react-three/fiber'
 import scene from '../assets/3d/poly_art_raccoon.glb'
 
 
 // insert UCSD raccoon vid
 // https://www.reddit.com/r/UCSD/comments/qxc16u/just_some_raccoons/
 
-const RaccoonNew = ({ currentAnimation, ...props }) => {
+const RaccoonNew = ({ currentAnimation, isRotating, ...props }) => {
     const group = useRef();
     const { nodes, materials, animations } = useGLTF(scene);
     const { actions } = useAnimations(animations, group);
 
 
+    const mixer = useRef();
+
     useEffect(() => {
-        console.log(actions)
+        // actions.Action_Crawl.setDuration(3).play();
+        console.log(actions);
+        console.log('raccoon action', actions.Action_Crawl)
+        // console.log(actions.Eating)
+        const mixerInstance = new AnimationMixer(group.current);
+        mixer.current = mixerInstance;
 
-        Object.values(actions).forEach((action) => action.stop());
+        // const crawlClip = actions.Action_Dig.getClip();
+        // const crawlClip = actions.Action_Crawl.getClip();
+        const crawlClip = actions.Action_Eat.getClip();
+        // const crawlClip = actions.Roll.getClip();
+        console.log('clip', crawlClip)
+        const crawlSubClip = AnimationUtils.subclip(crawlClip, 'crawl_subClip', 0, 1000, true);
+        console.log('subclip', crawlSubClip)
+        const crawlSubClipAction = mixerInstance.clipAction(crawlSubClip);
+        // crawlSubClipAction.enabled = true;
+        // crawlSubClipAction.setEffectiveTimeScale(1)
+        // crawlSubClipAction.setEffectiveWeight(1)
 
-        if (actions[currentAnimation]) {
-            actions[currentAnimation].play();
-            // console.log('current animation: ', currentAnimation);
+        ///////////// 2nd action
+        const digClip = actions.Action_Dig.getClip();
+        // const digClip = actions.Roll.getClip();
+        console.log('Dig', digClip)
+        const digSubClip = AnimationUtils.subclip(digClip, 'dig_subClip', 23.2, 24.5, true);
+        console.log('subDig', digSubClip)
+        const digSubClipAction = mixerInstance.clipAction(digSubClip);
+        /////////
+
+
+        ///////////// 3nd action: Swim_Idle is a good choice *********
+        const walkClip = actions.Swim_Idle.getClip();
+        console.log('walk', walkClip)
+        const walkSubClip = AnimationUtils.subclip(walkClip, 'walk_subClip', 1, 1000, true);
+        console.log('subwalk', walkSubClip)
+        const walkSubClipAction = mixerInstance.clipAction(walkSubClip).setDuration(0.7);
+        /////////
+
+
+        ///////////// 4th action: Jump_In_Place: cool for Contact Page when clicked on
+        const jumpClip = actions.Jump_In_Place.getClip();
+        console.log('jump', jumpClip)
+        const jumpSubClip = AnimationUtils.subclip(jumpClip, 'jump_subClip', 1, 1000, true);
+        console.log('subjump', jumpSubClip)
+        const jumpSubClipAction = mixerInstance.clipAction(jumpSubClip);
+        /////////
+
+
+        if (!isRotating) {
+            // jumpSubClipAction.stop()
+            walkSubClipAction.stop();
+            crawlSubClipAction.play();
+            // digSubClipAction.stop()
+        }
+        else {
+            // jumpSubClipAction.play();
+            walkSubClipAction.play();
+            crawlSubClipAction.stop();
+            // digSubClipAction.play();
+
         }
 
+        console.log('raccoon trimmed', crawlSubClipAction)
+        return () => {
+            mixerInstance.stopAllAction();
+        };
+    }, [actions, isRotating]);
 
-    }, [actions, currentAnimation])
+    useFrame((_, delta) => {
+        if (mixer.current) {
+            // console.log('delta', delta)
+            mixer.current.update(delta);
+            // mixer.current.update(0.010);
+        }
+    }, [actions, currentAnimation]);
+
+    // useEffect(() => {
+    //     console.log(actions)
+
+    //     Object.values(actions).forEach((action) => action.stop());
+
+    //     if (actions[currentAnimation]) {
+    //         actions[currentAnimation].play();
+    //         // console.log('current animation: ', currentAnimation);
+    //     }
+
+
+    // }, [actions, currentAnimation])
 
     return (
         <group ref={group} {...props} dispose={null}>

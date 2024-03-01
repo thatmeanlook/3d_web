@@ -12,6 +12,7 @@ import Balloon from '../models/Balloon'
 import BalloonBlue from '../models/BalloonBlue'
 import BalloonRed from '../models/BalloonRed'
 import { Environment } from '@react-three/drei'
+import RaccoonNew from '../models/RaccoonNew'
 
 
 const Home = () => {
@@ -108,11 +109,11 @@ const Home = () => {
 
                     {/* <Bird /> */}
 
-                    {/* <Balloon
+                    <Balloon
                         onClick={handleBalloonClick}
-                    /> */}
+                    />
 
-                    <BalloonBlue />
+                    {/* <BalloonBlue /> */}
 
                     {/* <BalloonRed
                         scale={[0.5, 0.5, 0.5]}
@@ -130,13 +131,21 @@ const Home = () => {
                     />
 
 
-                    <Plane
+                    {/* <Plane // THE ALPACA
                         scale={planeScale}
                         position={planePosition}
                         isRotating={isRotating}
                         // setIsRotating={setIsRotating}
                         rotation={[0, 20.5, 0]}
 
+                    /> */}
+
+                    <RaccoonNew
+                        // scale={planeScale}
+                        scale={[0.015, 0.015, 0.015]}
+                        position={planePosition}
+                        isRotating={isRotating}
+                        rotation={[0, 20.5, 0]}
                     />
 
 

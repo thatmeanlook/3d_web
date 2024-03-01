@@ -34,7 +34,11 @@ const Contact = () => {
 
     const handleAlpacaClick = () => {
         // Open Google.com in a new tab
-        window.open('https://www.google.com', '_blank');
+        setCurrentAnimation('Attack_Headbutt');
+        setTimeout(() => {
+            // window.open('https://www.google.com', '_blank');
+            setCurrentAnimation('Eating');
+        }, 1000);
     };
 
     return (
