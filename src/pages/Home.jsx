@@ -41,12 +41,14 @@ const Home = () => {
         let screenScale, screenPosition, shadowPosition
 
         if (window.innerWidth < 768) {
-            screenScale = [0.2, 0.2, 0.2];
+            // screenScale = [0.01, 0.01, 0.01]
+            screenScale = [0.2, 0.2, 0.2]; // Alpaca
             screenPosition = [0, -1.5, 0];
             shadowPosition = [0, -1.5, 0];
 
         } else {
-            screenScale = [0.4, 0.4, 0.4];
+            // screenScale = [0.015, 0.015, 0.015] // raccoon
+            screenScale = [0.4, 0.4, 0.4]; // Alpaca
             screenPosition = [0, -3, -4];
             shadowPosition = [0, -3, 0];
 
@@ -142,7 +144,7 @@ const Home = () => {
 
                     <RaccoonNew
                         // scale={planeScale}
-                        scale={[0.015, 0.015, 0.015]}
+                        scale={[0.03, 0.03, 0.03]}
                         position={planePosition}
                         isRotating={isRotating}
                         rotation={[0, 20.5, 0]}
