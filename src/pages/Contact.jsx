@@ -137,19 +137,37 @@ const Contact = () => {
                 </form>
             </div>
 
-            <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]'>
+            <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]'
+            // style={{ position: 'absolute', zIndex: 1 }} // Set position to absolute and z-index to bring the component to the front
+
+            >
                 <Canvas
+
                     camera={{
                         position: [0, 0, 5],
                         fov: 75,
                         near: 0.1,
                         far: 1000
                     }}
+
+
                 >
-                    <directionalLight intensity={2} position={[0, 1, 0]} />
+                    <directionalLight
+                        intensity={2}
+                        position={[0, 1, 0]}
+                    // color={'orange'}
+                    />
+                    {/* 
+                    <directionalLight
+                        intensity={3}
+                        position={[0, 1, 0]}
+                    // color={'orange'}
+                    /> */}
+
                     <ambientLight intensity={2} />
 
                     <Environment preset='sunset' />
+
                     <ContactShadows
                         position={[0, -3, 0]}
                         opacity={0.6} scale={20}
@@ -157,7 +175,9 @@ const Contact = () => {
                         resolution={256}
                         color='#000000' />
 
-                    <Suspense fallback={<Loader />}>
+                    <Suspense fallback={<Loader />}
+
+                    >
 
                         {/* <Raccoon
                             currentAnimation={currentAnimation}
@@ -178,11 +198,11 @@ const Contact = () => {
                             position={[0, -3, -5]}
                             rotation={[0, -19.5, 0]}
                             scale={[0.1, 0.1, 0.1]}
+                            // scale={}
                             // onHover={handleRaccoonHover}
                             onClick={handleRaccoonClick}
                             onPointerEnter={() => document.body.style.cursor = "grab"} // Change cursor on hover
                             onPointerLeave={() => document.body.style.cursor = "auto"} // Reset cursor on leave
-
                         />
 
                         {/* <Alpaca

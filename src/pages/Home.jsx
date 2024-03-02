@@ -26,7 +26,9 @@ const Home = () => {
         let rotation = [0.1, 4.7, 0];
 
         if (window.innerWidth < 768) {
-            screenScale = [0.9, 0.9, 0.9];
+            screenScale = [0.7, 0.7, 0.7];
+            // const w = window.innerWidth;
+            // screenScale = [w, w, w]
 
         } else {
             screenScale = [1, 1, 1];
@@ -41,14 +43,14 @@ const Home = () => {
         let screenScale, screenPosition, shadowPosition
 
         if (window.innerWidth < 768) {
-            // screenScale = [0.01, 0.01, 0.01]
-            screenScale = [0.2, 0.2, 0.2]; // Alpaca
+            screenScale = [0.015, 0.015, 0.015]
+            // screenScale = [0.2, 0.2, 0.2]; // Alpaca
             screenPosition = [0, -1.5, 0];
             shadowPosition = [0, -1.5, 0];
 
         } else {
-            // screenScale = [0.015, 0.015, 0.015] // raccoon
-            screenScale = [0.4, 0.4, 0.4]; // Alpaca
+            screenScale = [0.03, 0.03, 0.03] // raccoon
+            // screenScale = [0.4, 0.4, 0.4]; // Alpaca
             screenPosition = [0, -3, -4];
             shadowPosition = [0, -3, 0];
 
@@ -143,8 +145,8 @@ const Home = () => {
                     /> */}
 
                     <RaccoonNew
-                        // scale={planeScale}
-                        scale={[0.03, 0.03, 0.03]}
+                        scale={planeScale}
+                        // scale={[0.03, 0.03, 0.03]}
                         position={planePosition}
                         isRotating={isRotating}
                         rotation={[0, 20.5, 0]}

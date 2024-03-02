@@ -40,9 +40,26 @@ const Projects = () => {
                             <h4 className='text-2xl font-poppins font-semibold'>
                                 {project.name}
                             </h4>
+
                             <p className='mt-2 text-slate-500'>
                                 {project.description}
                             </p>
+
+                            <p className='mt-2 text-slate-500'>
+                                {project.tech}
+                            </p>
+
+                            {/* <ul className='my-5 list-disc ml-5 space-y-2'>
+                                {project.points.map((point, index) => (
+                                    <li
+                                        key={`project-point-${index}`}
+                                        className='text-black-500/50 font-poppins'
+                                    // className='text-black-500/50 font-normal pl-1 font-poppins'
+                                    >
+                                        {point}
+                                    </li>
+                                ))}
+                            </ul> */}
 
                             <div className='mt-5 flex items-center gap-2 font-poppins'>
                                 <Link

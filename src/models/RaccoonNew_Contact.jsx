@@ -70,9 +70,9 @@ const RaccoonNew = ({ currentAnimation, ...props }) => {
         }
 
 
-        return () => {
-            mixerInstance.stopAllAction();
-        };
+        // return () => {
+        //     mixerInstance.stopAllAction();
+        // };
     }, [actions, currentAnimation]);
 
     useFrame((_, delta) => {

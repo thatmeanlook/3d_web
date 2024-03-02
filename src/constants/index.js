@@ -172,6 +172,12 @@ export const projects = [
         name: '3D Web Portfolio',
         description: 'Developed a web application that tracks and notifies users of price changes for products on Amazon, helping users find the best deals.',
         tech: 'HTML, CSS, JS',
+
+        points: [
+            "Work closely with captains to ensure the cruise operates smoothly.",
+            "Interact with bar guests, take orders and serve drinks.",
+            "Monitor guest experience and ensure high standard service at all time.",
+        ],
         link: 'https://github.com/adrianhajdin/pricewise',
     },
     {
@@ -180,17 +186,28 @@ export const projects = [
         name: 'Natural Language Model',
         description: 'Created a full-stack replica of the popular discussion platform "Threads," enabling users to post and engage in threaded conversations.',
         tech: 'HTML, CSS, JS',
+
+        points: [
+            "Work closely with captains to ensure the cruise operates smoothly.",
+            "Interact with bar guests, take orders and serve drinks.",
+            "Monitor guest experience and ensure high standard service at all time.",
+        ],
         link: 'https://github.com/adrianhajdin/threads',
     },
     {
         iconUrl: car,
         theme: 'btn-back-blue',
-        name: 'Bond. James Bond',
-        description: 'Designed and built a mobile app for finding and comparing cars on the market, \
-         streamlining the car-buying process. \
-         eddw',
-        tech: 'HTML, CSS, JS',
-        link: 'https://github.com/adrianhajdin/project_next13_car_showcase',
+        name: '"Bond. James Bond"',
+        description: 'Analyzed the performance of the 007 movie franchise and \
+        created visualizations to communicate results.',
+        tech: 'Tech: Python, HTML, CSS, JS',
+
+        points: [
+            "Work closely with captains to ensure the cruise operates smoothly.",
+            "Interact with bar guests, take orders and serve drinks.",
+            "Monitor guest experience and ensure high standard service at all time.",
+        ],
+        link: 'https://thatmeanlook.github.io/james_bond/',
     },
 
 ];
