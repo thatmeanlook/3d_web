@@ -55,7 +55,7 @@ const Contact = () => {
     const handleRaccoonClick = () => {
         // document.body.style.cursor = "grabbing";
         // document.body.style.cursor = "grab";
-        ``
+
         // Open Google.com in a new tab
         setCurrentAnimation('Attack_Arms');
         // setCurrentAnimation('Jump_In_Place');
@@ -70,11 +70,34 @@ const Contact = () => {
         // }, 1200); // for Jump
     };
 
+    const adjustRaccoonForScreenSize = () => {
+
+        let screenScale, screenPosition, shadowPosition
+
+        if (window.innerWidth < 768) {
+            screenScale = [0.1, 0.1, 0.1] // racoon
+            screenPosition = [1.5, -1, -4];// raccoon
+            shadowPosition = [0, -1, 0]; // racccoon
+
+
+        } else {
+            screenScale = [0.1, 0.1, 0.1] // raccoon
+            screenPosition = [2, -3, -5];
+            shadowPosition = [0, -3, 0];
+
+        }
+        return [screenScale, screenPosition, shadowPosition]
+    }
+
+    const [raccoonScale, raccoonPosition, shadowPosition] = adjustRaccoonForScreenSize();
+
+
     return (
         <section className='relative flex lg:flex-row flex-col max-container'>
+            {/* <section className='relative flex lg:flex-row flex-col max-container'> */}
 
             {/* message box */}
-            <div className='flex-1 min-w-[50%] flex flex-col'>
+            <div className='flex-1 min-w-[50%] flex flex-col relative z-0'>
                 <h1 className='head-text'>Get in Touch</h1>
                 <form
                     className='w-full flex flex-col gap-7 mt-14'
@@ -137,12 +160,9 @@ const Contact = () => {
                 </form>
             </div>
 
-            <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]'
-            // style={{ position: 'absolute', zIndex: 1 }} // Set position to absolute and z-index to bring the component to the front
-
-            >
+            {/* Raccoon */}
+            <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px] relative z-10'>
                 <Canvas
-
                     camera={{
                         position: [0, 0, 5],
                         fov: 75,
@@ -169,7 +189,7 @@ const Contact = () => {
                     <Environment preset='sunset' />
 
                     <ContactShadows
-                        position={[0, -3, 0]}
+                        position={shadowPosition}
                         opacity={0.6} scale={20}
                         blur={1} far={10}
                         resolution={256}
@@ -195,11 +215,10 @@ const Contact = () => {
 
                         <RaccoonNew_Contact
                             currentAnimation={currentAnimation}
-                            position={[0, -3, -5]}
+                            position={raccoonPosition}
                             rotation={[0, -19.5, 0]}
-                            scale={[0.1, 0.1, 0.1]}
-                            // scale={}
-                            // onHover={handleRaccoonHover}
+                            scale={raccoonScale}
+                            // scale={[0.1, 0.1, 0.1]}
                             onClick={handleRaccoonClick}
                             onPointerEnter={() => document.body.style.cursor = "grab"} // Change cursor on hover
                             onPointerLeave={() => document.body.style.cursor = "auto"} // Reset cursor on leave

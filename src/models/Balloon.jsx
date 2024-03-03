@@ -9,22 +9,56 @@ Title: Hot air balloon
 import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import ballonScene from '../assets/3d/hot_air_balloon.glb'
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 
 const Balloon = ({ }) => {
     const ref = useRef();
     const { scene, animations } = useGLTF(ballonScene);
     const { actions } = useAnimations(animations, ref);
 
-    useEffect(() => {
-        console.log(actions)
-        actions['Take 001'].play();
-    }, []);
+    const { gl, viewport } = useThree();
+
+
+
+    // useEffect(() => {  // original
+    //     console.log(actions)
+    //     actions['Take 001'].play();
+    // }, []);
+
+    const handlePointerEnter = () => {
+        gl.domElement.style.cursor = 'default';
+    }
 
     const handleBalloonClick = () => {
         // Open Google.com in a new tab
         window.open("https://www.google.com", "_blank");
     };
+
+    useEffect(() => {
+
+        actions['Take 001'].play();
+
+        // const canvas = gl.domElement;
+
+        // console.log('CANVAS', canvas)
+        // // canvas.addEventListener('pointermove', handleCloudClick);
+        // canvas.addEventListener('pointerEnter', handlePointerEnter);
+        // canvas.addEventListener('onClick', handleBalloonClick);
+        // // canvas.addEventListener('pointermove', handlePointerMove);
+        // // document.addEventListener('keydown', handleKeyDown);
+        // // document.addEventListener('keyup', handleKeyUp);
+
+        // return () => {
+        //     canvas.removeEventListener('pointerEnter', handlePointerEnter);
+        //     canvas.removeEventListener('onClick', handleBalloonClick);
+        //     // canvas.removeEventListener('pointermove', handlePointerMove);
+        //     // document.removeEventListener('keydown', handleKeyDown);
+        //     // document.removeEventListener('keyup', handleKeyUp);
+        // }
+    }, [gl, handlePointerEnter, handleBalloonClick])
+
+
+
 
     useFrame(({ clock, camera }) => {
         // Update the Y position to simulate balloon-like motion using a sine wave
@@ -60,6 +94,7 @@ const Balloon = ({ }) => {
             position={[-15, 4, -11]}
             scale={[10, 10, 10]}
             ref={ref}
+            // onPointerEnter={handlePointerEnter}
             onClick={handleBalloonClick}
         >
             <primitive object={scene} />

@@ -13,6 +13,7 @@ import BalloonBlue from '../models/BalloonBlue'
 import BalloonRed from '../models/BalloonRed'
 import { Environment } from '@react-three/drei'
 import RaccoonNew from '../models/RaccoonNew'
+// import { DirectionalLightShadow } from '@react-three/drei'
 
 
 const Home = () => {
@@ -43,10 +44,12 @@ const Home = () => {
         let screenScale, screenPosition, shadowPosition
 
         if (window.innerWidth < 768) {
-            screenScale = [0.015, 0.015, 0.015]
+            screenScale = [0.012, 0.012, 0.012] // racoon
             // screenScale = [0.2, 0.2, 0.2]; // Alpaca
-            screenPosition = [0, -1.5, 0];
-            shadowPosition = [0, -1.5, 0];
+            screenPosition = [0, -1.2, 0];// raccoon
+            // screenPosition = [0, -1.5, 0];// Alpaca
+            shadowPosition = [0, -1.2, 0]; // racccoon
+            // shadowPosition = [0, -1.5, 0]; // Alpaca
 
         } else {
             screenScale = [0.03, 0.03, 0.03] // raccoon
@@ -79,23 +82,24 @@ const Home = () => {
 
             <Canvas
                 className={`w-full h-screen bg-transparent ${isRotating ? 'cursor-grabbing' : 'cursor-grab'}`}
-                camera={{ near: 0.1, far: 1000 }}>
+                camera={{ near: 0.1, far: 1000 }}
+            // castShadow
+            >
 
 
                 <directionalLight
-                    // castShadow:true
+                    castShadow:true
                     position={[1, 1, 10]} intensity={2}
                 />
                 {/* <Environment preset='sunset' /> */}
                 <ambientLight intensity={0.1} />
-                <pointLight />
-                <spotLight />
+                {/* <pointLight />
+                <spotLight /> */}
                 <hemisphereLight
                     skyColor='#b1e1ff'
                     groundColor='#000000'
                     intensity={3}
                 />
-
                 <ContactShadows
                     // position={planePosition}
 
@@ -114,7 +118,8 @@ const Home = () => {
                     {/* <Bird /> */}
 
                     <Balloon
-                        onClick={handleBalloonClick}
+                    // onClick={handleBalloonClick}
+                    // style={{ position: 'absolute' }}
                     />
 
                     {/* <BalloonBlue /> */}

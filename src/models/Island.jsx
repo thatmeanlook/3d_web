@@ -23,7 +23,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
     const dampingFactor = 0.95;
 
     const handlePointerDown = (e) => {
-        e.stopPropagation();
+        // e.stopPropagation();
         e.preventDefault();
         setIsRotating(true);
 
@@ -44,7 +44,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
     const handlePointerMove = (e) => {
         e.stopPropagation();
         e.preventDefault();
-
+        // console.log('eeeee', e)
         if (isRotating) {
             const clientX = e.touches
                 ? e.touches[0].clientX
@@ -61,6 +61,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
 
     useEffect(() => {
         const canvas = gl.domElement;
+        // canvas.addEventListener('pointermove', handleCloudClick);
+
         canvas.addEventListener('pointerdown', handlePointerDown);
         canvas.addEventListener('pointerup', handlePointerUp);
         canvas.addEventListener('pointermove', handlePointerMove);
@@ -76,8 +78,28 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
         }
     }, [gl, handlePointerDown, handlePointerUp, handlePointerMove])
 
+
+
+    // useEffect(() => {
+    //     const canvas = gl.domElement;
+    //     canvas.addEventListener('pointerdown', handlePointerDown);
+    //     canvas.addEventListener('pointerup', handlePointerUp);
+    //     canvas.addEventListener('pointermove', handlePointerMove);
+    //     document.addEventListener('keydown', handleKeyDown);
+    //     document.addEventListener('keyup', handleKeyUp);
+
+    //     return () => {
+    //         canvas.removeEventListener('pointerdown', handlePointerDown);
+    //         canvas.removeEventListener('pointerup', handlePointerUp);
+    //         canvas.removeEventListener('pointermove', handlePointerMove);
+    //         document.removeEventListener('keydown', handleKeyDown);
+    //         document.removeEventListener('keyup', handleKeyUp);
+    //     }
+    // }, [gl, handlePointerDown, handlePointerUp, handlePointerMove])
+
     const handleKeyDown = (e) => {
         if (e.key === 'ArrowLeft') {
+
             if (!isRotating) setIsRotating(true);
             islandRef.current.rotation.y += 0.01 * Math.PI;
         } else if (e.key === 'ArrowRight') {
@@ -91,6 +113,11 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
             setIsRotating(false);
         }
     }
+
+    const handleCloudClick = () => {
+        // Open Google.com in a new tab
+        window.open("https://www.google.com", "_blank");
+    };
 
     useFrame(() => {
         if (!isRotating) {
@@ -347,7 +374,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
                 />
 
                 {/* CLOUDS */}
-                {/* <mesh
+                <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes.Icosphere004_Material_0.geometry}
@@ -364,7 +391,9 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
                     position={[-322.135, 343.393, 44.987]}
                     rotation={[2.585, -0.515, -1.336]}
                     scale={49.018}
-                /> */}
+                    onClick={handleCloudClick}
+                />
+
             </group>
 
         </a.group>
