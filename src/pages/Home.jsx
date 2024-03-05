@@ -19,6 +19,7 @@ import Sky_Night from '../models/Sky_Night'
 import Sky_Test from '../models/Sky_Test'
 import Sky_Anime from '../models/Sky_Anime'
 import Sky_Land from '../models/SKy_Land'
+import Balloon_Test from '../models/Balloon_Test'
 
 // import { DirectionalLightShadow } from '@react-three/drei'
 
@@ -248,23 +249,7 @@ const Home = () => {
 
 
 
-                {showPlane &&
-                    <Environment preset='night' />
-                    // <Environment preset='sunset' />
-                }
 
-                {showPlane &&
-                    // <directionalLight
-                    //     castShadow:true
-                    //     position={[1, 1, 10]} intensity={0.2}
-                    // />
-
-                    <directionalLight
-                        color={0xffffff}
-                        intensity={0.3}
-                        position={[0, 1, 0]} />
-
-                }
 
                 {/* {showPlane &&
                     <spotLight
@@ -291,8 +276,6 @@ const Home = () => {
 
                 <Suspense fallback={<Loader />}>
 
-
-
                     {/* <Bird /> */}
 
                     <Balloon
@@ -303,17 +286,14 @@ const Home = () => {
                     // scale={balloonScale}
                     />
 
-                    {/* <BalloonBlue /> */}
+                    {/* <Balloon_Test /> */}
 
-                    {/* <BalloonRed
-                        scale={[0.5, 0.5, 0.5]}
-                    /> */}
+                    <BalloonBlue />
 
-                    {/* {!showPlane &&
-                        <Sky isRotating={isRotating}
-                        // scale={[0.5, 0.5, 0.5]}
-                        />
-                    } */}
+                    <BalloonRed
+                        scale={[0.3, 0.3, 0.3]}
+                    />
+
 
                     {!showPlane &&
                         <Sky_Land isRotating={isRotating}
@@ -321,20 +301,78 @@ const Home = () => {
                         />
                     }
 
-                    {/* <Sky_Anime isRotating={isRotating}
-                    /> */}
+                    {/* {showPlane &&
+                        <Environment preset='night' />
+                        // <Environment preset='sunset' />
+                    } */}
 
-                    {/* <Sky_Test isRotating={isRotating}
-                    // scale={[0.5, 0.5, 0.5]}
-                    /> */}
+                    {showPlane &&
+                        <pointLight
+                            // position={[1, 1, 1]}
+                            position={[0, 2, -4]} // raccoon on small screen
+                            // position={[0, 0, 0]} // raccoon on small screen
+                            // position={[0, 2, 0]}
+
+                            castShadow:true
+                            intensity={20}
+                        // color={'#fcb849'}
+                        />
+
+                        // <pointLight
+                        //     position={[1, 1, 1]} // Set the position of the light
+                        //     intensity={2} // Set the intensity of the light
+                        //     distance={10} // Set the distance that the light affects
+                        //     color="white" // Set the color of the light
+                        // />
+
+                    }
+
 
                     {/* {showPlane &&
-                        <Sky_Night
-                            isRotating={isRotating}
-                        // scale={[10, 10, 10]}
+                        <spotLight
+                            position={[0, 1, 10]}
+                            intensity={12}
+                            // distance={30} // for small screen
+                            distance={8}
+                            angle={Math.PI * 0.1}
+                        // penumbra={0.25}
+                        // decay={0.5}
+                        // target={[0, 0, 0]}
                         />
                     } */}
 
+                    {showPlane &&
+                        // <directionalLight
+                        //     castShadow:true
+                        //     position={[1, 1, 10]}
+                        //     intensity={0.5}
+                        // />
+
+                        <directionalLight
+                            // color={0xffffff}
+                            color={'#fcb849'} //current Yellow/Orange
+                            intensity={0.5}
+                            position={[0, 1, 0]}
+                            castShadow:true
+                        />
+
+                        // <directionalLight
+                        //     // color={0xffffff}
+                        //     // color={'#fcb849'} //current Yellow/Orange
+                        //     color={'#7c49fc'}
+                        //     intensity={1.5}
+                        //     position={[0, 1, 0]}
+                        //     castShadow:true
+                        // />
+
+                    }
+
+                    {showPlane &&
+                        <ambientLight
+                            intensity={0.1}
+                            color='white'
+                        />
+                    }
 
                     {showPlane &&
                         <Sky_Anime

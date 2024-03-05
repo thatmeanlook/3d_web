@@ -17,7 +17,7 @@ const BalloonBlue = ({ }) => {
 
     const handleBalloonClick = () => {
         // Open Google.com in a new tab
-        window.open("https://www.google.com", "_blank");
+        // window.open("https://www.google.com", "_blank");
     };
 
     useFrame(({ clock, camera }) => {

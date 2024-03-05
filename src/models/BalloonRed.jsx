@@ -60,7 +60,10 @@ const BalloonRed = ({ currentAnimation, ...props }) => {
     return (
         <group ref={group} {...props} dispose={null}>
             <group name="Sketchfab_Scene">
-                <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
+                <group name="Sketchfab_model"
+                    rotation={[-Math.PI / 2, 0, 0]}
+                    position={[-15, 4, -11]}
+                >
                     <group name="root">
                         <group name="GLTF_SceneRootNode" rotation={[Math.PI / 2, 0, 0]}>
                             <group name="Cube_1" position={[0, -3.619, 0]} scale={0.222}>
