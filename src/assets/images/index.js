@@ -6,7 +6,10 @@ import tesla from './tesla.png'
 import logo from './logo.svg'
 import xforce from './xforce.png'
 import hopeboat from './hopeboat.jpg'
-import cruise from './cruise.jpg'
+import cruise from './cruise.png'
+import ucsd from './ucsd.png'
+import ucsd_seal from './UCSD_Seal.png'
+import occ from './occ.png'
 
 export {
     hero,
@@ -18,4 +21,7 @@ export {
     xforce,
     hopeboat,
     cruise,
+    ucsd,
+    ucsd_seal,
+    occ
 }

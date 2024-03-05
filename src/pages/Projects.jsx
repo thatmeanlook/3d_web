@@ -18,9 +18,9 @@ const Projects = () => {
             </h1>
 
             <div className='mt-5 flex flex-col gap-3 text-slate-500'>
-                <p>
+                {/* <p>
                     What I have worked on
-                </p>
+                </p> */}
             </div>
 
 

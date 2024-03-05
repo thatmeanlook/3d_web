@@ -1,7 +1,7 @@
 import React from 'react'
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component'
 import 'react-vertical-timeline-component/style.min.css'
-import { skills, experiences } from '../constants'
+import { skills, experiences, educations } from '../constants'
 import CTA from '../components/CTA'
 
 const About = () => {
@@ -41,14 +41,15 @@ const About = () => {
                 </div>
             </div>
 
+            {/* EXPERIENCE */}
             <div className='py-16'>
-                <h3 className='subhead-text'>Work Experience.</h3>
-                <div className='mt-5 flex flex-col gap-3 text-slate-500'>
+                <h3 className='subhead-text'>Work Experience</h3>
+                {/* <div className='mt-5 flex flex-col gap-3 text-slate-500'>
                     <p>
                         I've worked with all sorts of companies, leveling up my skills and
                         teaming up with smart people. Here's the rundown:
                     </p>
-                </div>
+                </div> */}
 
                 <div className='mt-12 flex'>
                     <VerticalTimeline>
@@ -100,6 +101,72 @@ const About = () => {
                     </VerticalTimeline>
                 </div>
             </div>
+
+
+            {/* EDUCATION */}
+            <div className='pt-8 pb-16'>
+                <h3 className='subhead-text'>Education</h3>
+                {/* <div className='mt-5 flex flex-col gap-3 text-slate-500'>
+
+                </div> */}
+
+                <div className='mt-5 flex'>
+                    <VerticalTimeline>
+                        {educations.map((education, index) => (
+                            <VerticalTimelineElement
+                                // className='p-[-10]'
+                                key={education.company_name}
+                                date={
+                                    <div className=''>
+                                        {education.date}
+                                    </div>
+                                }
+                                iconStyle={{
+                                    background: education.iconBg,
+                                    // marginTop: '10px'
+                                }}
+                                icon={
+                                    <div className=' flex justify-center items-center w-full h-full'>
+                                        <img
+                                            src={education.icon}
+                                            alt={education.company_name}
+                                            className='w-[100%] h-[100%] object-contain'
+                                        />
+                                    </div>
+                                }
+                                contentStyle={{
+                                    borderBottom: "0px",
+                                    borderStyle: "solid",
+                                    borderBottomColor: education.iconBg,
+                                    boxShadow: "none",
+                                    // marginTop: '-10px'
+                                }}
+                            >
+                                <div className=''>
+                                    <h3 className=' text-black text-xl font-poppins font-semibold'>
+                                        {education.title}
+                                    </h3>
+                                    <p
+                                        className='text-black-500 font-medium text-base'
+                                        style={{ margin: 0 }}
+                                    >
+                                        {education.company_name}
+                                    </p>
+                                </div>
+
+
+                            </VerticalTimelineElement>
+                        ))}
+                    </VerticalTimeline>
+                </div>
+
+
+
+            </div>
+
+
+
+
 
             <hr className='border-slate-200' />
 

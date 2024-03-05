@@ -6,7 +6,7 @@ Source: https://sketchfab.com/3d-models/poly-art-raccoon-093e7d8dba2c47118aff112
 Title: Poly Art Raccoon
 */
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import { AnimationMixer, AnimationUtils } from 'three'
 import { Clock } from 'three'
@@ -22,13 +22,14 @@ const RaccoonNew = ({ currentAnimation, isRotating, ...props }) => {
     const { nodes, materials, animations } = useGLTF(scene);
     const { actions } = useAnimations(animations, group);
 
-
+    const [isWaving, setIsWaving] = useState(false);
     const mixer = useRef();
 
     useEffect(() => {
+
         // actions.Action_Crawl.setDuration(3).play();
-        console.log(actions);
-        console.log('raccoon action', actions.Action_Crawl)
+        // console.log(actions);
+        // console.log('raccoon action', actions.Action_Crawl)
         // console.log(actions.Eating)
         const mixerInstance = new AnimationMixer(group.current);
         mixer.current = mixerInstance;
@@ -37,9 +38,9 @@ const RaccoonNew = ({ currentAnimation, isRotating, ...props }) => {
         // const crawlClip = actions.Action_Crawl.getClip();
         const crawlClip = actions.Action_Eat.getClip();
         // const crawlClip = actions.Roll.getClip();
-        console.log('clip', crawlClip)
+        // console.log('clip', crawlClip)
         const crawlSubClip = AnimationUtils.subclip(crawlClip, 'crawl_subClip', 0, 1000, true);
-        console.log('subclip', crawlSubClip)
+        // console.log('subclip', crawlSubClip)
         const crawlSubClipAction = mixerInstance.clipAction(crawlSubClip);
         // crawlSubClipAction.enabled = true;
         // crawlSubClipAction.setEffectiveTimeScale(1)
@@ -48,29 +49,50 @@ const RaccoonNew = ({ currentAnimation, isRotating, ...props }) => {
         ///////////// 2nd action
         const digClip = actions.Action_Dig.getClip();
         // const digClip = actions.Roll.getClip();
-        console.log('Dig', digClip)
+        // console.log('Dig', digClip)
         const digSubClip = AnimationUtils.subclip(digClip, 'dig_subClip', 23.2, 24.5, true);
-        console.log('subDig', digSubClip)
+        // console.log('subDig', digSubClip)
         const digSubClipAction = mixerInstance.clipAction(digSubClip);
         /////////
 
 
         ///////////// 3nd action: Swim_Idle is a good choice *********
         const walkClip = actions.Swim_Idle.getClip();
-        console.log('walk', walkClip)
+        // console.log('walk', walkClip)
         const walkSubClip = AnimationUtils.subclip(walkClip, 'walk_subClip', 1, 1000, true);
-        console.log('subwalk', walkSubClip)
+        // console.log('subwalk', walkSubClip)
         const walkSubClipAction = mixerInstance.clipAction(walkSubClip).setDuration(0.7);
         /////////
 
 
         ///////////// 4th action: Jump_In_Place: cool for Contact Page when clicked on
         const jumpClip = actions.Jump_In_Place.getClip();
-        console.log('jump', jumpClip)
+        // console.log('jump', jumpClip)
         const jumpSubClip = AnimationUtils.subclip(jumpClip, 'jump_subClip', 1, 1000, true);
-        console.log('subjump', jumpSubClip)
+        // console.log('subjump', jumpSubClip)
         const jumpSubClipAction = mixerInstance.clipAction(jumpSubClip);
         /////////
+
+
+        ///////////// TRYING TO DO SOMETHING EVERY 10s
+
+        // // Subclip "Wave_Hand" action
+        // const waveHandClip = actions.Roll.getClip();
+        // const waveHandSubClip = AnimationUtils.subclip(waveHandClip, 'wave_hand_subClip', 0, 1000, true);
+        // const waveHandSubClipAction = mixerInstance.clipAction(waveHandSubClip);
+
+        // const playWaveHand = () => {
+        //     setIsWaving(true);
+        //     waveHandSubClipAction.play();
+        //     setTimeout(() => {
+        //         setIsWaving(false);
+        //     }, 9000); // Adjust this timeout to match the duration of the "Wave_Hand" action
+        // };
+
+        // const waveHandInterval = setInterval(playWaveHand, 5000);
+
+
+        ////////////
 
 
         if (!isRotating) {
@@ -87,11 +109,12 @@ const RaccoonNew = ({ currentAnimation, isRotating, ...props }) => {
 
         }
 
-        console.log('raccoon trimmed', crawlSubClipAction)
+        // console.log('raccoon trimmed', crawlSubClipAction)
         return () => {
+            // clearInterval(waveHandInterval);
             mixerInstance.stopAllAction();
         };
-    }, [actions, isRotating]);
+    }, [actions, isRotating, isWaving]);
 
     useFrame((_, delta) => {
         if (mixer.current) {

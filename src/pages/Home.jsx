@@ -1,4 +1,4 @@
-import { Suspense, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import Loader from '../components/Loader'
 import Island from '../models/Island'
@@ -20,10 +20,73 @@ const Home = () => {
     const [isRotating, setIsRotating] = useState(false);
     const [currentStage, setCurrentStage] = useState(1);
 
+    ///////////////////////////////////
+    // // CURSOR TRACKING
+
+    // const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+    // const [isMovingLeft, setIsMovingLeft] = useState(false);
+    // const [isMovingRight, setIsMovingRight] = useState(false);
+
+    // useEffect(() => {
+    //     const handleMouseMove = (e) => {
+    //         const newX = e.clientX;
+    //         const newY = e.clientY;
+
+    //         // Check if cursor is moving left or right
+    //         if (newX > cursorPosition.x) {
+    //             setIsMovingRight(true);
+    //             setIsMovingLeft(false);
+    //         } else if (newX < cursorPosition.x) {
+    //             setIsMovingLeft(true);
+    //             setIsMovingRight(false);
+    //         }
+
+    //         // Update cursor position
+    //         setCursorPosition({ x: newX, y: newY });
+    //     };
+
+    //     window.addEventListener('mousemove', handleMouseMove);
+
+    //     return () => {
+    //         window.removeEventListener('mousemove', handleMouseMove);
+    //     };
+    // }, [cursorPosition]);
+
+    // useEffect(() => {
+    //     // Handle cursor movement here...
+    //     if (isMovingLeft) {
+    //         console.log('Cursor is moving left');
+    //     } else if (isMovingRight) {
+    //         console.log('Cursor is moving right');
+    //     }
+    // }, [isMovingLeft, isMovingRight]);
+
+    ////////////////////////////////
+
+
+
+    // const raccoonDirection = () => {
+    //     let rotation;
+    //     if (isMovingLeft) {
+    //         rotation = [0, 20.5, 0]
+    //     } else {
+    //         rotation = [0, -20.5, 0]
+    //     }
+
+    //     return rotation
+    // };
+
+    // const raccoonRotation = raccoonDirection();
+
+
+
+    /////////////////////////
+
     const adjustIslandForScreenSize = () => {
 
         let screenScale = null;
         let screenPosition = [0, -6.5, -43];
+        // let screenPosition = [0, -6.5, -83];
         let rotation = [0.1, 4.7, 0];
 
         if (window.innerWidth < 768) {
@@ -91,15 +154,20 @@ const Home = () => {
                     castShadow:true
                     position={[1, 1, 10]} intensity={2}
                 />
-                {/* <Environment preset='sunset' /> */}
-                <ambientLight intensity={0.1} />
-                {/* <pointLight />
-                <spotLight /> */}
                 <hemisphereLight
                     skyColor='#b1e1ff'
                     groundColor='#000000'
                     intensity={3}
                 />
+                <ambientLight intensity={0.1} />
+
+                {/* <Environment preset='sunset' /> */}
+
+                {/* <Environment preset='warehouse' /> */}
+
+                {/* <pointLight />
+                <spotLight /> */}
+
                 <ContactShadows
                     // position={planePosition}
 
@@ -155,6 +223,8 @@ const Home = () => {
                         position={planePosition}
                         isRotating={isRotating}
                         rotation={[0, 20.5, 0]}
+                    // rotation={raccoonRotation}
+
                     />
 
 

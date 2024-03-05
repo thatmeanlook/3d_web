@@ -1,4 +1,4 @@
-import { meta, shopify, starbucks, tesla, xforce, hopeboat, cruise } from "../assets/images";
+import { meta, shopify, starbucks, tesla, xforce, hopeboat, cruise, ucsd, ucsd_seal, occ } from "../assets/images";
 import {
     car,
     contact,
@@ -23,58 +23,31 @@ import {
     summiz,
     tailwindcss,
     threads,
-    typescript
+    typescript,
+    three,
+    python
 } from "../assets/icons";
 
 export const skills = [
-    {
-        imageUrl: css,
-        name: "CSS",
-        type: "Frontend",
-    },
-    {
-        imageUrl: express,
-        name: "Express",
-        type: "Backend",
-    },
-    {
-        imageUrl: git,
-        name: "Git",
-        type: "Version Control",
-    },
-    {
-        imageUrl: github,
-        name: "GitHub",
-        type: "Version Control",
-    },
+
+    // {
+    //     imageUrl: express,
+    //     name: "Express",
+    //     type: "Backend",
+    // },
     {
         imageUrl: html,
         name: "HTML",
         type: "Frontend",
     },
     {
+        imageUrl: css,
+        name: "CSS",
+        type: "Frontend",
+    },
+    {
         imageUrl: javascript,
         name: "JavaScript",
-        type: "Frontend",
-    },
-    {
-        imageUrl: mongodb,
-        name: "MongoDB",
-        type: "Database",
-    },
-    {
-        imageUrl: motion,
-        name: "Motion",
-        type: "Animation",
-    },
-    {
-        imageUrl: mui,
-        name: "Material-UI",
-        type: "Frontend",
-    },
-    {
-        imageUrl: nextjs,
-        name: "Next.js",
         type: "Frontend",
     },
     {
@@ -88,37 +61,86 @@ export const skills = [
         type: "Frontend",
     },
     {
-        imageUrl: redux,
-        name: "Redux",
-        type: "State Management",
+        imageUrl: three,
+        name: "Three.js ",
+        type: "3D library",
     },
+    // {
+    //     imageUrl: git,
+    //     name: "Git",
+    //     type: "Version Control",
+    // },
     {
-        imageUrl: sass,
-        name: "Sass",
+        imageUrl: github,
+        name: "GitHub",
+        type: "Version Control",
+    },
+
+
+    // {
+    //     imageUrl: mongodb,
+    //     name: "MongoDB",
+    //     type: "Database",
+    // },
+
+
+    // {   // LEARN THIS ONE
+    //     imageUrl: motion,
+    //     name: "Motion",
+    //     type: "Animation",
+    // },
+
+    // {
+    //     imageUrl: mui,
+    //     name: "Material-UI",
+    //     type: "Frontend",
+    // },
+
+    {  // LEARN THIS ONE
+        imageUrl: nextjs,
+        name: "Next.js",
         type: "Frontend",
     },
+
+    // {
+    //     imageUrl: redux,
+    //     name: "Redux",
+    //     type: "State Management",
+    // },
+    // {
+    //     imageUrl: sass,
+    //     name: "Sass",
+    //     type: "Frontend",
+    // },
     {
         imageUrl: tailwindcss,
         name: "Tailwind CSS",
         type: "Frontend",
     },
+
     {
-        imageUrl: typescript,
-        name: "TypeScript",
-        type: "Frontend",
-    }
+        imageUrl: python,
+        name: "Python",
+        type: "Backend",
+    },
+    // {
+    //     imageUrl: typescript,
+    //     name: "TypeScript",
+    //     type: "Frontend",
+    // }
 ];
 
 export const experiences = [
     {
         title: "X-Force Research Fellow",
-        company_name: "NGA",
+        company_name: "National Security Inovation Network (NSIN)",
         icon: xforce,
         iconBg: "#5F4868",
         date: "June 2022 - August 2022",
         points: [
             "Organized and analyzed large-scale high-dimensional datasets.",
-            "Developed algorithm to identify structural features of network graphs.",
+            "Developed an algorithm proficiently to identify structural features within network graphs, enhancing data interpretation and visualization.",
+            "Implemented machine learning models to extract actionable insights and patterns from complex data sets."
         ],
     },
     {
@@ -128,8 +150,10 @@ export const experiences = [
         iconBg: "#fbc3bc",
         date: "June 2017 - July 2020",
         points: [
-            "Communicated with clients to develop visual concepts.",
-            "Measured and reported performance of all digital marketing campaigns.",
+
+            "Strategized and executed multi-platform campaigns to boost brand visibility and engagement.",
+            "Analyzed metrics and consumers insights to optimize SEO, SEM, and social media strategies.",
+            "Collaborated cross-functionally to align digital initiatives with business goals.",
         ],
     },
     {
@@ -139,10 +163,31 @@ export const experiences = [
         iconBg: "#ABD4F8",
         date: "Dec 2017 - Dec 2019",
         points: [
-            "Work closely with captains to ensure the cruise operates smoothly.",
-            "Interact with bar guests, take orders and serve drinks.",
-            "Monitor guest experience and ensure high standard service at all time.",
+            "Provided exceptional customer service by serving beverages and attending to passengers' needs aboard the vessel.",
+            "Assisted with deck operations, including mooring, anchoring, and general maintenance tasks, ensuring a safe and enjoyable experience for all guests.",
+            "Managed inventory, stocked supplies, and maintained cleanliness of the bar area, adhering to sanitation and safety standards.",
         ],
+    },
+
+];
+
+export const educations = [
+    {
+        title: "University of California, San Diego",
+        company_name: "Data Science (B.S.)",
+        icon: ucsd_seal,
+        // icon: ucsd,
+        iconBg: "#5F4868",
+        date: "September 2021 - April 2024",
+
+    },
+    {
+        title: "Orange Coast College",
+        company_name: "Art & Animation (A.A.), Math & Business (A.S.)",
+        icon: occ,
+        iconBg: "white",
+        date: "September 2019 - June 2021",
+
     },
 
 ];
@@ -170,8 +215,8 @@ export const projects = [
         iconUrl: pricewise,
         theme: 'btn-back-red',
         name: '3D Web Portfolio',
-        description: 'Developed a web application that tracks and notifies users of price changes for products on Amazon, helping users find the best deals.',
-        tech: 'HTML, CSS, JS',
+        description: 'Developed a portfolio website using React and Three.js, exploring the integration of immersive models and animations. ',
+        tech: 'This project provided hands-on experience in frontend development with React and incorporating dynamic graphics using Three.js.',
 
         points: [
             "Work closely with captains to ensure the cruise operates smoothly.",
@@ -184,8 +229,8 @@ export const projects = [
         iconUrl: threads,
         theme: 'btn-back-green',
         name: 'Natural Language Model',
-        description: 'Created a full-stack replica of the popular discussion platform "Threads," enabling users to post and engage in threaded conversations.',
-        tech: 'HTML, CSS, JS',
+        description: 'Developed an object-oriented N-gram language model in Python, employing regular expressions to tokenize and prepare corpuses for training.',
+        tech: ' Enhanced model efficiency and scalability for large datasets through optimization techniques, including the creation of a baseline uniform and unigram language model.',
 
         points: [
             "Work closely with captains to ensure the cruise operates smoothly.",
