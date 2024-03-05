@@ -23,7 +23,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
     const dampingFactor = 0.95;
 
     const handlePointerDown = (e) => {
-        // e.stopPropagation();
+        // e.stopPropagation(); // disable this allow onClick on Balloon
         e.preventDefault();
         setIsRotating(true);
 

@@ -28,8 +28,13 @@ import soundon from './soundon.png'
 import soundoff from './soundoff.png'
 import three from './three.png'
 import python from './python.png'
+import oo7 from './007.png'
+import user from './user.png'
+// import user from './user.svg'
 
 export {
+    user,
+    oo7,
     css,
     express,
     git,

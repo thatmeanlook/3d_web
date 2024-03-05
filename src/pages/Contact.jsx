@@ -13,29 +13,46 @@ const Contact = () => {
     const formRef = useRef(null);
     const [form, setForm] = useState({ name: '', email: '', message: '' })
     const [isLoading, setIsLoading] = useState(false);
-    // const [currentAnimation, setCurrentAnimation] = useState('Eating'); // for Alpaca
-    // const [currentAnimation, setCurrentAnimation] = useState('Stand_Idle'); // for New Raccoon
-    const [currentAnimation, setCurrentAnimation] = useState('Action_Eat'); // for New Raccoon
-    // const [currentAnimation, setCurrentAnimation] = useState('Racoon_Idle'); // this old raccoon
+
+    const [currentAnimation, setCurrentAnimation] = useState('Lie_Idle_2'); // for New Raccoon
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value })
     };
 
-    // const handleFocus = () => setCurrentAnimation('Racoon_Walk');
-    // const handleBlur = () => setCurrentAnimation('Racoon_StandUp');
 
-    // const handleFocus = () => setCurrentAnimation('Gallop'); // for Alpaca
-    // const handleBlur = () => setCurrentAnimation('Walk');  // for Alpaca
 
     const handleFocus = () => setCurrentAnimation('Sneak_Idle'); // for Alpaca
-    const handleBlur = () => setCurrentAnimation('Action_Crawl');  // for Alpaca
+    const handleBlur = () => setCurrentAnimation('Action_Eat');  // for Alpaca
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsLoading(true);
+        setCurrentAnimation('Jump_In_Place');
 
-        emailjs.sendForm
+        emailjs.send(
+
+            import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+            {
+                from_name: form.name,
+                to_name: "Minh",
+                from_email: form.email,
+                to_email: 'minhlucart@gmail.com',
+                message: form.message
+            },
+            import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
+        ).then(() => {
+            setIsLoading(false);
+            // SHOW success message
+            // hide alert
+            setForm({ name: '', email: '', message: '' });
+        }).catch((error) => {
+            setIsLoading(false);
+            setCurrentAnimation('Lie_Idle_2');
+            console.log(error);
+            // TO DO: show error message
+        })
     };
 
     const linkedIn = () => {
@@ -52,14 +69,8 @@ const Contact = () => {
         }, 1000);
     };
 
-    // const handleRaccoonHover = () => {
-    //     document.body.style.cursor = "grab";
-
-    // }
 
     const handleRaccoonClick = () => {
-        // document.body.style.cursor = "grabbing";
-        // document.body.style.cursor = "grab";
 
         // Open Google.com in a new tab
         setCurrentAnimation('Attack_Arms');
@@ -81,13 +92,13 @@ const Contact = () => {
 
         if (window.innerWidth < 768) {
             screenScale = [0.1, 0.1, 0.1] // racoon
-            screenPosition = [1.5, -1, -4];// raccoon
-            shadowPosition = [0, -1, 0]; // racccoon
+            screenPosition = [1.5, -3, -4];// raccoon
+            shadowPosition = [0, -3, 0]; // racccoon
 
 
         } else {
             screenScale = [0.1, 0.1, 0.1] // raccoon
-            screenPosition = [2, -3, -5];
+            screenPosition = [2, -4, -5];
             shadowPosition = [0, -3, 0];
 
         }
@@ -102,10 +113,10 @@ const Contact = () => {
             {/* <section className='relative flex lg:flex-row flex-col max-container'> */}
 
             {/* message box */}
-            <div className='flex-1 min-w-[50%] flex flex-col relative z-0'>
+            <div className='flex-1 min-w-[50%] flex flex-col relative z-0 bg-transparent'>
                 <h1 className='head-text'>Get in Touch</h1>
                 <form
-                    className='w-full flex flex-col gap-7 mt-14'
+                    className='w-full flex flex-col gap-5 mt-10'
                     onSubmit={handleSubmit}
                 >
                     <label className='text-black-500 font-semibold'>
@@ -143,7 +154,8 @@ const Contact = () => {
                         <textarea
                             rows={4}
                             name='message'
-                            className='input'
+                            // className='input'
+                            className='textarea'
                             placeholder=''
                             value={form.message}
                             onChange={handleChange}
@@ -159,7 +171,6 @@ const Contact = () => {
                         onBlur={handleBlur}
                     >
                         {isLoading ? 'Sending...' : 'Send Message'}
-
                     </button>
 
                     <button
@@ -178,7 +189,10 @@ const Contact = () => {
             </div>
 
             {/* Raccoon */}
-            <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px] relative z-10'>
+            <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px] relative z-100'
+            // style={{ position: 'absolute', top: '50px', left: '50px', zIndex: '100' }}
+            // style={{ position: 'absolute' }}
+            >
                 <Canvas
                     camera={{
                         position: [0, 0, 5],
@@ -186,7 +200,6 @@ const Contact = () => {
                         near: 0.1,
                         far: 1000
                     }}
-
 
                 >
                     <directionalLight
@@ -245,7 +258,11 @@ const Contact = () => {
 
             </div>
 
-        </section>
+            {/* <div>
+                <p>MinhLucArt@gmail.com</p>
+            </div> */}
+
+        </section >
 
 
     )

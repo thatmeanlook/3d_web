@@ -1,6 +1,7 @@
 import { meta, shopify, starbucks, tesla, xforce, hopeboat, cruise, ucsd, ucsd_seal, occ } from "../assets/images";
 import {
     car,
+    user,
     contact,
     css,
     estate,
@@ -25,7 +26,8 @@ import {
     threads,
     typescript,
     three,
-    python
+    python,
+    oo7
 } from "../assets/icons";
 
 export const skills = [
@@ -213,7 +215,8 @@ export const socialLinks = [
 
 export const projects = [
     {
-        iconUrl: pricewise,
+        iconUrl: user,
+        // iconUrl: pricewise,
         theme: 'btn-back-red',
         name: '3D Web Portfolio',
         description: 'Developed a portfolio website using React and Three.js, exploring the integration of immersive models and animations. ',
@@ -234,8 +237,9 @@ export const projects = [
     // },
 
     {
-        iconUrl: car,
+        iconUrl: oo7,
         theme: 'btn-back-blue',
+        // theme: 'red',
         name: '"Bond. James Bond"',
         // description: 'Analyzed the performance of the 007 movie franchise and \
         // created visualizations to communicate results.',

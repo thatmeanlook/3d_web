@@ -18,7 +18,8 @@ const About = () => {
 
             <div className='mt-5 flex flex-col gap-3 text-slate-500'>
                 <p>
-                    Front End Engineer based in San Diego, CA
+                    A recent graduate from UC San Diego and an aspiring Frontend Engineer.
+
                 </p>
             </div>
 

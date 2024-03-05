@@ -32,7 +32,7 @@ const Projects = () => {
                             <div className='btn-front rounded-xl flex justify-center items-center'>
                                 <img src={project.iconUrl}
                                     atl="Project Icon"
-                                    className='w-1/2 h-1/2 object-contain' />
+                                    className='w-full h-full object-contain' />
                             </div>
                         </div>
 
