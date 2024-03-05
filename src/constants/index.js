@@ -96,11 +96,11 @@ export const skills = [
     //     type: "Frontend",
     // },
 
-    {  // LEARN THIS ONE
-        imageUrl: nextjs,
-        name: "Next.js",
-        type: "Frontend",
-    },
+    // {  // LEARN THIS ONE
+    //     imageUrl: nextjs,
+    //     name: "Next.js",
+    //     type: "Frontend",
+    // },
 
     // {
     //     imageUrl: redux,
@@ -243,9 +243,12 @@ export const projects = [
         iconUrl: car,
         theme: 'btn-back-blue',
         name: '"Bond. James Bond"',
-        description: 'Analyzed the performance of the 007 movie franchise and \
-        created visualizations to communicate results.',
-        tech: 'Tech: Python, HTML, CSS, JS',
+        // description: 'Analyzed the performance of the 007 movie franchise and \
+        // created visualizations to communicate results.',
+        description: "Conducted comprehensive data analysis on the performance metrics of the 007 movie franchise, utilizing various statistical methods and visualization tools to extract insights and trends. ",
+
+        tech: '',
+        // tech: 'The project aimed to provide stakeholders with actionable insights into the box office performance, critical reception, and overall success of the iconic film series.',
 
         points: [
             "Work closely with captains to ensure the cruise operates smoothly.",

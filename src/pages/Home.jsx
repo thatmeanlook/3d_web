@@ -196,7 +196,9 @@ const Home = () => {
                         scale={[0.5, 0.5, 0.5]}
                     /> */}
 
-                    <Sky isRotating={isRotating} />
+                    <Sky isRotating={isRotating}
+                    // scale={[0.5, 0.5, 0.5]}
+                    />
 
                     <Island
                         position={islandPosition}

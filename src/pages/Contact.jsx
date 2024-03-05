@@ -1,10 +1,10 @@
 import React, { Suspense, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { Canvas } from '@react-three/fiber';
-import Raccoon from '../models/Raccoon';
+// import Raccoon from '../models/Raccoon';
 import Loader from '../components/Loader';
-import RaccoonNew from '../models/RaccoonNew';
-import Alpaca from '../models/Alpaca';
+// import RaccoonNew from '../models/RaccoonNew';
+// import Alpaca from '../models/Alpaca';
 import { Environment, ContactShadows } from '@react-three/drei';
 import { Link } from 'react-router-dom';
 import RaccoonNew_Contact from '../models/RaccoonNew_Contact';
@@ -37,6 +37,11 @@ const Contact = () => {
 
         emailjs.sendForm
     };
+
+    const linkedIn = () => {
+        window.open('https://linkedin.com/in/minhluc', '_blank');
+
+    }
 
     const handleAlpacaClick = () => {
         // Open Google.com in a new tab
@@ -157,6 +162,18 @@ const Contact = () => {
 
                     </button>
 
+                    <button
+                        // type='submit'
+                        className='btn'
+                        // disabled={isLoading}
+                        // onFocus={handleFocus}
+                        // onBlur={handleBlur}
+                        onClick={linkedIn}
+                    >
+                        Connect on LinkedIn
+
+                    </button>
+
                 </form>
             </div>
 
@@ -199,19 +216,6 @@ const Contact = () => {
 
                     >
 
-                        {/* <Raccoon
-                            currentAnimation={currentAnimation}
-                            position={[-2, -3, -5]}
-                            rotation={[0, 0, 0]}
-                            scale={[1, 1, 1]}
-                        /> */}
-
-                        {/* <RaccoonNew
-                            currentAnimation={currentAnimation}
-                            position={[-2, -3, -5]}
-                            rotation={[0, 0, 0]}
-                            scale={[0.1, 0.1, 0.1]}
-                        /> */}
 
                         <RaccoonNew_Contact
                             currentAnimation={currentAnimation}

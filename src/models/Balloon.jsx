@@ -19,12 +19,6 @@ const Balloon = ({ }) => {
     const { gl, viewport } = useThree();
 
 
-
-    // useEffect(() => {  // original
-    //     console.log(actions)
-    //     actions['Take 001'].play();
-    // }, []);
-
     const handlePointerEnter = () => {
         gl.domElement.style.cursor = 'default';
     }
@@ -33,6 +27,21 @@ const Balloon = ({ }) => {
         // Open Google.com in a new tab
         window.open("https://www.google.com", "_blank");
     };
+
+    const adjustBalloonForScreenSize = () => {
+        let position;
+        if (window.innerWidth < 500) {
+            position = [-7, 4, -11]
+        }
+        else {
+            position = [-15, 4, -11]
+        }
+
+        return position
+    }
+
+    const balloonPosition = adjustBalloonForScreenSize();
+
 
     useEffect(() => {
 
@@ -85,17 +94,19 @@ const Balloon = ({ }) => {
         }
     });
 
-    // useFrame((_, delta) => {
-    //     ref.current.rotation.Y += 0.15 * delta;
-    // })
+    useFrame((_, delta) => {
+        ref.current.rotation.Y += 0.15 * delta;
+    })
 
     return (
         <mesh
-            position={[-15, 4, -11]}
+            position={balloonPosition}
+            // position={[-15, 4, -11]}
             scale={[10, 10, 10]}
             ref={ref}
             // onPointerEnter={handlePointerEnter}
             onClick={handleBalloonClick}
+            onPointerDown={handleBalloonClick}
         >
             <primitive object={scene} />
         </mesh>
