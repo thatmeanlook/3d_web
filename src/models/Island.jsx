@@ -59,34 +59,34 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
 
     }
 
-    useEffect(() => {
-        const canvas = gl.domElement;
-        // canvas.addEventListener('pointermove', handleCloudClick);
+    // useEffect(() => {
+    //     const canvas = gl.domElement;
+    //     // canvas.addEventListener('pointermove', handleCloudClick);
 
-        canvas.addEventListener('pointerdown', handlePointerDown);
-        canvas.addEventListener('pointerup', handlePointerUp);
-        canvas.addEventListener('pointermove', handlePointerMove);
+    //     canvas.addEventListener('pointerdown', handlePointerDown);
+    //     canvas.addEventListener('pointerup', handlePointerUp);
+    //     canvas.addEventListener('pointermove', handlePointerMove);
 
-        canvas.addEventListener("touchstart", handlePointerDown);
-        canvas.addEventListener("touchmove", handlePointerMove);
-        canvas.addEventListener("touchend", handlePointerUp);
+    //     canvas.addEventListener("touchstart", handlePointerDown);
+    //     canvas.addEventListener("touchmove", handlePointerMove);
+    //     canvas.addEventListener("touchend", handlePointerUp);
 
-        document.addEventListener('keydown', handleKeyDown);
-        document.addEventListener('keyup', handleKeyUp);
+    //     document.addEventListener('keydown', handleKeyDown);
+    //     document.addEventListener('keyup', handleKeyUp);
 
-        return () => {
-            canvas.removeEventListener('pointerdown', handlePointerDown);
-            canvas.removeEventListener('pointerup', handlePointerUp);
-            canvas.removeEventListener('pointermove', handlePointerMove);
+    //     return () => {
+    //         canvas.removeEventListener('pointerdown', handlePointerDown);
+    //         canvas.removeEventListener('pointerup', handlePointerUp);
+    //         canvas.removeEventListener('pointermove', handlePointerMove);
 
-            canvas.removeEventListener("touchstart", handlePointerDown);
-            canvas.removeEventListener("touchmove", handlePointerMove);
-            canvas.removeEventListener("touchend", handlePointerUp);
+    //         canvas.removeEventListener("touchstart", handlePointerDown);
+    //         canvas.removeEventListener("touchmove", handlePointerMove);
+    //         canvas.removeEventListener("touchend", handlePointerUp);
 
-            document.removeEventListener('keydown', handleKeyDown);
-            document.removeEventListener('keyup', handleKeyUp);
-        }
-    }, [gl, handlePointerDown, handlePointerUp, handlePointerMove])
+    //         document.removeEventListener('keydown', handleKeyDown);
+    //         document.removeEventListener('keyup', handleKeyUp);
+    //     }
+    // }, [gl, handlePointerDown, handlePointerUp, handlePointerMove])
 
 
 

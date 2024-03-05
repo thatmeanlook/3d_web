@@ -11,7 +11,7 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import ballonScene from '../assets/3d/hot_air_balloon.glb'
 import { useFrame, useThree } from "@react-three/fiber";
 
-const Balloon = ({ }) => {
+const Balloon = ({ toggleShowPlane }) => {
     const ref = useRef();
     const { scene, animations } = useGLTF(ballonScene);
     const { actions } = useAnimations(animations, ref);
@@ -23,9 +23,12 @@ const Balloon = ({ }) => {
         gl.domElement.style.cursor = 'default';
     }
 
-    const handleBalloonClick = () => {
+    const handleBalloonClick = (e) => {
+        toggleShowPlane();
+        // showPlane = true;
+        // console.log('show Plane', showPlane)
         // Open Google.com in a new tab
-        window.open("https://www.google.com", "_blank");
+        // window.open("https://www.amazon.com", "_blank");
     };
 
     const adjustBalloonForScreenSize = () => {
@@ -55,14 +58,15 @@ const Balloon = ({ }) => {
         // canvas.addEventListener('onClick', handleBalloonClick);
         // // canvas.addEventListener('pointermove', handlePointerMove);
         // // document.addEventListener('keydown', handleKeyDown);
-        // // document.addEventListener('keyup', handleKeyUp);
+        // window.addEventListener('pointerdown', handleBalloonClick);
 
         // return () => {
-        //     canvas.removeEventListener('pointerEnter', handlePointerEnter);
-        //     canvas.removeEventListener('onClick', handleBalloonClick);
-        //     // canvas.removeEventListener('pointermove', handlePointerMove);
-        //     // document.removeEventListener('keydown', handleKeyDown);
-        //     // document.removeEventListener('keyup', handleKeyUp);
+        //     document.removeEventListener('pointerdown', handleBalloonClick);
+        // canvas.removeEventListener('pointerEnter', handlePointerEnter);
+        // canvas.removeEventListener('onClick', handleBalloonClick);
+        // canvas.removeEventListener('pointermove', handlePointerMove);
+        // document.removeEventListener('keydown', handleKeyDown);
+        // document.removeEventListener('keyup', handleKeyUp);
         // }
     }, [gl, handlePointerEnter, handleBalloonClick])
 
@@ -105,6 +109,7 @@ const Balloon = ({ }) => {
             scale={[10, 10, 10]}
             ref={ref}
             // onPointerEnter={handlePointerEnter}
+
             onClick={handleBalloonClick}
             onPointerDown={handleBalloonClick}
         >

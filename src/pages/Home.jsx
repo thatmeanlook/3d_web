@@ -13,12 +13,31 @@ import BalloonBlue from '../models/BalloonBlue'
 import BalloonRed from '../models/BalloonRed'
 import { Environment } from '@react-three/drei'
 import RaccoonNew from '../models/RaccoonNew'
+
 // import { DirectionalLightShadow } from '@react-three/drei'
 
 
 const Home = () => {
     const [isRotating, setIsRotating] = useState(false);
     const [currentStage, setCurrentStage] = useState(1);
+    const [showPlane, setShowPlane] = useState(false); // State to control Plane visibility
+    const [clickDisabled, setClickDisabled] = useState(false);
+
+    //////////////////////
+    /// TOGGLE PLANE ON OFF
+    const toggleShowPlane = () => {
+        if (!clickDisabled) {
+            setShowPlane(prevState => !prevState); // Toggle the value of showPlane
+            setClickDisabled(true); // Disable click temporarily
+            setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
+        }
+        // setShowPlane(prevState => !prevState); // Toggle the value of showPlane
+
+        // setShowPlane(true);
+    };
+
+
+    ///////////////
 
     ///////////////////////////////////
     // // CURSOR TRACKING
@@ -129,10 +148,17 @@ const Home = () => {
     const [planeScale, planePosition, shadowPosition] = adjustPlaneForScreenSize();
 
 
-    const handleBalloonClick = () => {
-        // Open "99 red balloon" in a new tab
-        window.open('https://youtu.be/hiwgOWo7mDc?si=ppFvsBFkXo1BVBS6', '_blank');
-    };
+    // const handleBalloonClick = () => {
+    //     setShowPlane(true);
+    //     // Open "99 red balloon" in a new tab
+    //     window.open('https://youtu.be/hiwgOWo7mDc?si=ppFvsBFkXo1BVBS6', '_blank');
+    // };
+
+    console.log('show plane in home', showPlane)
+
+    // if (showPlane) {
+    //     showPlane = true;
+    // }
 
     return (
         <section className='w-full h-screen relative'>
@@ -186,8 +212,8 @@ const Home = () => {
                     {/* <Bird /> */}
 
                     <Balloon
-                    // onClick={handleBalloonClick}
-                    // style={{ position: 'absolute' }}
+                        // onClick={handleBalloonClick}
+                        toggleShowPlane={toggleShowPlane}
                     />
 
                     {/* <BalloonBlue /> */}
@@ -209,9 +235,20 @@ const Home = () => {
                         setCurrentStage={setCurrentStage}
                     />
 
+                    {showPlane && <Plane // THE ALPACA
+                        scale={[0.2, 0.2, 0.2]}
+                        // scale={planeScale}
+                        // position={planePosition}
+                        position={[1, -2, 1]}
+                        isRotating={isRotating}
+                        // setIsRotating={setIsRotating}
+                        rotation={[0, 20.5, 0]}
+
+                    />}
 
                     {/* <Plane // THE ALPACA
-                        scale={planeScale}
+                        scale={[0.2, 0.2, 0.2]}
+                        // scale={planeScale}
                         position={planePosition}
                         isRotating={isRotating}
                         // setIsRotating={setIsRotating}
