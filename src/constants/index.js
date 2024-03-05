@@ -163,9 +163,10 @@ export const experiences = [
         iconBg: "#ABD4F8",
         date: "Dec 2017 - Dec 2019",
         points: [
+            "Managed inventory, stocked supplies, and maintained cleanliness of the bar area, adhering to sanitation and safety standards.",
             "Provided exceptional customer service by serving beverages and attending to passengers' needs aboard the vessel.",
             "Assisted with deck operations, including mooring, anchoring, and general maintenance tasks, ensuring a safe and enjoyable experience for all guests.",
-            "Managed inventory, stocked supplies, and maintained cleanliness of the bar area, adhering to sanitation and safety standards.",
+            ,
         ],
     },
 
@@ -218,27 +219,20 @@ export const projects = [
         description: 'Developed a portfolio website using React and Three.js, exploring the integration of immersive models and animations. ',
         tech: 'This project provided hands-on experience in frontend development with React and incorporating dynamic graphics using Three.js.',
 
-        points: [
-            "Work closely with captains to ensure the cruise operates smoothly.",
-            "Interact with bar guests, take orders and serve drinks.",
-            "Monitor guest experience and ensure high standard service at all time.",
-        ],
-        link: 'https://github.com/adrianhajdin/pricewise',
+        link: 'https://github.com/thatmeanlook/3d_web',
     },
-    {
-        iconUrl: threads,
-        theme: 'btn-back-green',
-        name: 'Natural Language Model',
-        description: 'Developed an object-oriented N-gram language model in Python, employing regular expressions to tokenize and prepare corpuses for training.',
-        tech: ' Enhanced model efficiency and scalability for large datasets through optimization techniques, including the creation of a baseline uniform and unigram language model.',
 
-        points: [
-            "Work closely with captains to ensure the cruise operates smoothly.",
-            "Interact with bar guests, take orders and serve drinks.",
-            "Monitor guest experience and ensure high standard service at all time.",
-        ],
-        link: 'https://github.com/adrianhajdin/threads',
-    },
+    // {
+    //     iconUrl: threads,
+    //     theme: 'btn-back-green',
+    //     name: 'Natural Language Model',
+    //     description: 'Developed an object-oriented N-gram language model in Python, employing regular expressions to tokenize and prepare corpuses for training.',
+    //     tech: ' Enhanced model efficiency and scalability for large datasets through optimization techniques, including the creation of a baseline uniform and unigram language model.',
+
+
+    //     link: '',
+    // },
+
     {
         iconUrl: car,
         theme: 'btn-back-blue',
@@ -250,11 +244,7 @@ export const projects = [
         tech: '',
         // tech: 'The project aimed to provide stakeholders with actionable insights into the box office performance, critical reception, and overall success of the iconic film series.',
 
-        points: [
-            "Work closely with captains to ensure the cruise operates smoothly.",
-            "Interact with bar guests, take orders and serve drinks.",
-            "Monitor guest experience and ensure high standard service at all time.",
-        ],
+
         link: 'https://thatmeanlook.github.io/james_bond/',
     },
 
