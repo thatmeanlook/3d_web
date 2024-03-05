@@ -15,6 +15,8 @@ import { Environment } from '@react-three/drei'
 import RaccoonNew from '../models/RaccoonNew'
 import Fire from '../models/Fire'
 import FireNew from '../models/FireNew'
+import Sky_Night from '../models/Sky_Night'
+import Sky_Test from '../models/Sky_Test'
 
 // import { DirectionalLightShadow } from '@react-three/drei'
 
@@ -177,17 +179,24 @@ const Home = () => {
             // castShadow
             >
 
+                {!showPlane &&
+                    <directionalLight
+                        castShadow:true
+                        position={[1, 1, 10]} intensity={1}
+                    />
+                }
 
-                <directionalLight
-                    castShadow:true
-                    position={[1, 1, 10]} intensity={2}
-                />
-                <hemisphereLight
-                    skyColor='#b1e1ff'
-                    groundColor='#000000'
-                    intensity={3}
-                />
-                <ambientLight intensity={0.1} />
+                {!showPlane &&
+                    <hemisphereLight
+                        skyColor='#b1e1ff'
+                        groundColor='#000000'
+                        intensity={3}
+                    />
+                }
+
+                {!showPlane &&
+                    <ambientLight intensity={0.1} />
+                }
 
                 {/* <Environment preset='sunset' /> */}
 
@@ -206,6 +215,49 @@ const Home = () => {
                     blur={1} far={10}
                     resolution={256}
                     color='#000000' />
+
+
+
+                {showPlane &&
+                    <Environment preset='night' />
+                    // <Environment preset='sunset' />
+                }
+
+                {showPlane &&
+                    // <directionalLight
+                    //     castShadow:true
+                    //     position={[1, 1, 10]} intensity={0.2}
+                    // />
+
+                    <directionalLight
+                        color={0xffffff}
+                        intensity={0.3}
+                        position={[0, 1, 0]} />
+
+                }
+
+                {/* {showPlane &&
+                    <spotLight
+                        position={[0, 0, 0]} // Position at the center of the screen
+                        angle={Math.PI / 4}    // 45 degree angle
+                        penumbra={0.1}         // Soft edge
+                        intensity={1}          // Full brightness
+                        castShadow             // Enable shadow casting
+                    />
+                } */}
+
+                {/* {showPlane &&
+                    // <Environment preset='night' />
+                    <hemisphereLight
+                        skyColor='blue'
+                        // skyColor='#b1e1ff'
+                        groundColor='#010a01'
+                        // groundColor='#000000'
+                        intensity={1}
+                    />
+                } */}
+
+
 
                 <Suspense fallback={<Loader />}>
 
@@ -228,6 +280,12 @@ const Home = () => {
                     // scale={[0.5, 0.5, 0.5]}
                     />
 
+                    {showPlane &&
+                        <Sky_Night isRotating={isRotating}
+                            scale={[5, 5, 5]}
+                        />
+                    }
+
                     <Island
                         // scale={[1, 1, 1]}
                         position={islandPosition}
@@ -238,11 +296,6 @@ const Home = () => {
                         setCurrentStage={setCurrentStage}
                     />
 
-
-
-                    {showPlane &&
-                        <Environment preset='sunset' />
-                    }
 
 
                     {/* {showPlane && <FireNew // TURN ON/OFF FIRE

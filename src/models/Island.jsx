@@ -30,7 +30,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
     const handleFireOpacity = () => {
         if (!clickDisabled) {
             if (fireOpacity == 0) {
-                setFireOpacity(0.5); // Toggle the value of showPlane
+                setFireOpacity(0.9); // Toggle the value of showPlane
 
             } else {
                 setFireOpacity(0);
@@ -439,7 +439,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
                             name="db63cf47b674497bb5667986891360e3fbx"
                             rotation={[Math.PI / 2, 0, 0]}
                             position={[10, -3, 2]}
-                            scale={[10, 10, 10]}
+                            // scale={[10, 10, 10]}
+                            scale={[7, 7, 7]}
                         >
                             <group name="Object_2">
                                 <group name="RootNode">
@@ -463,6 +464,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
                                                 material={materials2.fire}
                                                 material-transparent
                                                 material-opacity={fireOpacity}
+                                            // material-color={'blue'}
 
                                             />
                                         </group>
@@ -630,6 +632,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
                                             position={[0.033, -0.028, 0.008]}
                                             rotation={[0, 0, 1.212]}
                                             scale={[0.847, 0.847, 0.481]}
+
                                         >
                                             <mesh
                                                 name="fireB_042_fire_0"
@@ -670,6 +673,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
                                                 geometry={nodes2.fireB_041_fire_0.geometry}
                                                 material={materials2.fire}
                                                 material-opacity={fireOpacity}
+
 
                                             />
                                         </group>
@@ -797,6 +801,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
                         rotation={[0.416, -0.613, 0.372]}
                         scale={[5.848, 5.867, 15.466]}
                         onClick={handleFireOpacity}
+                        onPointerDown={handleFireOpacity}
 
                     />
                     <mesh
@@ -883,6 +888,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
                         rotation={[-Math.PI / 2, 0, -0.195]}
                         scale={3.407}
                         onClick={handleFireOpacity}
+                        onPointerDown={handleFireOpacity}
+
 
                     />
 
