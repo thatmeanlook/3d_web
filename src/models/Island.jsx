@@ -7,16 +7,26 @@ Title: Fox's islands
 */
 
 import { useRef, useEffect } from "react";
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, useAnimations } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import islandScene from '../assets/3d/cute_island.glb'
+import fireScene from '../assets/3d/fire.glb'
 import { a } from '@react-spring/three'
+import { user } from "../assets/icons";
 
 const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
     const islandRef = useRef();
+    const group = useRef();
 
     const { gl, viewport } = useThree();
     const { nodes, materials } = useGLTF(islandScene);
+    const { nodes: nodes2, materials: materials2, animations } = useGLTF(fireScene);
+    const { actions } = useAnimations(animations, islandRef);
+
+
+    // const { nodes2, materials2 } = useGLTF(fireScene);
+    // console.log('NODE', nodes)
+    console.log('NODE 2', nodes2)
 
     const lastX = useRef(0);
     const rotationSpeed = useRef(0);
@@ -59,34 +69,37 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
 
     }
 
-    // useEffect(() => {
-    //     const canvas = gl.domElement;
-    //     // canvas.addEventListener('pointermove', handleCloudClick);
+    useEffect(() => {
 
-    //     canvas.addEventListener('pointerdown', handlePointerDown);
-    //     canvas.addEventListener('pointerup', handlePointerUp);
-    //     canvas.addEventListener('pointermove', handlePointerMove);
+        actions['Default Take'].play();
 
-    //     canvas.addEventListener("touchstart", handlePointerDown);
-    //     canvas.addEventListener("touchmove", handlePointerMove);
-    //     canvas.addEventListener("touchend", handlePointerUp);
+        const canvas = gl.domElement;
+        // canvas.addEventListener('pointermove', handleCloudClick);
 
-    //     document.addEventListener('keydown', handleKeyDown);
-    //     document.addEventListener('keyup', handleKeyUp);
+        canvas.addEventListener('pointerdown', handlePointerDown);
+        canvas.addEventListener('pointerup', handlePointerUp);
+        canvas.addEventListener('pointermove', handlePointerMove);
 
-    //     return () => {
-    //         canvas.removeEventListener('pointerdown', handlePointerDown);
-    //         canvas.removeEventListener('pointerup', handlePointerUp);
-    //         canvas.removeEventListener('pointermove', handlePointerMove);
+        canvas.addEventListener("touchstart", handlePointerDown);
+        canvas.addEventListener("touchmove", handlePointerMove);
+        canvas.addEventListener("touchend", handlePointerUp);
 
-    //         canvas.removeEventListener("touchstart", handlePointerDown);
-    //         canvas.removeEventListener("touchmove", handlePointerMove);
-    //         canvas.removeEventListener("touchend", handlePointerUp);
+        document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('keyup', handleKeyUp);
 
-    //         document.removeEventListener('keydown', handleKeyDown);
-    //         document.removeEventListener('keyup', handleKeyUp);
-    //     }
-    // }, [gl, handlePointerDown, handlePointerUp, handlePointerMove])
+        return () => {
+            canvas.removeEventListener('pointerdown', handlePointerDown);
+            canvas.removeEventListener('pointerup', handlePointerUp);
+            canvas.removeEventListener('pointermove', handlePointerMove);
+
+            canvas.removeEventListener("touchstart", handlePointerDown);
+            canvas.removeEventListener("touchmove", handlePointerMove);
+            canvas.removeEventListener("touchend", handlePointerUp);
+
+            document.removeEventListener('keydown', handleKeyDown);
+            document.removeEventListener('keyup', handleKeyUp);
+        }
+    }, [gl, handlePointerDown, handlePointerUp, handlePointerMove, actions])
 
 
 
@@ -187,203 +200,662 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
 
     return (
         // 
+        // <a.group ref={group} {...props}>
+
+        //     <group name="Sketchfab_Scene">
+        //         <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
+        //             <group
+        //                 name="db63cf47b674497bb5667986891360e3fbx"
+        //                 rotation={[Math.PI / 2, 0, 0]}
+        //             >
+        //                 <group name="Object_2">
+        //                     <group name="RootNode">
+        //                         <group
+        //                             name="gtmfc_fire_1"
+        //                             position={[0, -0.044, 0]}
+        //                             rotation={[-Math.PI / 2, 0, 0]}
+        //                         >
+        //                             <group
+        //                                 name="fireA_005"
+        //                                 position={[0.014, 0, 0]}
+        //                                 scale={1.075}
+
+        //                             >
+        //                                 <mesh
+        //                                     name="fireA_005_fire_0"
+        //                                     castShadow
+        //                                     receiveShadow
+        //                                     geometry={nodes.fireA_005_fire_0.geometry}
+        //                                     material={materials.fire}
+        //                                     material-transparent
+        //                                     material-opacity={0.5}
+
+        //                                 />
+        //                             </group>
+        //                             <group
+        //                                 name="fireB_048"
+        //                                 position={[-0.007, 0, 0]}
+        //                                 scale={[0.419, 0.419, 0.422]}
+        //                             >
+        //                                 <mesh
+        //                                     name="fireB_048_fire_0"
+        //                                     castShadow
+        //                                     receiveShadow
+        //                                     geometry={nodes.fireB_048_fire_0.geometry}
+        //                                     material={materials.fire}
+        //                                 />
+        //                             </group>
+        //                             <group
+        //                                 name="fireB_047"
+        //                                 position={[0.081, -0.079, 0.032]}
+        //                                 rotation={[0.014, -0.052, 0.619]}
+        //                                 scale={[0.394, 0.394, 0.213]}
+        //                             >
+        //                                 <mesh
+        //                                     name="fireB_047_fire_0"
+        //                                     castShadow
+        //                                     receiveShadow
+        //                                     geometry={nodes.fireB_047_fire_0.geometry}
+        //                                     material={materials.fire}
+        //                                 />
+        //                             </group>
+        //                             <group
+        //                                 name="fireB_046"
+        //                                 position={[0.024, -0.087, 0.034]}
+        //                                 rotation={[0, 0, -1.638]}
+        //                                 scale={[0.339, 0.339, 0.153]}
+        //                             >
+        //                                 <mesh
+        //                                     name="fireB_046_fire_0"
+        //                                     castShadow
+        //                                     receiveShadow
+        //                                     geometry={nodes.fireB_046_fire_0.geometry}
+        //                                     material={materials.fire}
+        //                                 />
+        //                             </group>
+        //                             <group
+        //                                 name="fireB_045"
+        //                                 position={[0.005, -0.088, 0.232]}
+        //                                 rotation={[0, 0, 0.087]}
+        //                                 scale={[0.846, 0.846, 0.356]}
+        //                             >
+        //                                 <mesh
+        //                                     name="fireB_045_fire_0"
+        //                                     castShadow
+        //                                     receiveShadow
+        //                                     geometry={nodes.fireB_045_fire_0.geometry}
+        //                                     material={materials.fire}
+        //                                 />
+        //                             </group>
+        //                             <group
+        //                                 name="fireB_044"
+        //                                 position={[0.091, 0.018, 0.155]}
+        //                                 rotation={[0, 0, -0.295]}
+        //                                 scale={[0.621, 0.55, 0.755]}
+        //                             >
+        //                                 <mesh
+        //                                     name="fireB_044_fire_0"
+        //                                     castShadow
+        //                                     receiveShadow
+        //                                     geometry={nodes.fireB_044_fire_0.geometry}
+        //                                     material={materials.fire}
+        //                                 />
+        //                             </group>
+        //                             <group
+        //                                 name="fireB_043"
+        //                                 position={[0.081, -0.071, 0.045]}
+        //                                 rotation={[-0.046, -0.076, 0.672]}
+        //                                 scale={[0.696, 0.695, 0.733]}
+        //                             >
+        //                                 <mesh
+        //                                     name="fireB_043_fire_0"
+        //                                     castShadow
+        //                                     receiveShadow
+        //                                     geometry={nodes.fireB_043_fire_0.geometry}
+        //                                     material={materials.fire}
+        //                                 />
+        //                             </group>
+        //                             <group
+        //                                 name="smoke_087"
+        //                                 position={[0.017, -0.085, 0.735]}
+        //                                 rotation={[0.232, -0.591, -0.034]}
+        //                                 scale={[0.294, 0.283, 0.294]}
+        //                             >
+        //                                 <mesh
+        //                                     name="smoke_087_fire_0"
+        //                                     castShadow
+        //                                     receiveShadow
+        //                                     geometry={nodes.smoke_087_fire_0.geometry}
+        //                                     material={materials.fire}
+        //                                 />
+        //                             </group>
+        //                             <group
+        //                                 name="smoke_086"
+        //                                 position={[-0.038, -0.082, 1.763]}
+        //                                 rotation={[1.413, 0.981, -1.387]}
+        //                                 scale={[0.326, 0.455, 0.455]}
+        //                             >
+        //                                 <mesh
+        //                                     name="smoke_086_fire_0"
+        //                                     castShadow
+        //                                     receiveShadow
+        //                                     geometry={nodes.smoke_086_fire_0.geometry}
+        //                                     material={materials.fire}
+        //                                 />
+        //                             </group>
+        //                             <group
+        //                                 name="smoke_085"
+        //                                 position={[-0.014, 0.079, 0.96]}
+        //                                 rotation={[1.009, 0.156, 0.514]}
+        //                                 scale={[0.683, 0.405, 0.697]}
+        //                             >
+        //                                 <mesh
+        //                                     name="smoke_085_fire_0"
+        //                                     castShadow
+        //                                     receiveShadow
+        //                                     geometry={nodes.smoke_085_fire_0.geometry}
+        //                                     material={materials.fire}
+        //                                 />
+        //                             </group>
+        //                             <group
+        //                                 name="smoke_084"
+        //                                 position={[0.009, -0.037, 1.071]}
+        //                                 rotation={[0.246, 0.514, 1.049]}
+        //                                 scale={[0.328, 0.498, 0.498]}
+        //                             >
+        //                                 <mesh
+        //                                     name="smoke_084_fire_0"
+        //                                     castShadow
+        //                                     receiveShadow
+        //                                     geometry={nodes.smoke_084_fire_0.geometry}
+        //                                     material={materials.fire}
+        //                                 />
+        //                             </group>
+        //                             <group
+        //                                 name="fireB_042"
+        //                                 position={[0.033, -0.028, 0.008]}
+        //                                 rotation={[0, 0, 1.212]}
+        //                                 scale={[0.847, 0.847, 0.481]}
+        //                             >
+        //                                 <mesh
+        //                                     name="fireB_042_fire_0"
+        //                                     castShadow
+        //                                     receiveShadow
+        //                                     geometry={nodes.fireB_042_fire_0.geometry}
+        //                                     material={materials.fire}
+        //                                 />
+        //                             </group>
+        //                             <group
+        //                                 name="smoke_083"
+        //                                 position={[0.15, 0.217, 0.638]}
+        //                                 rotation={[0.615, -0.098, 1.014]}
+        //                                 scale={[0.29, 0.289, 0.29]}
+        //                             >
+        //                                 <mesh
+        //                                     name="smoke_083_fire_0"
+        //                                     castShadow
+        //                                     receiveShadow
+        //                                     geometry={nodes.smoke_083_fire_0.geometry}
+        //                                     material={materials.fire}
+        //                                 />
+        //                             </group>
+        //                             <group
+        //                                 name="fireB_041"
+        //                                 position={[0.109, -0.084, 0.034]}
+        //                                 rotation={[0, 0, -1.437]}
+        //                                 scale={[0.339, 0.339, 0.153]}
+        //                             >
+        //                                 <mesh
+        //                                     name="fireB_041_fire_0"
+        //                                     castShadow
+        //                                     receiveShadow
+        //                                     geometry={nodes.fireB_041_fire_0.geometry}
+        //                                     material={materials.fire}
+        //                                 />
+        //                             </group>
+        //                         </group>
+        //                     </group>
+        //                 </group>
+        //             </group>
+        //         </group>
+        //     </group>
+        // </a.group>
+
+
+
+
+
         <a.group ref={islandRef} {...props}>
 
-            <group scale={0.07}
+            <group
+                // scale={0.07}
                 position={[0, 0, 0]}
                 rotation={[0, 0.6, 0]}
             >
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder_Material_0.geometry}
-                    material={materials.Material}
-                    position={[2.041, -139.81, 0]}
-                    rotation={[-Math.PI / 2, 0, -0.946]}
-                    scale={[350, 350, 140]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder001_Material_0.geometry}
-                    material={materials.Material}
-                    position={[2.041, -139.81, 0]}
-                    rotation={[-Math.PI / 2, 0, -0.946]}
-                    scale={[350, 350, 140]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Torus002_Material_0.geometry}
-                    material={materials.Material}
-                    position={[-36.291, 129.905, -158.527]}
-                    rotation={[-1.748, 0.301, 0.182]}
-                    scale={[10.774, 10.895, 9.406]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder002_Material_0.geometry}
-                    material={materials.Material}
-                    position={[-204.454, 55.698, -170.588]}
-                    rotation={[-Math.PI / 2, 0, 0]}
-                    scale={[14.975, 14.975, 43.025]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder003_Material_0.geometry}
-                    material={materials.Material}
-                    position={[8.86, 44.279, -272.547]}
-                    rotation={[-Math.PI / 2, 0, 0]}
-                    scale={[12.135, 12.135, 34.867]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder004_Material_0.geometry}
-                    material={materials.Material}
-                    position={[-181.622, 49.615, -42.053]}
-                    rotation={[-Math.PI / 2, 0, 0.744]}
-                    scale={[9.632, 9.632, 27.675]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder005_Material_0.geometry}
-                    material={materials.Material}
-                    position={[123.122, 38.646, -211.553]}
-                    rotation={[-Math.PI / 2, 0, 0.708]}
-                    scale={[9.239, 9.239, 26.546]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder006_Material_0.geometry}
-                    material={materials.Material}
-                    position={[-294.693, 43.624, -6.261]}
-                    rotation={[-Math.PI / 2, 0, -0.518]}
-                    scale={[11.545, 11.545, 33.172]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder007_Material_0.geometry}
-                    material={materials.Material}
-                    position={[-109.699, 52.569, -261.662]}
-                    rotation={[-Math.PI / 2, 0, -2.874]}
-                    scale={[15.706, 15.706, 45.125]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder008_Material_0.geometry}
-                    material={materials.Material}
-                    position={[-142.454, 38.456, 124.072]}
-                    rotation={[0.115, -0.032, -0.528]}
-                    scale={100.309}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder009_Material_0.geometry}
-                    material={materials.Material}
-                    position={[92.614, 52.903, 165.46]}
-                    rotation={[-Math.PI / 2, 0, 0.023]}
-                    scale={[2.332, 2.332, 29.523]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder012_Material_0.geometry}
-                    material={materials.Material}
-                    position={[103.392, 36.69, 103.377]}
-                    rotation={[0.416, -0.613, 0.372]}
-                    scale={[5.848, 5.867, 15.466]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder010_Material_0.geometry}
-                    material={materials.Material}
-                    position={[220.728, 24.928, -79.14]}
-                    rotation={[-Math.PI / 2, 0, 0]}
-                    scale={[3.464, 3.464, 6.539]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder011_Material_0.geometry}
-                    material={materials.Material}
-                    position={[-37.824, 18.836, 285.587]}
-                    rotation={[-Math.PI / 2, 0, 0]}
-                    scale={[3.825, 3.825, 7.135]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder013_Material_0.geometry}
-                    material={materials.Material}
-                    position={[-233.198, 12.043, 213.107]}
-                    rotation={[-Math.PI / 2, 0, 0]}
-                    scale={[3.163, 3.163, 5.972]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder014_Material_0.geometry}
-                    material={materials.Material}
-                    position={[63.539, 27.373, -190.155]}
-                    rotation={[-Math.PI / 2, 0, 0]}
-                    scale={[4.255, 4.255, 7.937]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder015_Material_0.geometry}
-                    material={materials.Material}
-                    position={[-159.358, 48.992, 176.075]}
-                    rotation={[-1.379, -0.559, 0.479]}
-                    scale={[2.695, 2.695, 5.087]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder016_Material_0.geometry}
-                    material={materials.Material}
-                    position={[-155.678, 54.336, 110.91]}
-                    rotation={[-1.809, -0.623, -0.065]}
-                    scale={[2.253, 2.253, 4.203]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder017_Material_0.geometry}
-                    material={materials.Material}
-                    position={[293.776, 15.892, 19.905]}
-                    rotation={[-1.59, -0.026, 0.176]}
-                    scale={[2.695, 2.695, 5.087]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Cylinder018_Material_0.geometry}
-                    material={materials.Material}
-                    position={[155.35, 15.203, -227.589]}
-                    rotation={[-1.638, -0.029, 0.316]}
-                    scale={[2.503, 2.503, 4.668]}
-                />
-                <mesh
-                    castShadow
-                    receiveShadow
-                    geometry={nodes.Sphere004_Material_0.geometry}
-                    material={materials.Material}
-                    position={[104.184, 66.958, 112.02]}
-                    rotation={[-Math.PI / 2, 0, -0.195]}
-                    scale={3.407}
-                />
+                {/* FIRE /////////////////////////////////////////// */}
 
-                {/* CLOUDS
+                <group name="Sketchfab_Scene">
+                    <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
+                        <group
+                            name="db63cf47b674497bb5667986891360e3fbx"
+                            rotation={[Math.PI / 2, 0, 0]}
+                            position={[10, -3, 2]}
+                            scale={[10, 10, 10]}
+                        >
+                            <group name="Object_2">
+                                <group name="RootNode">
+                                    <group
+                                        name="gtmfc_fire_1"
+                                        position={[0, -0.044, 0]}
+
+                                        rotation={[-Math.PI / 2, 0, 0]}
+                                    >
+                                        <group
+                                            name="fireA_005"
+                                            position={[0.014, 0, 0]}
+                                            scale={1.075}
+
+                                        >
+                                            <mesh
+                                                name="fireA_005_fire_0"
+                                                castShadow
+                                                receiveShadow
+                                                geometry={nodes2.fireA_005_fire_0.geometry}
+                                                material={materials2.fire}
+                                                material-transparent
+                                                material-opacity={0.5}
+
+                                            />
+                                        </group>
+                                        <group
+                                            name="fireB_048"
+                                            position={[-0.007, 0, 0]}
+                                            scale={[0.419, 0.419, 0.422]}
+                                        >
+                                            <mesh
+                                                name="fireB_048_fire_0"
+                                                castShadow
+                                                receiveShadow
+                                                geometry={nodes2.fireB_048_fire_0.geometry}
+                                                material={materials2.fire}
+                                            />
+                                        </group>
+                                        <group
+                                            name="fireB_047"
+                                            position={[0.081, -0.079, 0.032]}
+                                            rotation={[0.014, -0.052, 0.619]}
+                                            scale={[0.394, 0.394, 0.213]}
+                                        >
+                                            <mesh
+                                                name="fireB_047_fire_0"
+                                                castShadow
+                                                receiveShadow
+                                                geometry={nodes2.fireB_047_fire_0.geometry}
+                                                material={materials2.fire}
+                                            />
+                                        </group>
+                                        <group
+                                            name="fireB_046"
+                                            position={[0.024, -0.087, 0.034]}
+                                            rotation={[0, 0, -1.638]}
+                                            scale={[0.339, 0.339, 0.153]}
+                                        >
+                                            <mesh
+                                                name="fireB_046_fire_0"
+                                                castShadow
+                                                receiveShadow
+                                                geometry={nodes2.fireB_046_fire_0.geometry}
+                                                material={materials2.fire}
+                                            />
+                                        </group>
+                                        <group
+                                            name="fireB_045"
+                                            position={[0.005, -0.088, 0.232]}
+                                            rotation={[0, 0, 0.087]}
+                                            scale={[0.846, 0.846, 0.356]}
+                                        >
+                                            <mesh
+                                                name="fireB_045_fire_0"
+                                                castShadow
+                                                receiveShadow
+                                                geometry={nodes2.fireB_045_fire_0.geometry}
+                                                material={materials2.fire}
+                                            />
+                                        </group>
+                                        <group
+                                            name="fireB_044"
+                                            position={[0.091, 0.018, 0.155]}
+                                            rotation={[0, 0, -0.295]}
+                                            scale={[0.621, 0.55, 0.755]}
+                                        >
+                                            <mesh
+                                                name="fireB_044_fire_0"
+                                                castShadow
+                                                receiveShadow
+                                                geometry={nodes2.fireB_044_fire_0.geometry}
+                                                material={materials2.fire}
+                                            />
+                                        </group>
+                                        <group
+                                            name="fireB_043"
+                                            position={[0.081, -0.071, 0.045]}
+                                            rotation={[-0.046, -0.076, 0.672]}
+                                            scale={[0.696, 0.695, 0.733]}
+                                        >
+                                            <mesh
+                                                name="fireB_043_fire_0"
+                                                castShadow
+                                                receiveShadow
+                                                geometry={nodes2.fireB_043_fire_0.geometry}
+                                                material={materials2.fire}
+                                            />
+                                        </group>
+                                        <group
+                                            name="smoke_087"
+                                            position={[0.017, -0.085, 0.735]}
+                                            rotation={[0.232, -0.591, -0.034]}
+                                            scale={[0.294, 0.283, 0.294]}
+                                        >
+                                            <mesh
+                                                name="smoke_087_fire_0"
+                                                castShadow
+                                                receiveShadow
+                                                geometry={nodes2.smoke_087_fire_0.geometry}
+                                                material={materials2.fire}
+                                            />
+                                        </group>
+                                        <group
+                                            name="smoke_086"
+                                            position={[-0.038, -0.082, 1.763]}
+                                            rotation={[1.413, 0.981, -1.387]}
+                                            scale={[0.326, 0.455, 0.455]}
+                                        >
+                                            <mesh
+                                                name="smoke_086_fire_0"
+                                                castShadow
+                                                receiveShadow
+                                                geometry={nodes2.smoke_086_fire_0.geometry}
+                                                material={materials2.fire}
+                                            />
+                                        </group>
+                                        <group
+                                            name="smoke_085"
+                                            position={[-0.014, 0.079, 0.96]}
+                                            rotation={[1.009, 0.156, 0.514]}
+                                            scale={[0.683, 0.405, 0.697]}
+                                        >
+                                            <mesh
+                                                name="smoke_085_fire_0"
+                                                castShadow
+                                                receiveShadow
+                                                geometry={nodes2.smoke_085_fire_0.geometry}
+                                                material={materials2.fire}
+                                            />
+                                        </group>
+                                        <group
+                                            name="smoke_084"
+                                            position={[0.009, -0.037, 1.071]}
+                                            rotation={[0.246, 0.514, 1.049]}
+                                            scale={[0.328, 0.498, 0.498]}
+                                        >
+                                            <mesh
+                                                name="smoke_084_fire_0"
+                                                castShadow
+                                                receiveShadow
+                                                geometry={nodes2.smoke_084_fire_0.geometry}
+                                                material={materials2.fire}
+                                            />
+                                        </group>
+                                        <group
+                                            name="fireB_042"
+                                            position={[0.033, -0.028, 0.008]}
+                                            rotation={[0, 0, 1.212]}
+                                            scale={[0.847, 0.847, 0.481]}
+                                        >
+                                            <mesh
+                                                name="fireB_042_fire_0"
+                                                castShadow
+                                                receiveShadow
+                                                geometry={nodes2.fireB_042_fire_0.geometry}
+                                                material={materials2.fire}
+                                            />
+                                        </group>
+                                        <group
+                                            name="smoke_083"
+                                            position={[0.15, 0.217, 0.638]}
+                                            rotation={[0.615, -0.098, 1.014]}
+                                            scale={[0.29, 0.289, 0.29]}
+                                        >
+                                            <mesh
+                                                name="smoke_083_fire_0"
+                                                castShadow
+                                                receiveShadow
+                                                geometry={nodes2.smoke_083_fire_0.geometry}
+                                                material={materials2.fire}
+                                            />
+                                        </group>
+                                        <group
+                                            name="fireB_041"
+                                            position={[0.109, -0.084, 0.034]}
+                                            rotation={[0, 0, -1.437]}
+                                            scale={[0.339, 0.339, 0.153]}
+                                        >
+                                            <mesh
+                                                name="fireB_041_fire_0"
+                                                castShadow
+                                                receiveShadow
+                                                geometry={nodes2.fireB_041_fire_0.geometry}
+                                                material={materials2.fire}
+                                            />
+                                        </group>
+                                    </group>
+                                </group>
+                            </group>
+                        </group>
+                    </group>
+                </group>
+
+
+                <group scale={0.07}
+                    position={[0, 0, 0]}
+                    rotation={[0, 0.6, 0]}
+                >
+
+                    {/* ISLAND///////////////////////////////////// */}
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder_Material_0.geometry}
+                        material={materials.Material}
+                        position={[2.041, -139.81, 0]}
+                        rotation={[-Math.PI / 2, 0, -0.946]}
+                        scale={[350, 350, 140]}
+                    />
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder001_Material_0.geometry}
+                        material={materials.Material}
+                        position={[2.041, -139.81, 0]}
+                        rotation={[-Math.PI / 2, 0, -0.946]}
+                        scale={[350, 350, 140]}
+                    />
+                    <mesh // TENT
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Torus002_Material_0.geometry}
+                        material={materials.Material}
+                        position={[-36.291, 129.905, -158.527]}
+                        rotation={[-1.748, 0.301, 0.182]}
+                        scale={[10.774, 10.895, 9.406]}
+                    />
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder002_Material_0.geometry}
+                        material={materials.Material}
+                        position={[-204.454, 55.698, -170.588]}
+                        rotation={[-Math.PI / 2, 0, 0]}
+                        scale={[14.975, 14.975, 43.025]}
+                    />
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder003_Material_0.geometry}
+                        material={materials.Material}
+                        position={[8.86, 44.279, -272.547]}
+                        rotation={[-Math.PI / 2, 0, 0]}
+                        scale={[12.135, 12.135, 34.867]}
+                    />
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder004_Material_0.geometry}
+                        material={materials.Material}
+                        position={[-181.622, 49.615, -42.053]}
+                        rotation={[-Math.PI / 2, 0, 0.744]}
+                        scale={[9.632, 9.632, 27.675]}
+                    />
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder005_Material_0.geometry}
+                        material={materials.Material}
+                        position={[123.122, 38.646, -211.553]}
+                        rotation={[-Math.PI / 2, 0, 0.708]}
+                        scale={[9.239, 9.239, 26.546]}
+                    />
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder006_Material_0.geometry}
+                        material={materials.Material}
+                        position={[-294.693, 43.624, -6.261]}
+                        rotation={[-Math.PI / 2, 0, -0.518]}
+                        scale={[11.545, 11.545, 33.172]}
+                    />
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder007_Material_0.geometry}
+                        material={materials.Material}
+                        position={[-109.699, 52.569, -261.662]}
+                        rotation={[-Math.PI / 2, 0, -2.874]}
+                        scale={[15.706, 15.706, 45.125]}
+                    />
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder008_Material_0.geometry}
+                        material={materials.Material}
+                        position={[-142.454, 38.456, 124.072]}
+                        rotation={[0.115, -0.032, -0.528]}
+                        scale={100.309}
+                    />
+                    <mesh //KITCHEN
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder009_Material_0.geometry}
+                        material={materials.Material}
+                        position={[92.614, 52.903, 165.46]}
+                        rotation={[-Math.PI / 2, 0, 0.023]}
+                        scale={[2.332, 2.332, 29.523]}
+                    />
+                    <mesh // FIREWOOD
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder012_Material_0.geometry}
+                        material={materials.Material}
+                        position={[103.392, 36.69, 103.377]}
+                        rotation={[0.416, -0.613, 0.372]}
+                        scale={[5.848, 5.867, 15.466]}
+                    />
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder010_Material_0.geometry}
+                        material={materials.Material}
+                        position={[220.728, 24.928, -79.14]}
+                        rotation={[-Math.PI / 2, 0, 0]}
+                        scale={[3.464, 3.464, 6.539]}
+                    />
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder011_Material_0.geometry}
+                        material={materials.Material}
+                        position={[-37.824, 18.836, 285.587]}
+                        rotation={[-Math.PI / 2, 0, 0]}
+                        scale={[3.825, 3.825, 7.135]}
+                    />
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder013_Material_0.geometry}
+                        material={materials.Material}
+                        position={[-233.198, 12.043, 213.107]}
+                        rotation={[-Math.PI / 2, 0, 0]}
+                        scale={[3.163, 3.163, 5.972]}
+                    />
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder014_Material_0.geometry}
+                        material={materials.Material}
+                        position={[63.539, 27.373, -190.155]}
+                        rotation={[-Math.PI / 2, 0, 0]}
+                        scale={[4.255, 4.255, 7.937]}
+                    />
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder015_Material_0.geometry}
+                        material={materials.Material}
+                        position={[-159.358, 48.992, 176.075]}
+                        rotation={[-1.379, -0.559, 0.479]}
+                        scale={[2.695, 2.695, 5.087]}
+                    />
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder016_Material_0.geometry}
+                        material={materials.Material}
+                        position={[-155.678, 54.336, 110.91]}
+                        rotation={[-1.809, -0.623, -0.065]}
+                        scale={[2.253, 2.253, 4.203]}
+                    />
+
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder017_Material_0.geometry}
+                        material={materials.Material}
+                        position={[293.776, 15.892, 19.905]}
+                        rotation={[-1.59, -0.026, 0.176]}
+                        scale={[2.695, 2.695, 5.087]}
+                    />
+
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Cylinder018_Material_0.geometry}
+                        material={materials.Material}
+                        position={[155.35, 15.203, -227.589]}
+                        rotation={[-1.638, -0.029, 0.316]}
+                        scale={[2.503, 2.503, 4.668]}
+                    />
+
+                    <mesh // THE POT
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Sphere004_Material_0.geometry}
+                        material={materials.Material}
+                        position={[104.184, 66.958, 112.02]}
+                        rotation={[-Math.PI / 2, 0, -0.195]}
+                        scale={3.407}
+                    />
+
+                    {/* CLOUDS
                 <mesh
                     castShadow
                     receiveShadow
@@ -403,6 +875,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
                     scale={49.018}
                     onClick={handleCloudClick}
                 /> */}
+
+                </group>
 
             </group>
 

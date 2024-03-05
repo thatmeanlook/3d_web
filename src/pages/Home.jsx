@@ -13,6 +13,7 @@ import BalloonBlue from '../models/BalloonBlue'
 import BalloonRed from '../models/BalloonRed'
 import { Environment } from '@react-three/drei'
 import RaccoonNew from '../models/RaccoonNew'
+import Fire from '../models/Fire'
 
 // import { DirectionalLightShadow } from '@react-three/drei'
 
@@ -227,6 +228,7 @@ const Home = () => {
                     />
 
                     <Island
+                        // scale={[1, 1, 1]}
                         position={islandPosition}
                         scale={islandScale}
                         rotation={islandRotation}
@@ -235,16 +237,22 @@ const Home = () => {
                         setCurrentStage={setCurrentStage}
                     />
 
-                    {showPlane && <Plane // THE ALPACA
-                        scale={[0.2, 0.2, 0.2]}
+
+
+                    {showPlane && <Fire // TURN ON/OFF FIRE
+                        scale={[1, 1, 1]}
                         // scale={planeScale}
                         // position={planePosition}
-                        position={[1, -2, 1]}
-                        isRotating={isRotating}
-                        // setIsRotating={setIsRotating}
+                        position={[-0.6, -0.5, 1]}
+                        opacity={0.1}
                         rotation={[0, 20.5, 0]}
 
+                        isRotating={isRotating}
+                        setIsRotating={setIsRotating}
+                        setCurrentStage={setCurrentStage}
+
                     />}
+
 
                     {/* <Plane // THE ALPACA
                         scale={[0.2, 0.2, 0.2]}
