@@ -14,7 +14,7 @@ import fireScene from '../assets/3d/fire.glb'
 import { a } from '@react-spring/three'
 import { user } from "../assets/icons";
 
-const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
+const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleShowPlane, ...props }) => {
     const islandRef = useRef();
     const group = useRef();
 
@@ -24,13 +24,15 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
     const { actions } = useAnimations(animations, islandRef);
 
     const [clickDisabled, setClickDisabled] = useState(false);
-    const [fireOpacity, setFireOpacity] = useState(0);
-    console.log('fire opacity before', fireOpacity)
+    const [fireOpacity, setFireOpacity] = useState(0.8);
+
 
     const handleFireOpacity = () => {
+        // toggleShowPlane(); // experimental
+
         if (!clickDisabled) {
             if (fireOpacity == 0) {
-                setFireOpacity(0.9); // Toggle the value of showPlane
+                setFireOpacity(0.8); // Toggle the value of showPlane
 
             } else {
                 setFireOpacity(0);
@@ -116,7 +118,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
             document.removeEventListener('keydown', handleKeyDown);
             document.removeEventListener('keyup', handleKeyUp);
         }
-    }, [gl, handlePointerDown, handlePointerUp, handlePointerMove, actions])
+    }, [gl, handlePointerDown, handlePointerUp, handlePointerMove, actions, handleFireOpacity])
 
 
     const handleKeyDown = (e) => {
@@ -437,10 +439,13 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
                     <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
                         <group
                             name="db63cf47b674497bb5667986891360e3fbx"
-                            rotation={[Math.PI / 2, 0, 0]}
+                            rotation={[1.3, 0, 0]}
+                            // rotation={[Math.PI / 2, 0, 0]}
                             position={[10, -3, 2]}
                             // scale={[10, 10, 10]}
+                            // scale={[20, 20, 20]}
                             scale={[7, 7, 7]}
+                        // scale={[5, 5, 5]}
                         >
                             <group name="Object_2">
                                 <group name="RootNode">

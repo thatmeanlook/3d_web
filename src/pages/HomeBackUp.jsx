@@ -236,6 +236,8 @@ const Home = () => {
                         isRotating={isRotating}
                         setIsRotating={setIsRotating}
                         setCurrentStage={setCurrentStage}
+
+                        toggleShowPlane={toggleShowPlane}
                     />
 
 

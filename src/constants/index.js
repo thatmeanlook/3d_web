@@ -220,7 +220,8 @@ export const projects = [
         theme: 'btn-back-red',
         name: '3D Web Portfolio',
         description: 'Developed a portfolio website using React and Three.js, exploring the integration of immersive models and animations. ',
-        tech: 'This project provided hands-on experience in frontend development with React and incorporating dynamic graphics using Three.js.',
+        tech: 'I had a lot of fun working on this project while learning a ton about frontend development with React and Three.js.',
+        // tech: 'This project provided hands-on experience in frontend development with React and incorporating dynamic graphics using Three.js.',
 
         link: 'https://github.com/thatmeanlook/3d_web',
     },

@@ -8,9 +8,11 @@ Title: FREE - SkyBox In The Cloud
 
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
+import scene from '../assets/3d/sky.glb'
+
 
 const Sky_Test = ({ props }) => {
-    const { nodes, materials } = useGLTF("/sky.glb");
+    const { nodes, materials } = useGLTF(scene);
     return (
         <group {...props} dispose={null}>
             <group scale={0.01}>
@@ -21,6 +23,8 @@ const Sky_Test = ({ props }) => {
                     material={materials["Scene_-_Root"]}
                     rotation={[-Math.PI / 2, 0, 0]}
                     scale={50000}
+                // material-color={'blue'}
+                // material-blend={'burn'}
                 />
             </group>
         </group>

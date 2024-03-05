@@ -23,7 +23,7 @@ const Balloon = ({ toggleShowPlane }) => {
         gl.domElement.style.cursor = 'default';
     }
 
-    const handleBalloonClick = (e) => {
+    const handleBalloonClick = () => {
         toggleShowPlane();
         // showPlane = true;
         // console.log('show Plane', showPlane)
@@ -33,17 +33,20 @@ const Balloon = ({ toggleShowPlane }) => {
 
     const adjustBalloonForScreenSize = () => {
         let position;
+        let screenScale;
         if (window.innerWidth < 500) {
             position = [-7, 4, -11]
+            screenScale = [8, 8, 8]
         }
         else {
             position = [-15, 4, -11]
+            screenScale = [10, 10, 10]
         }
 
-        return position
+        return [position, screenScale]
     }
 
-    const balloonPosition = adjustBalloonForScreenSize();
+    const [balloonPosition, balloonScale] = adjustBalloonForScreenSize();
 
 
     useEffect(() => {
@@ -106,7 +109,8 @@ const Balloon = ({ toggleShowPlane }) => {
         <mesh
             position={balloonPosition}
             // position={[-15, 4, -11]}
-            scale={[10, 10, 10]}
+            // scale={[10, 10, 10]}
+            scale={balloonScale}
             ref={ref}
             // onPointerEnter={handlePointerEnter}
 

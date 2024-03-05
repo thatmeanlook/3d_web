@@ -17,6 +17,8 @@ import Fire from '../models/Fire'
 import FireNew from '../models/FireNew'
 import Sky_Night from '../models/Sky_Night'
 import Sky_Test from '../models/Sky_Test'
+import Sky_Anime from '../models/Sky_Anime'
+import Sky_Land from '../models/SKy_Land'
 
 // import { DirectionalLightShadow } from '@react-three/drei'
 
@@ -32,7 +34,9 @@ const Home = () => {
     const toggleShowPlane = () => {
         if (!clickDisabled) {
             setShowPlane(prevState => !prevState); // Toggle the value of showPlane
+            console.log('1st change')
             setClickDisabled(true); // Disable click temporarily
+            console.log('Disable click')
             setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
         }
         // setShowPlane(prevState => !prevState); // Toggle the value of showPlane
@@ -41,7 +45,19 @@ const Home = () => {
     };
 
 
-    ///////////////
+    //  /// TOGGLE PLANE ON OFF -- ORIGINAL WORKING
+    //  const toggleShowPlane = () => {
+    //     if (!clickDisabled) {
+    //         setShowPlane(prevState => !prevState); // Toggle the value of showPlane
+    //         setClickDisabled(true); // Disable click temporarily
+    //         setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
+    //     }
+    //     
+    // };
+
+
+
+    ///////////////////////////////
 
     ///////////////////////////////////
     // // CURSOR TRACKING
@@ -110,9 +126,11 @@ const Home = () => {
         let screenScale = null;
         let screenPosition = [0, -6.5, -43];
         // let screenPosition = [0, -6.5, -83];
-        let rotation = [0.1, 4.7, 0];
+        let rotation = [0.1, 4, 0];
+        // let rotation = [0.1, 4.7, 0];
 
-        if (window.innerWidth < 768) {
+        // if (window.innerWidth < 768) {
+        if (window.innerWidth < 700) {
             screenScale = [0.7, 0.7, 0.7];
             // const w = window.innerWidth;
             // screenScale = [w, w, w]
@@ -129,7 +147,7 @@ const Home = () => {
 
         let screenScale, screenPosition, shadowPosition
 
-        if (window.innerWidth < 768) {
+        if (window.innerWidth < 700) {
             screenScale = [0.012, 0.012, 0.012] // racoon
             // screenScale = [0.2, 0.2, 0.2]; // Alpaca
             screenPosition = [0, -1.2, 0];// raccoon
@@ -147,10 +165,22 @@ const Home = () => {
         return [screenScale, screenPosition, shadowPosition]
     }
 
+    // const adjustBalloonForScreenSize = () => {
+    //     let screenScale;
+    //     if (window.innerWidth < 768) {
+    //         screenScale = [0.2, 0.2, 0.2]
+    //     } else {
+    //         screenScale = [100, 100, 100]
+    //     }
+    //     return screenScale
+    // };
 
     const [islandScale, islandPosition, islandRotation] = adjustIslandForScreenSize();
     const [planeScale, planePosition, shadowPosition] = adjustPlaneForScreenSize();
+    // const balloonScale = adjustBalloonForScreenSize();
+    // const balloonScale = [10, 10, 10];
 
+    // console.log('ballon scale: ', balloonScale)
 
     // const handleBalloonClick = () => {
     //     setShowPlane(true);
@@ -190,7 +220,7 @@ const Home = () => {
                     <hemisphereLight
                         skyColor='#b1e1ff'
                         groundColor='#000000'
-                        intensity={3}
+                        intensity={2}
                     />
                 }
 
@@ -268,6 +298,9 @@ const Home = () => {
                     <Balloon
                         // onClick={handleBalloonClick}
                         toggleShowPlane={toggleShowPlane}
+                        clickDisabled={clickDisabled}
+                        setClickDisabled={setClickDisabled}
+                    // scale={balloonScale}
                     />
 
                     {/* <BalloonBlue /> */}
@@ -276,13 +309,37 @@ const Home = () => {
                         scale={[0.5, 0.5, 0.5]}
                     /> */}
 
-                    <Sky isRotating={isRotating}
+                    {/* {!showPlane &&
+                        <Sky isRotating={isRotating}
+                        // scale={[0.5, 0.5, 0.5]}
+                        />
+                    } */}
+
+                    {!showPlane &&
+                        <Sky_Land isRotating={isRotating}
+                        // scale={[0.5, 0.5, 0.5]}
+                        />
+                    }
+
+                    {/* <Sky_Anime isRotating={isRotating}
+                    /> */}
+
+                    {/* <Sky_Test isRotating={isRotating}
                     // scale={[0.5, 0.5, 0.5]}
-                    />
+                    /> */}
+
+                    {/* {showPlane &&
+                        <Sky_Night
+                            isRotating={isRotating}
+                        // scale={[10, 10, 10]}
+                        />
+                    } */}
+
 
                     {showPlane &&
-                        <Sky_Night isRotating={isRotating}
-                            scale={[5, 5, 5]}
+                        <Sky_Anime
+                            isRotating={isRotating}
+                        // scale={[10, 10, 10]}
                         />
                     }
 
@@ -294,6 +351,9 @@ const Home = () => {
                         isRotating={isRotating}
                         setIsRotating={setIsRotating}
                         setCurrentStage={setCurrentStage}
+
+                        toggleShowPlane={toggleShowPlane}
+
                     />
 
 
