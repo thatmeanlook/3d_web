@@ -12,7 +12,7 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import scene from '../assets/3d/fire.glb'
 import { act, useThree, useFrame } from "@react-three/fiber";
 import { a } from '@react-spring/three'
-// import Fire from'
+import { MeshBasicMaterial } from "three";
 
 const Fire = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
     const group = useRef();

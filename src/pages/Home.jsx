@@ -166,6 +166,23 @@ const Home = () => {
         return [screenScale, screenPosition, shadowPosition]
     }
 
+    const adjustBalloonForScreenSize = () => {
+        let position;
+        let screenScale;
+        if (window.innerWidth < 500) {
+            position = [-7, 4, -11]
+            screenScale = [0.7, 0.7, 0.7]
+        }
+        else {
+            position = [-15, 4, -11]
+            screenScale = [1, 1, 1]
+        }
+
+        return [position, screenScale]
+    }
+
+    const [balloonPosition, balloonScale] = adjustBalloonForScreenSize();
+
     // const adjustBalloonForScreenSize = () => {
     //     let screenScale;
     //     if (window.innerWidth < 768) {
@@ -245,10 +262,8 @@ const Home = () => {
                     opacity={1} scale={15}
                     blur={1} far={10}
                     resolution={256}
-                    color='#000000' />
-
-
-
+                    color='#000000'
+                />
 
 
                 {/* {showPlane &&
@@ -286,13 +301,16 @@ const Home = () => {
                     // scale={balloonScale}
                     />
 
-                    {/* <Balloon_Test /> */}
+                    {/* <Balloon_Test
+                    // position={balloonPosition}
+                    // scale={balloonScale}
+                    /> */}
 
                     <BalloonBlue />
 
-                    <BalloonRed
+                    {/* <BalloonRed
                         scale={[0.3, 0.3, 0.3]}
-                    />
+                    /> */}
 
 
                     {!showPlane &&
@@ -351,7 +369,7 @@ const Home = () => {
                         <directionalLight
                             // color={0xffffff}
                             color={'#fcb849'} //current Yellow/Orange
-                            intensity={0.5}
+                            intensity={.8}
                             position={[0, 1, 0]}
                             castShadow:true
                         />
@@ -369,7 +387,7 @@ const Home = () => {
 
                     {showPlane &&
                         <ambientLight
-                            intensity={0.1}
+                            intensity={0.12}
                             color='white'
                         />
                     }
@@ -423,7 +441,8 @@ const Home = () => {
                         position={planePosition}
                         isRotating={isRotating}
                         rotation={[0, 20.5, 0]}
-                    // rotation={raccoonRotation}
+                        // rotation={raccoonRotation}
+                        showPlane={showPlane}
 
                     />
 

@@ -12,24 +12,20 @@ import scene from '../assets/3d/balloonBlue.glb'
 import { useFrame } from "@react-three/fiber";
 
 
-const BalloonRed = ({ currentAnimation, ...props }) => {
+const BalloonRed = ({ props }) => {
     const group = useRef();
-
     const { nodes, materials, animations } = useGLTF(scene);
+    // const { nodes, materials, animations } = useGLTF("../assets/3d/hot_air_balloon.glb");
     const { actions } = useAnimations(animations, group);
 
 
-
     useEffect(() => {
-        console.log('blue balloon', actions)
-        actions['Action'].setDuration(20).play();
-        // actions['Action'].play();
-    }, []);
 
-    const handleBalloonClick = () => {
-        // Open Google.com in a new tab
-        window.open("https://www.google.com", "_blank");
-    };
+        actions['Action'].setDuration(20).play();
+
+    }, [])
+
+
 
     useFrame(({ clock, camera }) => {
         // Update the Y position to simulate balloon-like motion using a sine wave
@@ -55,6 +51,10 @@ const BalloonRed = ({ currentAnimation, ...props }) => {
             group.current.position.z += 0.01;
         }
     });
+
+    useFrame((_, delta) => {
+        group.current.rotation.Y += 0.15 * delta;
+    })
 
 
     return (

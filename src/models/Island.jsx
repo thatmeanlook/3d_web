@@ -13,6 +13,7 @@ import islandScene from '../assets/3d/cute_island.glb'
 import fireScene from '../assets/3d/fire.glb'
 import { a } from '@react-spring/three'
 import { user } from "../assets/icons";
+import { MeshBasicMaterial, Color } from "three";
 
 const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleShowPlane, ...props }) => {
     const islandRef = useRef();
@@ -25,6 +26,9 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
 
     const [clickDisabled, setClickDisabled] = useState(false);
     const [fireOpacity, setFireOpacity] = useState(0.8);
+
+    const glowGreen = new MeshBasicMaterial({ color: new Color(0, 3, 1), toneMapped: false })
+
 
 
     const handleFireOpacity = () => {
@@ -469,6 +473,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 material={materials2.fire}
                                                 material-transparent
                                                 material-opacity={fireOpacity}
+                                            // material={glowGreen}
                                             // material-color={'blue'}
 
                                             />

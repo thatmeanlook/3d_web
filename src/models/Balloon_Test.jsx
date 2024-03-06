@@ -18,14 +18,28 @@ const Balloon_Test = (props) => {
     const { actions } = useAnimations(animations, group);
 
 
+
+    const adjustBalloonForScreenSize = () => {
+        let position;
+        let screenScale;
+        if (window.innerWidth < 500) {
+            position = [-7, 4, -11]
+            screenScale = [0.7, 0.7, 0.7]
+        }
+        else {
+            position = [-15, 4, -11]
+            screenScale = [1, 1, 1]
+        }
+
+        return [position, screenScale]
+    }
+
+    const [balloonPosition, balloonScale] = adjustBalloonForScreenSize();
+
+
     useEffect(() => {
-
         actions['Take 001'].play();
-
-
     }, [])
-
-
 
 
     useFrame(({ clock, camera }) => {
@@ -61,12 +75,15 @@ const Balloon_Test = (props) => {
     return (
         <group ref={group} {...props} dispose={null}>
             <group name="Sketchfab_Scene">
-                <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
+                <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}
+                    // position={balloonPosition}
+                    position={[2, -2, -7]}
+                    scale={balloonScale}
+                >
                     <group
                         name="564d5998c2ae4a5f85a602f77fb33fc1fbx"
                         rotation={[Math.PI / 2, 0, 0]}
                         scale={0.1}
-                    // scale={balloonScale}
 
                     >
                         <group name="Object_2">

@@ -22,6 +22,7 @@ const FireNew = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
     const { nodes, materials } = useGLTF(islandScene);
     const { nodes: nodes2, materials: materials2, animations } = useGLTF(fireScene);
     const { actions } = useAnimations(animations, islandRef);
+
     const [clickDisabled, setClickDisabled] = useState(false);
     const [fireOpacity, setFireOpacity] = useState(0);
 
@@ -38,24 +39,17 @@ const FireNew = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
     const dampingFactor = 0.95;
 
 
-    // let fireOpacity = 0;
     console.log('fire opacity before', fireOpacity)
 
     const handleFireOpacity = () => {
-
-        // fireOpacity = 0.5;
-
         if (!clickDisabled) {
             setFireOpacity(0.8); // Toggle the value of showPlane
             setClickDisabled(true); // Disable click temporarily
             setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
             console.log('fire opacity after', fireOpacity)
-
         }
-
     }
 
-    // const fireOpacity = handleFireOpacity();
 
 
     const handlePointerDown = (e) => {

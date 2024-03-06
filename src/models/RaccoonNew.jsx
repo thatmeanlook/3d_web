@@ -17,7 +17,7 @@ import scene from '../assets/3d/poly_art_raccoon.glb'
 // insert UCSD raccoon vid
 // https://www.reddit.com/r/UCSD/comments/qxc16u/just_some_raccoons/
 
-const RaccoonNew = ({ currentAnimation, isRotating, ...props }) => {
+const RaccoonNew = ({ currentAnimation, isRotating, showPlane, ...props }) => {
     const group = useRef();
     const { nodes, materials, animations } = useGLTF(scene);
     const { actions } = useAnimations(animations, group);
@@ -40,7 +40,7 @@ const RaccoonNew = ({ currentAnimation, isRotating, ...props }) => {
         // const crawlClip = actions.Roll.getClip();
         // console.log('clip', crawlClip)
         const crawlSubClip = AnimationUtils.subclip(crawlClip, 'crawl_subClip', 0, 1000, true);
-        // console.log('subclip', crawlSubClip)
+        // console.log('subclip', crawlSubClip) 
         const crawlSubClipAction = mixerInstance.clipAction(crawlSubClip);
         // crawlSubClipAction.enabled = true;
         // crawlSubClipAction.setEffectiveTimeScale(1)
@@ -62,6 +62,13 @@ const RaccoonNew = ({ currentAnimation, isRotating, ...props }) => {
         const walkSubClip = AnimationUtils.subclip(walkClip, 'walk_subClip', 1, 1000, true);
         // console.log('subwalk', walkSubClip)
         const walkSubClipAction = mixerInstance.clipAction(walkSubClip).setDuration(0.7);
+
+
+        // SLOW DOWN FOR NIGHT TIME
+
+        if (showPlane) {
+            const walkSubClipAction = mixerInstance.clipAction(walkSubClip).setDuration(1.5);
+        };
         /////////
 
 
@@ -114,7 +121,7 @@ const RaccoonNew = ({ currentAnimation, isRotating, ...props }) => {
             // clearInterval(waveHandInterval);
             mixerInstance.stopAllAction();
         };
-    }, [actions, isRotating, isWaving]);
+    }, [actions, isRotating, isWaving, showPlane]);
 
     useFrame((_, delta) => {
         if (mixer.current) {
