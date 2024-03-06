@@ -258,7 +258,21 @@ const Contact = () => {
                     </Suspense>
 
                 </Canvas>
-
+                <div>
+                    <footer style={{
+                        position: 'absolute',
+                        bottom: 0, width: '100%', textAlign: 'center', paddingBottom: '0px',
+                        font: 4,
+                    }}>
+                        <p
+                            style={{
+                                fontFamily: 'Arial, sans-serif',
+                                fontSize: 12,
+                                color: 'grey'
+                            }}
+                        >MinhLucArt@gmail.com</p>
+                    </footer>
+                </div>
             </div>
 
             {/* <div>
