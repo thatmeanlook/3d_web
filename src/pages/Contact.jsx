@@ -73,16 +73,19 @@ const Contact = () => {
     const handleRaccoonClick = () => {
 
         // Open Google.com in a new tab
-        setCurrentAnimation('Attack_Arms');
+        // setCurrentAnimation('GetHit_Front_Right_2');
+        setCurrentAnimation('GetHit_Front_Left_2');
+        // setCurrentAnimation('Attack_Arms');
         // setCurrentAnimation('Jump_In_Place');
         setTimeout(() => {
             // window.open('https://www.google.com', '_blank');
             // setCurrentAnimation('Action_Eat');
-        }, 1000);
+        }, 1500);
 
         setTimeout(() => {
             setCurrentAnimation('Action_Eat');
-        }, 1250);
+        }, 1500); // for GetHit_Front_Left_2
+        // }, 1250); // Attack_Arms
         // }, 1200); // for Jump
     };
 
@@ -92,8 +95,8 @@ const Contact = () => {
 
         if (window.innerWidth < 768) {
             screenScale = [0.1, 0.1, 0.1] // racoon
-            screenPosition = [1.5, -3, -4];// raccoon
-            shadowPosition = [0, -3, 0]; // racccoon
+            screenPosition = [1.5, -1, -4];// raccoon
+            shadowPosition = [0, -1, 0]; // racccoon
 
 
         } else {

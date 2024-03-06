@@ -67,10 +67,22 @@ const RaccoonNew = ({ currentAnimation, isRotating, showPlane, ...props }) => {
         // SLOW DOWN FOR NIGHT TIME
 
         if (showPlane) {
-            const walkSubClipAction = mixerInstance.clipAction(walkSubClip).setDuration(1.5);
+            const walkSubClipAction = mixerInstance.clipAction(walkSubClip).setDuration(1.7);
         };
-        /////////
 
+
+        /////////
+        // NIGHT TIME IDLE
+
+        // const lieClip = actions.Sneak_Idle.getClip();
+        const lieClip = actions.Idle_Yaw.getClip();
+        // const lieClip = actions.Lie_Idle_2.getClip();
+        // console.log('lie', lieClip)
+        const lieSubClip = AnimationUtils.subclip(lieClip, 'lie_subClip', 1, 1000, true);
+        // console.log('sublie', lieSubClip)
+        // const lieSubClipAction = mixerInstance.clipAction(lieSubClip).setDuration(2.5);
+        const lieSubClipAction = mixerInstance.clipAction(lieSubClip);
+        //////////////////////////////////
 
         ///////////// 4th action: Jump_In_Place: cool for Contact Page when clicked on
         const jumpClip = actions.Jump_In_Place.getClip();
@@ -103,16 +115,31 @@ const RaccoonNew = ({ currentAnimation, isRotating, showPlane, ...props }) => {
 
 
         if (!isRotating) {
-            // jumpSubClipAction.stop()
-            walkSubClipAction.stop();
-            crawlSubClipAction.play();
-            // digSubClipAction.stop()
+            // // jumpSubClipAction.stop()
+            // walkSubClipAction.stop();
+            // crawlSubClipAction.play();
+            // // digSubClipAction.stop()
+            if (showPlane) {
+                lieSubClipAction.play();
+                walkSubClipAction.stop();
+            } else {
+                walkSubClipAction.stop();
+                crawlSubClipAction.play();
+            }
         }
         else {
-            // jumpSubClipAction.play();
-            walkSubClipAction.play();
-            crawlSubClipAction.stop();
-            // digSubClipAction.play();
+            // // jumpSubClipAction.play();
+            // walkSubClipAction.play();
+            // crawlSubClipAction.stop();
+            // // digSubClipAction.play();
+
+            if (showPlane) {
+                lieSubClipAction.stop();
+                walkSubClipAction.play();
+            } else {
+                walkSubClipAction.play();
+                crawlSubClipAction.stop();
+            }
 
         }
 

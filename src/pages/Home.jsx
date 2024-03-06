@@ -32,29 +32,29 @@ const Home = () => {
 
     //////////////////////
     /// TOGGLE PLANE ON OFF
+    // const toggleShowPlane = () => {
+    //     if (!clickDisabled) {
+    //         setShowPlane(prevState => !prevState); // Toggle the value of showPlane
+    //         console.log('1st change')
+    //         setClickDisabled(true); // Disable click temporarily
+    //         console.log('Disable click')
+    //         setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
+    //     }
+    //     // setShowPlane(prevState => !prevState); // Toggle the value of showPlane
+
+    //     // setShowPlane(true);
+    // };
+
+
+    /// TOGGLE PLANE ON OFF -- ORIGINAL WORKING
     const toggleShowPlane = () => {
         if (!clickDisabled) {
             setShowPlane(prevState => !prevState); // Toggle the value of showPlane
-            console.log('1st change')
             setClickDisabled(true); // Disable click temporarily
-            console.log('Disable click')
             setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
         }
-        // setShowPlane(prevState => !prevState); // Toggle the value of showPlane
 
-        // setShowPlane(true);
     };
-
-
-    //  /// TOGGLE PLANE ON OFF -- ORIGINAL WORKING
-    //  const toggleShowPlane = () => {
-    //     if (!clickDisabled) {
-    //         setShowPlane(prevState => !prevState); // Toggle the value of showPlane
-    //         setClickDisabled(true); // Disable click temporarily
-    //         setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
-    //     }
-    //     
-    // };
 
 
 
@@ -259,8 +259,8 @@ const Home = () => {
                     // position={[0, -3, 0]}
                     // position={[0, -1.5, 0]}
                     position={shadowPosition}
-                    opacity={1} scale={15}
-                    blur={1} far={10}
+                    opacity={1} scale={20}
+                    blur={0.5} far={10}
                     resolution={256}
                     color='#000000'
                 />
@@ -293,20 +293,24 @@ const Home = () => {
 
                     {/* <Bird /> */}
 
-                    <Balloon
+                    {/* <Balloon // VERY STABLE AND RELIABLE
                         // onClick={handleBalloonClick}
                         toggleShowPlane={toggleShowPlane}
                         clickDisabled={clickDisabled}
                         setClickDisabled={setClickDisabled}
                     // scale={balloonScale}
-                    />
+                    /> */}
 
                     {/* <Balloon_Test
                     // position={balloonPosition}
                     // scale={balloonScale}
                     /> */}
 
-                    <BalloonBlue />
+                    <BalloonBlue
+                        toggleShowPlane={toggleShowPlane}
+                        clickDisabled={clickDisabled}
+                        setClickDisabled={setClickDisabled}
+                    />
 
                     {/* <BalloonRed
                         scale={[0.3, 0.3, 0.3]}

@@ -4,18 +4,39 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import ballonScene from '../assets/3d/balloonBlue.glb'
 import { useFrame } from "@react-three/fiber";
 
-const BalloonBlue = ({ }) => {
+const BalloonBlue = ({ toggleShowPlane }) => {
     const ref = useRef();
     const { scene, animations } = useGLTF(ballonScene);
     const { actions } = useAnimations(animations, ref);
 
+    const adjustBalloonForScreenSize = () => {
+        let position;
+        let screenScale;
+        if (window.innerWidth < 500) {
+            position = [-7, 4, -11]
+            screenScale = [0.5, 0.5, 0.5]
+        }
+        else {
+            position = [-15, 4, -11]
+            screenScale = [1, 1, 1]
+        }
+
+        return [position, screenScale]
+    }
+
+    const [balloonPosition, balloonScale] = adjustBalloonForScreenSize();
+
+
+
+
     useEffect(() => {
         console.log('blue balloon', actions)
-        actions['Action'].setDuration(20).play();
+        actions['Action'].setDuration(30).play();
         // actions['Action'].play();
     }, []);
 
     const handleBalloonClick = () => {
+        toggleShowPlane();
         // Open Google.com in a new tab
         // window.open("https://www.google.com", "_blank");
     };
@@ -45,16 +66,22 @@ const BalloonBlue = ({ }) => {
         }
     });
 
-    // useFrame((_, delta) => {
-    //     ref.current.rotation.Y += 0.15 * delta;
-    // })
+    useFrame((_, delta) => {
+        ref.current.rotation.Y += 0.15 * delta;
+    })
 
     return (
         <mesh
-            position={[-15, 4, -11]}
-            scale={[1, 1, 1]}
+            position={balloonPosition}
+            scale={balloonScale}
             ref={ref}
             onClick={handleBalloonClick}
+            onPointerDown={handleBalloonClick}
+
+        // position={[-15, 4, -11]}
+        // scale={[1, 1, 1]}
+        // ref={ref}
+        // onClick={handleBalloonClick}
         >
             <primitive object={scene} />
         </mesh>
