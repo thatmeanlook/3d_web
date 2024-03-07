@@ -187,6 +187,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
 
     return (
         // 
+        
         <a.group ref={islandRef} {...props}>
 
             <group scale={0.07}

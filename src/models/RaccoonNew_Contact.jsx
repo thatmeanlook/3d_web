@@ -26,8 +26,8 @@ const RaccoonNew = ({ currentAnimation, ...props }) => {
     const mixer = useRef();
 
     useEffect(() => {
-        console.log(actions);
-        console.log('raccoon action', actions.Action_Crawl)
+        // console.log(actions);
+        // console.log('raccoon action', actions.Action_Crawl)
         const mixerInstance = new AnimationMixer(group.current);
         mixer.current = mixerInstance;
 
@@ -50,14 +50,14 @@ const RaccoonNew = ({ currentAnimation, ...props }) => {
         Object.values(actions).forEach((action) => action.stop());
 
         if (actions[currentAnimation]) {
-            console.log('current animation', currentAnimation);
-            console.log('current action:', actions[currentAnimation]);
+            // console.log('current animation', currentAnimation);
+            // console.log('current action:', actions[currentAnimation]);
 
             const crawlClip = actions[currentAnimation].getClip();
 
-            console.log('clip', crawlClip)
+            // console.log('clip', crawlClip)
             const crawlSubClip = AnimationUtils.subclip(crawlClip, 'crawl_subClip', 0, 1000, true);
-            console.log('subclip', crawlSubClip)
+            // console.log('subclip', crawlSubClip)
             const crawlSubClipAction = mixerInstance.clipAction(crawlSubClip);
             crawlSubClipAction.enabled = true;
 
@@ -66,7 +66,7 @@ const RaccoonNew = ({ currentAnimation, ...props }) => {
             }
             crawlSubClipAction.play();
 
-            console.log('current animation: ', currentAnimation);
+            // console.log('current animation: ', currentAnimation);
         }
 
 

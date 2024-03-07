@@ -71,16 +71,17 @@ const Contact = () => {
 
 
     const handleRaccoonClick = () => {
+        console.log('shadow position', shadowPosition)
 
         // Open Google.com in a new tab
         // setCurrentAnimation('GetHit_Front_Right_2');
         setCurrentAnimation('GetHit_Front_Left_2');
         // setCurrentAnimation('Attack_Arms');
         // setCurrentAnimation('Jump_In_Place');
-        setTimeout(() => {
-            // window.open('https://www.google.com', '_blank');
-            // setCurrentAnimation('Action_Eat');
-        }, 1500);
+        // setTimeout(() => {
+        //     // window.open('https://www.google.com', '_blank');
+        //     // setCurrentAnimation('Action_Eat');
+        // }, 1500);
 
         setTimeout(() => {
             setCurrentAnimation('Action_Eat');
@@ -96,14 +97,25 @@ const Contact = () => {
         if (window.innerWidth < 768) {
             screenScale = [0.1, 0.1, 0.1] // racoon
             screenPosition = [1.5, -1, -4];// raccoon
-            shadowPosition = [0, -1, 0]; // racccoon
+            if (currentAnimation == 'Lie_Idle_2') {
+                shadowPosition = [0.1, -1.1, -0.2]; // racccoon
 
+            } else {
+                shadowPosition = [0, -1, 0]; // racccoon
+            }
 
         } else {
             screenScale = [0.1, 0.1, 0.1] // raccoon
             screenPosition = [2, -4, -5];
-            shadowPosition = [0, -3, 0];
+            // shadowPosition = [0, -3, 0]; // racccoon
 
+            if (currentAnimation == 'Lie_Idle_2') {
+                shadowPosition = [0.05, -4.1, -0.1]; // racccoon
+
+            } else {
+                console.log('hereeeeeeeeee')
+                shadowPosition = [0, -4, 0]; // racccoon
+            }
         }
         return [screenScale, screenPosition, shadowPosition]
     }
@@ -192,9 +204,9 @@ const Contact = () => {
             </div>
 
             {/* Raccoon */}
-            <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px] relative z-100'
+            <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px] relative'
             // style={{ position: 'absolute', top: '50px', left: '50px', zIndex: '100' }}
-            // style={{ position: 'absolute' }}
+            // style={{ zIndex: 1 }}
             >
                 <Canvas
                     camera={{
@@ -258,26 +270,26 @@ const Contact = () => {
                     </Suspense>
 
                 </Canvas>
+
                 <div>
-                    <footer style={{
+                    {/* <footer style={{
                         position: 'absolute',
                         bottom: 0, width: '100%', textAlign: 'center', paddingBottom: '0px',
                         font: 4,
-                    }}>
-                        <p
-                            style={{
-                                fontFamily: 'Arial, sans-serif',
-                                fontSize: 12,
-                                color: 'grey'
-                            }}
-                        >MinhLucArt@gmail.com</p>
-                    </footer>
+                    }}> */}
+                    <p
+                        style={{
+                            fontFamily: 'Arial, sans-serif',
+                            fontSize: 12,
+                            color: 'grey',
+                        }}
+                    >MinhLucArt@gmail.com</p>
+                    {/* </footer> */}
                 </div>
+
             </div>
 
-            {/* <div>
-                <p>MinhLucArt@gmail.com</p>
-            </div> */}
+
 
         </section >
 
