@@ -106,15 +106,15 @@ const Contact = () => {
 
         } else {
             screenScale = [0.1, 0.1, 0.1] // raccoon
-            screenPosition = [2, -4, -5];
+            screenPosition = [2, -3, -5];
             // shadowPosition = [0, -3, 0]; // racccoon
 
             if (currentAnimation == 'Lie_Idle_2') {
-                shadowPosition = [0.05, -4.1, -0.1]; // racccoon
+                shadowPosition = [0.05, -3.3, -0.1]; // racccoon
 
             } else {
                 console.log('hereeeeeeeeee')
-                shadowPosition = [0, -4, 0]; // racccoon
+                shadowPosition = [0, -3.3, 0]; // racccoon
             }
         }
         return [screenScale, screenPosition, shadowPosition]
@@ -271,20 +271,27 @@ const Contact = () => {
 
                 </Canvas>
 
-                <div>
-                    {/* <footer style={{
+
+
+                <div className=' bg-slate-300/20'>
+                    <footer style={{
                         position: 'absolute',
-                        bottom: 0, width: '100%', textAlign: 'center', paddingBottom: '0px',
+                        bottom: 0, width: '100%',
+                        textAlign: 'center',
+                        // paddingBottom: '100px',
                         font: 4,
-                    }}> */}
-                    <p
-                        style={{
-                            fontFamily: 'Arial, sans-serif',
-                            fontSize: 12,
-                            color: 'grey',
-                        }}
-                    >MinhLucArt@gmail.com</p>
-                    {/* </footer> */}
+                        paddingTop: '100px',
+                        // color: '',
+                    }}>
+                        <p
+                            style={{
+                                fontFamily: 'Arial, sans-serif',
+                                fontSize: 12,
+                                color: 'grey',
+                                // position: 'absolute'
+                            }}
+                        >MinhLucArt@gmail.com</p>
+                    </footer>
                 </div>
 
             </div>

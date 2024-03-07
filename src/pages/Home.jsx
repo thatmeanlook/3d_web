@@ -132,7 +132,7 @@ const Home = () => {
 
         // if (window.innerWidth < 768) {
         if (window.innerWidth < 700) {
-            screenScale = [0.7, 0.7, 0.7];
+            screenScale = [0.63, 0.63, 0.63];
             // const w = window.innerWidth;
             // screenScale = [w, w, w]
 
@@ -146,24 +146,26 @@ const Home = () => {
 
     const adjustPlaneForScreenSize = () => {
 
-        let screenScale, screenPosition, shadowPosition
+        let screenScale, screenPosition, shadowPosition, pointLightPower
 
         if (window.innerWidth < 700) {
-            screenScale = [0.012, 0.012, 0.012] // racoon
+            screenScale = [0.011, 0.011, 0.011] // racoon
             // screenScale = [0.2, 0.2, 0.2]; // Alpaca
-            screenPosition = [0, -1.2, 0];// raccoon
+            screenPosition = [0, -1.1, 0];// raccoon
             // screenPosition = [0, -1.5, 0];// Alpaca
-            shadowPosition = [0, -1.2, 0]; // racccoon
+            shadowPosition = [0, -1.12, 0]; // racccoon
             // shadowPosition = [0, -1.5, 0]; // Alpaca
+            pointLightPower = 50;
 
         } else {
             screenScale = [0.03, 0.03, 0.03] // raccoon
             // screenScale = [0.4, 0.4, 0.4]; // Alpaca
             screenPosition = [0, -3, -4];
             shadowPosition = [0, -3, 0];
+            pointLightPower = 20;
 
         }
-        return [screenScale, screenPosition, shadowPosition]
+        return [screenScale, screenPosition, shadowPosition, pointLightPower]
     }
 
     const adjustBalloonForScreenSize = () => {
@@ -194,7 +196,7 @@ const Home = () => {
     // };
 
     const [islandScale, islandPosition, islandRotation] = adjustIslandForScreenSize();
-    const [planeScale, planePosition, shadowPosition] = adjustPlaneForScreenSize();
+    const [planeScale, planePosition, shadowPosition, pointLightPower] = adjustPlaneForScreenSize();
     // const balloonScale = adjustBalloonForScreenSize();
     // const balloonScale = [10, 10, 10];
 
@@ -230,7 +232,8 @@ const Home = () => {
                 {!showPlane &&
                     <directionalLight
                         castShadow:true
-                        position={[1, 1, 10]} intensity={1}
+                        position={[1, 1, 10]}
+                        intensity={1}
                     />
                 }
 
@@ -334,9 +337,9 @@ const Home = () => {
                             position={[0, 2, -4]} // raccoon on small screen
                             // position={[0, 0, 0]} // raccoon on small screen
                             // position={[0, 2, 0]}
-
                             castShadow:true
-                            intensity={20}
+                            intensity={pointLightPower}
+                        // intensity={20}
                         // color={'#fcb849'}
                         />
 
