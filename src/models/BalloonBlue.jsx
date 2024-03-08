@@ -78,6 +78,8 @@ const BalloonBlue = ({ toggleShowPlane }) => {
             onClick={handleBalloonClick}
             onPointerDown={handleBalloonClick}
 
+
+
         // position={[-15, 4, -11]}
         // scale={[1, 1, 1]}
         // ref={ref}
