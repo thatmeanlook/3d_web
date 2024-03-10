@@ -293,7 +293,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 material-transparent={true}
                                                 material-opacity={birdOpacity}
                                             // material-color={'#9c5d98'}
-                                            // material-color={'#cfae55'}
+                                            // material-color={'#bd8b77'}
                                             />
                                         </group>
                                         <group

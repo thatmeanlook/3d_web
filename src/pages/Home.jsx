@@ -241,7 +241,7 @@ const Home = () => {
             // castShadow
             >
 
-
+                {/* DAY LIGHT /////// */}
                 {!showPlane &&
                     <directionalLight
                         castShadow:true
@@ -261,6 +261,16 @@ const Home = () => {
                 {!showPlane &&
                     <ambientLight intensity={0.1} />
                 }
+
+                {!showPlane &&
+                    <pointLight
+                        position={[-1, 5, 1]} // raccoon on small screen
+                        castShadow:true
+                        intensity={60}
+                    // intensity={pointLightPower}
+                    />
+                }
+                {/* ///////////////////////////////// */}
 
                 {/* <Environment preset='sunset' /> */}
 
@@ -347,53 +357,16 @@ const Home = () => {
                         />
                     }
 
-                    {/* {showPlane &&
-                        <Environment preset='night' />
-                        // <Environment preset='sunset' />
-                    } */}
-
                     {showPlane &&
                         <pointLight
-                            // position={[1, 1, 1]}
                             position={[0, 2, -4]} // raccoon on small screen
                             // position={[0, 0, 0]} // raccoon on small screen
-                            // position={[0, 2, 0]}
                             castShadow:true
                             intensity={pointLightPower}
-                        // intensity={20}
-                        // color={'#fcb849'}
                         />
-
-                        // <pointLight
-                        //     position={[1, 1, 1]} // Set the position of the light
-                        //     intensity={2} // Set the intensity of the light
-                        //     distance={10} // Set the distance that the light affects
-                        //     color="white" // Set the color of the light
-                        // />
-
                     }
 
-
-                    {/* {showPlane &&
-                        <spotLight
-                            position={[0, 1, 10]}
-                            intensity={12}
-                            // distance={30} // for small screen
-                            distance={8}
-                            angle={Math.PI * 0.1}
-                        // penumbra={0.25}
-                        // decay={0.5}
-                        // target={[0, 0, 0]}
-                        />
-                    } */}
-
                     {showPlane &&
-                        // <directionalLight
-                        //     castShadow:true
-                        //     position={[1, 1, 10]}
-                        //     intensity={0.5}
-                        // />
-
                         <directionalLight
                             // color={0xffffff}
                             color={'#fcb849'} //current Yellow/Orange
@@ -402,16 +375,6 @@ const Home = () => {
                             position={[0, 1, 0]}
                             castShadow:true
                         />
-
-                        // <directionalLight
-                        //     // color={0xffffff}
-                        //     // color={'#fcb849'} //current Yellow/Orange
-                        //     color={'#7c49fc'}
-                        //     intensity={1.5}
-                        //     position={[0, 1, 0]}
-                        //     castShadow:true
-                        // />
-
                     }
 
                     {showPlane &&
