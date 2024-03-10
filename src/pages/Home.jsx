@@ -4,7 +4,6 @@ import Loader from '../components/Loader'
 import Island from '../models/Island'
 // import { Sky } from '@react-three/drei'
 import Sky from '../models/Sky'
-import Bird from '../models/Bird'
 import Plane from '../models/Plane'
 import HomeInfo from '../components/HomeInfo'
 import { ContactShadows } from '@react-three/drei'
@@ -20,6 +19,7 @@ import Sky_Test from '../models/Sky_Test'
 import Sky_Anime from '../models/Sky_Anime'
 import Sky_Land from '../models/SKy_Land'
 import Balloon_Test from '../models/Balloon_Test'
+import Bird from '../models/Bird';
 
 // import { DirectionalLightShadow } from '@react-three/drei'
 
@@ -28,6 +28,7 @@ const Home = () => {
     const [isRotating, setIsRotating] = useState(false);
     const [currentStage, setCurrentStage] = useState(1);
     const [showPlane, setShowPlane] = useState(false); // State to control Plane visibility
+    const [showBird, setShowBird] = useState(false); // State to control Plane visibility
     const [clickDisabled, setClickDisabled] = useState(false);
 
     //////////////////////
@@ -49,12 +50,25 @@ const Home = () => {
     /// TOGGLE PLANE ON OFF -- ORIGINAL WORKING
     const toggleShowPlane = () => {
         if (!clickDisabled) {
-            setShowPlane(prevState => !prevState); // Toggle the value of showPlane
+            setShowPlane(prevState => !prevState); // Toggle the value of showBird
             setClickDisabled(true); // Disable click temporarily
             setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
         }
 
     };
+
+
+    /// TOGGLE BIRD ON OFF -- 
+    const toggleShowBird = () => {
+        if (!clickDisabled) {
+            setShowBird(prevState => !prevState); // Toggle the value of showPlane
+            setClickDisabled(true); // Disable click temporarily
+            setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
+        }
+
+    };
+
+
 
 
 
@@ -126,9 +140,7 @@ const Home = () => {
 
         let screenScale = null;
         let screenPosition = [0, -6.5, -43];
-        // let screenPosition = [0, -6.5, -83];
-        let rotation = [0.1, 4, 0];
-        // let rotation = [0.1, 4.7, 0];
+        let rotation = [0.1, 3.85, 0];
 
         // if (window.innerWidth < 768) {
         if (window.innerWidth < 700) {
@@ -229,6 +241,7 @@ const Home = () => {
             // castShadow
             >
 
+
                 {!showPlane &&
                     <directionalLight
                         castShadow:true
@@ -293,8 +306,16 @@ const Home = () => {
 
 
                 <Suspense fallback={<Loader />}>
+                    {/* 
+                    {showBird && <Bird
+                        position={[-20, -50, 30]}
+                        scale={[0.3, 0.3, 0.3]}
+                        toggleShowBird={toggleShowBird}
+                    />
+                    } */}
 
-                    {/* <Bird /> */}
+
+
 
                     {/* <Balloon // VERY STABLE AND RELIABLE
                         // onClick={handleBalloonClick}
@@ -418,6 +439,7 @@ const Home = () => {
                         setCurrentStage={setCurrentStage}
 
                         toggleShowPlane={toggleShowPlane}
+                        toggleShowBird={toggleShowBird}
 
                     />
 

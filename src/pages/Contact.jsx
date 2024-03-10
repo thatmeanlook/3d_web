@@ -9,6 +9,7 @@ import { Environment, ContactShadows } from '@react-three/drei';
 import { Link } from 'react-router-dom';
 import RaccoonNew_Contact from '../models/RaccoonNew_Contact';
 import { socialLinks } from '../constants'
+// import Bird from '../models/Bird';
 
 
 const Contact = () => {
@@ -17,6 +18,7 @@ const Contact = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const [currentAnimation, setCurrentAnimation] = useState('Lie_Idle_2'); // for New Raccoon
+    // const [currentAnimation, setCurrentAnimation] = useState('Idle_Look_Left'); // for New Raccoon
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value })
@@ -277,7 +279,8 @@ const Contact = () => {
                         <RaccoonNew_Contact
                             currentAnimation={currentAnimation}
                             position={raccoonPosition}
-                            rotation={[0, -19.5, 0]}
+                            rotation={[0, -19.5, 0]} // for Lie_Idle_2
+                            // rotation={[0, -1.8, 0]} // for Idle_Look_Left
                             scale={raccoonScale}
                             // scale={[0.1, 0.1, 0.1]}
                             onClick={handleRaccoonClick}

@@ -181,6 +181,7 @@ export const educations = [
         company_name: "Data Science (B.S.)",
         icon: ucsd_seal,
         // icon: ucsd,
+        // icon: ucsd,
         iconBg: "#5F4868",
         date: "September 2021 - April 2024",
 

@@ -11,21 +11,42 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import islandScene from '../assets/3d/cute_island.glb'
 import fireScene from '../assets/3d/fire.glb'
+import birdScene from '../assets/3d/bird.glb'
+import birdPolyScene from '../assets/3d/bird_poly.glb'
+import birdScene3 from '../assets/3d/bird_3.glb'
+import birdWhite from '../assets/3d/low_poly_bird_animated.glb'
 import { a } from '@react-spring/three'
 import { user } from "../assets/icons";
 import { MeshBasicMaterial, Color } from "three";
 
-const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleShowPlane, ...props }) => {
+const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleShowPlane, toggleShowBird, ...props }) => {
     const islandRef = useRef();
     const group = useRef();
 
     const { gl, viewport } = useThree();
     const { nodes, materials } = useGLTF(islandScene);
     const { nodes: nodes2, materials: materials2, animations } = useGLTF(fireScene);
+    const { nodes: nodesBird, materials: materialsBird, animations: animationsBird } = useGLTF(birdScene);
+    const { nodes: nodesBirdPoly, materials: materialsBirdPoly, animations: animationsBirdPoly } = useGLTF(birdPolyScene);
     const { actions } = useAnimations(animations, islandRef);
+    const { actions: actionsBird } = useAnimations(animationsBird, islandRef);
+    const { actions: actionsBirdPoly } = useAnimations(animationsBirdPoly, islandRef)
+    // console.log('birdScene', animationsBird)
+
+    const { nodes: nodes3, materials: materials3, animations3 } = useGLTF(birdScene3);
+    const { nodes: nodesWhite, materials: materialsWhite, animationsWhite } = useGLTF(birdWhite);
+
+    console.log('fire animation', animations)
+    console.log('bird poly animation', animationsBirdPoly)
+    console.log('bird animation', animationsBird)
+    console.log('bird scene', nodesBird)
+    console.log('fire scene', nodes2)
+    console.log('bird animation white', animationsWhite)
 
     const [clickDisabled, setClickDisabled] = useState(false);
     const [fireOpacity, setFireOpacity] = useState(0.8);
+
+    const [birdOpacity, setBirdOpacity] = useState(0);
 
     const glowGreen = new MeshBasicMaterial({ color: new Color(0, 3, 1), toneMapped: false })
 
@@ -33,6 +54,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
 
     const handleFireOpacity = () => {
         // toggleShowPlane(); // experimental
+
+        // console.log('birdScene', nodesBird)
 
         if (!clickDisabled) {
             if (fireOpacity == 0) {
@@ -47,9 +70,29 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
         }
     }
 
-    // const { nodes2, materials2 } = useGLTF(fireScene);
-    // console.log('NODE', nodes)
-    // console.log('NODE 2', nodes2)
+    const handleTreeClick = () => {
+        toggleShowBird();
+
+        if (!clickDisabled) {
+            if (birdOpacity == 0) {
+                setBirdOpacity(1); // Toggle the value of showPlane
+                // actionsBird['Take 001'].play();
+                actionsBirdPoly['Take 001'].play();
+                // setTimeout(() => (actionsBird['Take 001'].stop(),
+                //     setBirdOpacity(0)), 6000)
+
+            } else {
+                setBirdOpacity(0);
+            }
+            setClickDisabled(true); // Disable click temporarily
+            setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
+        }
+    }
+
+    const handleBirdClick = () => {
+
+        window.open('https://youtu.be/hiwgOWo7mDc?si=ppFvsBFkXo1BVBS6', '_blank');
+    }
 
     const lastX = useRef(0);
     const rotationSpeed = useRef(0);
@@ -94,7 +137,11 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
 
     useEffect(() => {
 
-        actions['Default Take'].play();
+        actions['Default Take'].play(); // fire animation
+
+        // actionsBird['Take 001'].play();
+
+        // actionsBirdPoly['Take 001'].play();
 
         const canvas = gl.domElement;
         // canvas.addEventListener('pointermove', handleCloudClick);
@@ -122,7 +169,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
             document.removeEventListener('keydown', handleKeyDown);
             document.removeEventListener('keyup', handleKeyUp);
         }
-    }, [gl, handlePointerDown, handlePointerUp, handlePointerMove, actions, handleFireOpacity])
+    }, [gl, handlePointerDown, handlePointerUp, handlePointerMove, actions, actionsBird, handleFireOpacity])
 
 
     const handleKeyDown = (e) => {
@@ -204,239 +251,132 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
 
 
     return (
-        // 
-        // <a.group ref={group} {...props}>
-
-        //     <group name="Sketchfab_Scene">
-        //         <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
-        //             <group
-        //                 name="db63cf47b674497bb5667986891360e3fbx"
-        //                 rotation={[Math.PI / 2, 0, 0]}
-        //             >
-        //                 <group name="Object_2">
-        //                     <group name="RootNode">
-        //                         <group
-        //                             name="gtmfc_fire_1"
-        //                             position={[0, -0.044, 0]}
-        //                             rotation={[-Math.PI / 2, 0, 0]}
-        //                         >
-        //                             <group
-        //                                 name="fireA_005"
-        //                                 position={[0.014, 0, 0]}
-        //                                 scale={1.075}
-
-        //                             >
-        //                                 <mesh
-        //                                     name="fireA_005_fire_0"
-        //                                     castShadow
-        //                                     receiveShadow
-        //                                     geometry={nodes.fireA_005_fire_0.geometry}
-        //                                     material={materials.fire}
-        //                                     material-transparent
-        //                                     material-opacity={0.5}
-
-        //                                 />
-        //                             </group>
-        //                             <group
-        //                                 name="fireB_048"
-        //                                 position={[-0.007, 0, 0]}
-        //                                 scale={[0.419, 0.419, 0.422]}
-        //                             >
-        //                                 <mesh
-        //                                     name="fireB_048_fire_0"
-        //                                     castShadow
-        //                                     receiveShadow
-        //                                     geometry={nodes.fireB_048_fire_0.geometry}
-        //                                     material={materials.fire}
-        //                                 />
-        //                             </group>
-        //                             <group
-        //                                 name="fireB_047"
-        //                                 position={[0.081, -0.079, 0.032]}
-        //                                 rotation={[0.014, -0.052, 0.619]}
-        //                                 scale={[0.394, 0.394, 0.213]}
-        //                             >
-        //                                 <mesh
-        //                                     name="fireB_047_fire_0"
-        //                                     castShadow
-        //                                     receiveShadow
-        //                                     geometry={nodes.fireB_047_fire_0.geometry}
-        //                                     material={materials.fire}
-        //                                 />
-        //                             </group>
-        //                             <group
-        //                                 name="fireB_046"
-        //                                 position={[0.024, -0.087, 0.034]}
-        //                                 rotation={[0, 0, -1.638]}
-        //                                 scale={[0.339, 0.339, 0.153]}
-        //                             >
-        //                                 <mesh
-        //                                     name="fireB_046_fire_0"
-        //                                     castShadow
-        //                                     receiveShadow
-        //                                     geometry={nodes.fireB_046_fire_0.geometry}
-        //                                     material={materials.fire}
-        //                                 />
-        //                             </group>
-        //                             <group
-        //                                 name="fireB_045"
-        //                                 position={[0.005, -0.088, 0.232]}
-        //                                 rotation={[0, 0, 0.087]}
-        //                                 scale={[0.846, 0.846, 0.356]}
-        //                             >
-        //                                 <mesh
-        //                                     name="fireB_045_fire_0"
-        //                                     castShadow
-        //                                     receiveShadow
-        //                                     geometry={nodes.fireB_045_fire_0.geometry}
-        //                                     material={materials.fire}
-        //                                 />
-        //                             </group>
-        //                             <group
-        //                                 name="fireB_044"
-        //                                 position={[0.091, 0.018, 0.155]}
-        //                                 rotation={[0, 0, -0.295]}
-        //                                 scale={[0.621, 0.55, 0.755]}
-        //                             >
-        //                                 <mesh
-        //                                     name="fireB_044_fire_0"
-        //                                     castShadow
-        //                                     receiveShadow
-        //                                     geometry={nodes.fireB_044_fire_0.geometry}
-        //                                     material={materials.fire}
-        //                                 />
-        //                             </group>
-        //                             <group
-        //                                 name="fireB_043"
-        //                                 position={[0.081, -0.071, 0.045]}
-        //                                 rotation={[-0.046, -0.076, 0.672]}
-        //                                 scale={[0.696, 0.695, 0.733]}
-        //                             >
-        //                                 <mesh
-        //                                     name="fireB_043_fire_0"
-        //                                     castShadow
-        //                                     receiveShadow
-        //                                     geometry={nodes.fireB_043_fire_0.geometry}
-        //                                     material={materials.fire}
-        //                                 />
-        //                             </group>
-        //                             <group
-        //                                 name="smoke_087"
-        //                                 position={[0.017, -0.085, 0.735]}
-        //                                 rotation={[0.232, -0.591, -0.034]}
-        //                                 scale={[0.294, 0.283, 0.294]}
-        //                             >
-        //                                 <mesh
-        //                                     name="smoke_087_fire_0"
-        //                                     castShadow
-        //                                     receiveShadow
-        //                                     geometry={nodes.smoke_087_fire_0.geometry}
-        //                                     material={materials.fire}
-        //                                 />
-        //                             </group>
-        //                             <group
-        //                                 name="smoke_086"
-        //                                 position={[-0.038, -0.082, 1.763]}
-        //                                 rotation={[1.413, 0.981, -1.387]}
-        //                                 scale={[0.326, 0.455, 0.455]}
-        //                             >
-        //                                 <mesh
-        //                                     name="smoke_086_fire_0"
-        //                                     castShadow
-        //                                     receiveShadow
-        //                                     geometry={nodes.smoke_086_fire_0.geometry}
-        //                                     material={materials.fire}
-        //                                 />
-        //                             </group>
-        //                             <group
-        //                                 name="smoke_085"
-        //                                 position={[-0.014, 0.079, 0.96]}
-        //                                 rotation={[1.009, 0.156, 0.514]}
-        //                                 scale={[0.683, 0.405, 0.697]}
-        //                             >
-        //                                 <mesh
-        //                                     name="smoke_085_fire_0"
-        //                                     castShadow
-        //                                     receiveShadow
-        //                                     geometry={nodes.smoke_085_fire_0.geometry}
-        //                                     material={materials.fire}
-        //                                 />
-        //                             </group>
-        //                             <group
-        //                                 name="smoke_084"
-        //                                 position={[0.009, -0.037, 1.071]}
-        //                                 rotation={[0.246, 0.514, 1.049]}
-        //                                 scale={[0.328, 0.498, 0.498]}
-        //                             >
-        //                                 <mesh
-        //                                     name="smoke_084_fire_0"
-        //                                     castShadow
-        //                                     receiveShadow
-        //                                     geometry={nodes.smoke_084_fire_0.geometry}
-        //                                     material={materials.fire}
-        //                                 />
-        //                             </group>
-        //                             <group
-        //                                 name="fireB_042"
-        //                                 position={[0.033, -0.028, 0.008]}
-        //                                 rotation={[0, 0, 1.212]}
-        //                                 scale={[0.847, 0.847, 0.481]}
-        //                             >
-        //                                 <mesh
-        //                                     name="fireB_042_fire_0"
-        //                                     castShadow
-        //                                     receiveShadow
-        //                                     geometry={nodes.fireB_042_fire_0.geometry}
-        //                                     material={materials.fire}
-        //                                 />
-        //                             </group>
-        //                             <group
-        //                                 name="smoke_083"
-        //                                 position={[0.15, 0.217, 0.638]}
-        //                                 rotation={[0.615, -0.098, 1.014]}
-        //                                 scale={[0.29, 0.289, 0.29]}
-        //                             >
-        //                                 <mesh
-        //                                     name="smoke_083_fire_0"
-        //                                     castShadow
-        //                                     receiveShadow
-        //                                     geometry={nodes.smoke_083_fire_0.geometry}
-        //                                     material={materials.fire}
-        //                                 />
-        //                             </group>
-        //                             <group
-        //                                 name="fireB_041"
-        //                                 position={[0.109, -0.084, 0.034]}
-        //                                 rotation={[0, 0, -1.437]}
-        //                                 scale={[0.339, 0.339, 0.153]}
-        //                             >
-        //                                 <mesh
-        //                                     name="fireB_041_fire_0"
-        //                                     castShadow
-        //                                     receiveShadow
-        //                                     geometry={nodes.fireB_041_fire_0.geometry}
-        //                                     material={materials.fire}
-        //                                 />
-        //                             </group>
-        //                         </group>
-        //                     </group>
-        //                 </group>
-        //             </group>
-        //         </group>
-        //     </group>
-        // </a.group>
-
-
-
-
 
         <a.group ref={islandRef} {...props}>
 
             <group
                 // scale={0.07}
                 position={[0, 0, 0]}
-                rotation={[0, 0.6, 0]}
-            >
+                rotation={[0, 0.6, 0]}>
+
+                {/* BIRD POLY /////////////////////////////////// */}
+                <group name="Sketchfab_Scene">
+                    <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
+                        <group
+                            name="b41216c5de024b378dcea87d8b695888fbx"
+                            // rotation={[Math.PI / 2, 2, 0]}
+                            rotation={[1, 2, 0]}
+                            position={[-20, 10, 15]}
+                            scale={1}
+                            onClick={handleBirdClick}
+                            onPointerDown={handleBirdClick}
+
+                        >
+                            <group name="Object_2">
+                                <group name="RootNode">
+                                    <group
+                                        name="FlyingBird"
+                                        // position={[-0.003, 0.079, 0.074]}
+                                        rotation={[2.922, -0.036, 3.134]}
+                                    >
+                                        <group
+                                            name="Bird"
+                                            position={[0.064, 0.146, 0.587]}
+                                            scale={0.104}
+                                        >
+                                            <mesh
+                                                name="Bird_roll_env_07lambert10_0"
+                                                castShadow
+                                                receiveShadow
+                                                geometry={nodesBirdPoly.Bird_roll_env_07lambert10_0.geometry}
+                                                material={materialsBirdPoly.roll_env_07lambert10}
+                                                material-transparent={true}
+                                                material-opacity={birdOpacity}
+                                            // material-color={'#9c5d98'}
+                                            // material-color={'#cfae55'}
+                                            />
+                                        </group>
+                                        <group
+                                            name="Bird_RW"
+                                            position={[-0.057, 0.196, 0.349]}
+                                            rotation={[-0.066, -0.051, 0.025]}
+                                            scale={0.104}
+                                        >
+                                            <mesh
+                                                name="Bird_RW_roll_env_07fishMaterialSG1_0"
+                                                castShadow
+                                                receiveShadow
+                                                geometry={
+                                                    nodesBirdPoly.Bird_RW_roll_env_07fishMaterialSG1_0.geometry
+                                                }
+                                                material={materialsBirdPoly.roll_env_07fishMaterialSG1}
+                                                material-transparent={true}
+                                                material-opacity={birdOpacity}
+                                            />
+                                        </group>
+                                        <group
+                                            name="Bird_LW"
+                                            position={[-0.057, 0.196, 0.349]}
+                                            rotation={[-0.09, -0.046, -3.105]}
+                                            scale={0.104}
+                                        >
+                                            <mesh
+                                                name="Bird_LW_roll_env_07fishMaterialSG1_0"
+                                                castShadow
+                                                receiveShadow
+                                                geometry={
+                                                    nodesBirdPoly.Bird_LW_roll_env_07fishMaterialSG1_0.geometry
+                                                }
+                                                material={materialsBirdPoly.roll_env_07fishMaterialSG1}
+                                                material-transparent={true}
+                                                material-opacity={birdOpacity} />
+                                        </group>
+                                    </group>
+                                </group>
+                            </group>
+                        </group>
+                    </group>
+                </group>
+
+
+
+
+                {/* BIRD///////////////////////////////////// */}
+                {/* <group name="Sketchfab_Scene">
+                    <group name="Sketchfab_model"
+                        rotation={[-Math.PI / 2, 0, 0]}
+                        position={[-15, 0, 5]}
+                        scale={[0.1, 0.1, 0.1]}
+                    >
+                        <group name="birdFBX"
+                            rotation={[Math.PI / 2, 0, 0]}
+                        >
+                            <group name="Object_2">
+                                <group name="RootNode">
+                                    <group name="Object_4">
+                                        <primitive object={nodesBird._rootJoint} />
+                                        <skinnedMesh
+                                            name="Object_7"
+                                            geometry={nodesBird.Object_7.geometry}
+                                            material={materialsBird["01_-_Default"]}
+                                            skeleton={nodesBird.Object_7.skeleton}
+                                            material-opacity={birdOpacity}
+                                            material-transparent={true}
+
+                                        />
+                                        <group name="Object_6" rotation={[-Math.PI / 2, 0, 0]} />
+                                        <group name="Box002" rotation={[-Math.PI / 2, 0, 0]} />
+                                    </group>
+                                </group>
+                            </group>
+                        </group>
+                    </group>
+                </group> */}
+
+
+
+
+
                 {/* FIRE /////////////////////////////////////////// */}
 
                 <group name="Sketchfab_Scene">
@@ -456,7 +396,6 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                     <group
                                         name="gtmfc_fire_1"
                                         position={[0, -0.044, 0]}
-
                                         rotation={[-Math.PI / 2, 0, 0]}
                                     >
                                         <group
@@ -705,7 +644,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                     position={[0, 0, 0]}
                     rotation={[0, 0.6, 0]}
                 >
-                    <mesh
+                    <mesh  // ROCK BOTTOM
                         castShadow
                         receiveShadow
                         geometry={nodes.Cylinder_Material_0.geometry}
@@ -714,7 +653,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                         rotation={[-Math.PI / 2, 0, -0.946]}
                         scale={[350, 350, 140]}
                     />
-                    <mesh
+                    <mesh // GREEN SURFACE
                         castShadow
                         receiveShadow
                         geometry={nodes.Cylinder001_Material_0.geometry}
@@ -733,7 +672,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                         scale={[10.774, 10.895, 9.406]}
                     // onClick={handleFireOpacity}
                     />
-                    <mesh
+                    <mesh // 4TH TREE FROM LEFT
                         castShadow
                         receiveShadow
                         geometry={nodes.Cylinder002_Material_0.geometry}
@@ -742,7 +681,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                         rotation={[-Math.PI / 2, 0, 0]}
                         scale={[14.975, 14.975, 43.025]}
                     />
-                    <mesh
+                    <mesh // 2ND TREE
                         castShadow
                         receiveShadow
                         geometry={nodes.Cylinder003_Material_0.geometry}
@@ -751,7 +690,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                         rotation={[-Math.PI / 2, 0, 0]}
                         scale={[12.135, 12.135, 34.867]}
                     />
-                    <mesh
+                    <mesh // 5TH TREE
                         castShadow
                         receiveShadow
                         geometry={nodes.Cylinder004_Material_0.geometry}
@@ -760,7 +699,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                         rotation={[-Math.PI / 2, 0, 0.744]}
                         scale={[9.632, 9.632, 27.675]}
                     />
-                    <mesh
+                    <mesh // 1ST TREE
                         castShadow
                         receiveShadow
                         geometry={nodes.Cylinder005_Material_0.geometry}
@@ -769,7 +708,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                         rotation={[-Math.PI / 2, 0, 0.708]}
                         scale={[9.239, 9.239, 26.546]}
                     />
-                    <mesh
+                    <mesh // 6TH TREE
                         castShadow
                         receiveShadow
                         geometry={nodes.Cylinder006_Material_0.geometry}
@@ -778,7 +717,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                         rotation={[-Math.PI / 2, 0, -0.518]}
                         scale={[11.545, 11.545, 33.172]}
                     />
-                    <mesh
+                    <mesh // 3RD TREE
                         castShadow
                         receiveShadow
                         geometry={nodes.Cylinder007_Material_0.geometry}
@@ -786,8 +725,10 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                         position={[-109.699, 52.569, -261.662]}
                         rotation={[-Math.PI / 2, 0, -2.874]}
                         scale={[15.706, 15.706, 45.125]}
+                        onClick={handleTreeClick}
+                        onPointerDown={handleTreeClick}
                     />
-                    <mesh
+                    <mesh // THE TREE LOG
                         castShadow
                         receiveShadow
                         geometry={nodes.Cylinder008_Material_0.geometry}
@@ -804,7 +745,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                         position={[92.614, 52.903, 165.46]}
                         rotation={[-Math.PI / 2, 0, 0.023]}
                         // scale={[2.332, 2.332, 29.523]} // original
-                        scale={[2.332 * 1, 2.332, 29.523 * 1]} //
+                        scale={[2.332 * 1.2, 2.332, 29.523 * 1.1]} //
                     />
                     <mesh // FIREWOOD
                         castShadow
@@ -819,14 +760,14 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                         onPointerDown={handleFireOpacity}
 
                     />
-                    <mesh
+                    <mesh // BLUE SHROOM
                         castShadow
                         receiveShadow
                         geometry={nodes.Cylinder010_Material_0.geometry}
                         material={materials.Material}
                         position={[220.728, 24.928, -79.14]}
                         rotation={[-Math.PI / 2, 0, 0]}
-                        scale={[3.464, 3.464, 6.539]}
+                        scale={[3.464, 3.464, 16.539]}
                     />
                     <mesh
                         castShadow
