@@ -75,15 +75,11 @@ const Contact = () => {
     const handleRaccoonClick = () => {
         console.log('shadow position', shadowPosition)
 
-        // Open Google.com in a new tab
-        // setCurrentAnimation('GetHit_Front_Right_2');
-        setCurrentAnimation('GetHit_Front_Left_2');
+        setCurrentAnimation('GetHit_Front_Left_2'); // CURRENT
+        // setCurrentAnimation('Roll');
         // setCurrentAnimation('Attack_Arms');
         // setCurrentAnimation('Jump_In_Place');
-        // setTimeout(() => {
-        //     // window.open('https://www.google.com', '_blank');
-        //     // setCurrentAnimation('Action_Eat');
-        // }, 1500);
+
 
         setTimeout(() => {
             setCurrentAnimation('Action_Eat');
@@ -124,29 +120,35 @@ const Contact = () => {
 
     const [raccoonScale, raccoonPosition, shadowPosition] = adjustRaccoonForScreenSize();
 
+    // socialLinks.
 
     return (
         <section className='relative flex lg:flex-row flex-col max-container'>
 
             {/* SOCIAL LINKS */}
             {/* <div className='py-10 flex flex-col'> */}
-            <div className='flex-1 min-w-[50%] flex flex-col relative z-0 bg-transparent'>
+            <div className='flex-1 min-w-[50%] flex flex-col relative z-10'>
                 <h1 className='head-text'>Get in Touch</h1>
 
                 <div className='mt-16 flex flex-wrap gap-12'>
                     {socialLinks.map((social) => (
-
+                        // <div className='block-container w-20 h-20' key={social.name}>
                         <div className='block-container w-20 h-20' key={social.name}>
+
+                            <div className='btn-back rounded-xl' />
                             <a href={social.link} target="_blank" rel="noopener noreferrer">
-                                <div className='btn-back rounded-xl' />
+
                                 <div className='btn-front rounded-xl flex justify-center items-center'>
+
                                     <img
                                         src={social.iconUrl}
                                         alt={social.name}
                                         className='w-1/2 h-1/2 object-contain'
                                     />
+
                                 </div>
                             </a>
+
                         </div>
                     ))}
                 </div>
@@ -231,7 +233,7 @@ const Contact = () => {
 
             {/* Raccoon */}
             {/* <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px] relative' */}
-            <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px] relative'
+            <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px] relative z-20'
             // style={{ position: 'absolute', top: '50px', left: '50px', zIndex: '100' }}
             // style={{ zIndex: 1 }}
             >

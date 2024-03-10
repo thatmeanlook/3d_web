@@ -31,8 +31,10 @@ import python from './python.png'
 import oo7 from './007.png'
 import user from './user.png'
 // import user from './user.svg'
+import gmail from './gmail.png'
 
 export {
+    gmail,
     user,
     oo7,
     css,

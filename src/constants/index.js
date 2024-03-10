@@ -27,7 +27,8 @@ import {
     typescript,
     three,
     python,
-    oo7
+    oo7,
+    gmail
 } from "../assets/icons";
 
 export const skills = [
@@ -198,7 +199,7 @@ export const educations = [
 export const socialLinks = [
     {
         name: 'Contact',
-        iconUrl: contact,
+        iconUrl: gmail,
         // link: '/contact',
         link: 'mailto:MinhLucArt@gmail.com',
     },
