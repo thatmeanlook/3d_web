@@ -376,7 +376,8 @@ const Home = () => {
                         <directionalLight
                             // color={0xffffff}
                             color={'#fcb849'} //current Yellow/Orange
-                            intensity={.8}
+                            // intensity={.8}
+                            intensity={1}
                             position={[0, 1, 0]}
                             castShadow:true
                         />
@@ -394,7 +395,8 @@ const Home = () => {
 
                     {showPlane &&
                         <ambientLight
-                            intensity={0.12}
+                            intensity={0.2}
+                            // intensity={0.12}
                             color='white'
                         />
                     }

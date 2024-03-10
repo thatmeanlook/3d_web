@@ -447,8 +447,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                             // rotation={[Math.PI / 2, 0, 0]}
                             position={[10, -3, 2]}
                             // scale={[10, 10, 10]}
-                            // scale={[20, 20, 20]}
-                            scale={[7, 7, 7]}
+                            scale={[8, 8, 8]}
+                        // scale={[7, 7, 7]}
                         // scale={[5, 5, 5]}
                         >
                             <group name="Object_2">
@@ -474,7 +474,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 material-transparent
                                                 material-opacity={fireOpacity}
                                             // material={glowGreen}
-                                            // material-color={'blue'}
+                                            // material-color={'#fa9c0f'}
+                                            // material-color={'orange'}
 
                                             />
                                         </group>
@@ -490,6 +491,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 geometry={nodes2.fireB_048_fire_0.geometry}
                                                 material={materials2.fire}
                                                 material-opacity={fireOpacity}
+                                            // material-color={'red'}
 
                                             />
                                         </group>
@@ -506,6 +508,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 geometry={nodes2.fireB_047_fire_0.geometry}
                                                 material={materials2.fire}
                                                 material-opacity={fireOpacity}
+                                            // material-color={'red'}
 
                                             />
                                         </group>
@@ -800,7 +803,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                         material={materials.Material}
                         position={[92.614, 52.903, 165.46]}
                         rotation={[-Math.PI / 2, 0, 0.023]}
-                        scale={[2.332, 2.332, 29.523]}
+                        // scale={[2.332, 2.332, 29.523]} // original
+                        scale={[2.332 * 1, 2.332, 29.523 * 1]} //
                     />
                     <mesh // FIREWOOD
                         castShadow
@@ -809,6 +813,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                         material={materials.Material}
                         position={[103.392, 36.69, 103.377]}
                         rotation={[0.416, -0.613, 0.372]}
+                        // scale={[5.848, 5.867, 15.466]} // ORIGINAL
                         scale={[5.848, 5.867, 15.466]}
                         onClick={handleFireOpacity}
                         onPointerDown={handleFireOpacity}
@@ -896,7 +901,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                         material={materials.Material}
                         position={[104.184, 66.958, 112.02]}
                         rotation={[-Math.PI / 2, 0, -0.195]}
-                        scale={3.407}
+                        // scale={3.407} // ORIGINAL
+                        scale={3.407 * 1.2} // ORIGINAL
                         onClick={handleFireOpacity}
                         onPointerDown={handleFireOpacity}
 
