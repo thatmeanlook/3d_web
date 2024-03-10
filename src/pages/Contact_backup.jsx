@@ -127,34 +127,10 @@ const Contact = () => {
 
     return (
         <section className='relative flex lg:flex-row flex-col max-container'>
-
-            {/* SOCIAL LINKS */}
-            {/* <div className='py-10 flex flex-col'> */}
-            <div className='flex-1 min-w-[50%] flex flex-col relative z-0 bg-transparent'>
-                <h1 className='head-text'>Get in Touch</h1>
-
-                <div className='mt-16 flex flex-wrap gap-12'>
-                    {socialLinks.map((social) => (
-
-                        <div className='block-container w-20 h-20' key={social.name}>
-                            <a href={social.link} target="_blank" rel="noopener noreferrer">
-                                <div className='btn-back rounded-xl' />
-                                <div className='btn-front rounded-xl flex justify-center items-center'>
-                                    <img
-                                        src={social.iconUrl}
-                                        alt={social.name}
-                                        className='w-1/2 h-1/2 object-contain'
-                                    />
-                                </div>
-                            </a>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
+            {/* <section className='relative flex lg:flex-row flex-col max-container'> */}
 
             {/* message box */}
-            {/* <div className='flex-1 min-w-[50%] flex flex-col relative z-0 bg-transparent'>
+            <div className='flex-1 min-w-[50%] flex flex-col relative z-0 bg-transparent'>
                 <h1 className='head-text'>Get in Touch</h1>
                 <form
                     className='w-full flex flex-col gap-5 mt-10'
@@ -227,10 +203,9 @@ const Contact = () => {
                     </button>
 
                 </form>
-            </div> */}
+            </div>
 
             {/* Raccoon */}
-            {/* <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px] relative' */}
             <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px] relative'
             // style={{ position: 'absolute', top: '50px', left: '50px', zIndex: '100' }}
             // style={{ zIndex: 1 }}
@@ -300,9 +275,7 @@ const Contact = () => {
 
 
 
-                {/* <div className=' bg-slate-300/20 ' */}
-                {/* <div className=' bg-black-500 w-full h-[100px] '
-                >
+                <div className=' bg-slate-300/20'>
                     <footer style={{
                         position: 'absolute',
                         bottom: 0, width: '100%',
@@ -321,7 +294,7 @@ const Contact = () => {
                             }}
                         >MinhLucArt@gmail.com</p>
                     </footer>
-                </div> */}
+                </div>
 
             </div>
 
