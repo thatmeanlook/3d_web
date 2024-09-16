@@ -91,7 +91,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
 
     const handleBirdClick = () => {
 
-        window.open('https://youtu.be/hiwgOWo7mDc?si=ppFvsBFkXo1BVBS6', '_blank');
+        window.open('https://thatmeanlook.github.io/dino-run/', '_blank');
     }
 
     const lastX = useRef(0);

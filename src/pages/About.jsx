@@ -18,13 +18,15 @@ const About = () => {
 
             <div className='mt-5 flex flex-col gap-3 text-slate-500'>
                 <p>
-                    A senior student at UC San Diego and an aspiring Frontend Engineer.
+                    A recent graduate from UC San Diego and an aspiring Frontend Developer.
+                    Skilled in HTML, CSS, JavaScript, and React, with hands-on experience building responsive web applications.
+                    Strong focus on delivering high-quality UX, writing maintainable code, and problem-solving.
 
                 </p>
             </div>
 
             <div className='py-10 flex flex-col'>
-                <h3 className='subhead-text'>My Skills</h3>
+                <h3 className='subhead-text'>Skills</h3>
 
                 <div className='mt-16 flex flex-wrap gap-12'>
                     {skills.map((skill) => (
@@ -60,12 +62,17 @@ const About = () => {
                                 date={experience.date}
                                 iconStyle={{ background: experience.iconBg }}
                                 icon={
-                                    <div className='flex justify-center items-center w-full h-full'>
-                                        <img
-                                            src={experience.icon}
-                                            alt={experience.company_name}
-                                            className='w-[100%] h-[100%] object-contain'
-                                        />
+                                    <div className='flex justify-center items-center w-full h-full transform transition-transform duration-300 hover:scale-110'>
+                                        <a href={experience.company_link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <img
+                                                src={experience.icon}
+                                                alt={experience.company_name}
+                                                className='w-[100%] h-[100%] object-contain'
+                                            />
+                                        </a>
                                     </div>
                                 }
                                 contentStyle={{
@@ -79,12 +86,25 @@ const About = () => {
                                     <h3 className='text-black text-xl font-poppins font-semibold'>
                                         {experience.title}
                                     </h3>
-                                    <p
+
+                                    <a
+                                        href={experience.company_link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className='text-black-500 font-medium text-base underline hover:text-blue-800'
+                                    >
+                                        {experience.company_name}
+                                    </a>
+
+                                    {/* ORIGINAL COMPANY NAME */}
+                                    {/* <p
                                         className='text-black-500 font-medium text-base'
                                         style={{ margin: 0 }}
                                     >
                                         {experience.company_name}
-                                    </p>
+                                    </p> */}
+
+
                                 </div>
 
                                 <ul className='my-5 list-disc ml-5 space-y-2'>
@@ -153,8 +173,14 @@ const About = () => {
                                     >
                                         {education.company_name}
                                     </p>
+                                    {/* Second major */}
+                                    <p
+                                        className='text-black-500 font-medium text-base'
+                                        style={{ margin: 0 }}
+                                    >
+                                        {education.company_name_2}
+                                    </p>
                                 </div>
-
 
                             </VerticalTimelineElement>
                         ))}

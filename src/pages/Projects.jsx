@@ -17,16 +17,9 @@ const Projects = () => {
 
             </h1>
 
-            <div className='mt-5 flex flex-col gap-3 text-slate-500'>
-                {/* <p>
-                    What I have worked on
-                </p> */}
-            </div>
-
-
-            <div className='flex flex-wrap my-20 gap-16'>
+            <div className='flex flex-wrap my-20 gap-8'>
                 {projects.map((project) => (
-                    <div className='lg:w-[400px] w-full' key={project.name}>
+                    <div className='lg:w-[400px] w-full bg-white p-6 rounded-lg shadow-lg' key={project.name}>
                         <div className='block-container w-12 h-12'>
                             <div className={`btn-back rounded-xl ${project.theme}`} />
                             <div className='btn-front rounded-xl flex justify-center items-center'>
@@ -41,6 +34,16 @@ const Projects = () => {
                                 {project.name}
                             </h4>
 
+                            <p>
+                                {project.info} |
+                                <a href={project.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className='text-black-500 font-medium text-base underline hover:text-blue-800 ml-2'>
+                                    Link
+                                </a>
+                            </p>
+
                             <p className='mt-2 text-slate-500'>
                                 {project.description}
                             </p>
@@ -49,19 +52,10 @@ const Projects = () => {
                                 {project.tech}
                             </p>
 
-                            {/* <ul className='my-5 list-disc ml-5 space-y-2'>
-                                {project.points.map((point, index) => (
-                                    <li
-                                        key={`project-point-${index}`}
-                                        className='text-black-500/50 font-poppins'
-                                    // className='text-black-500/50 font-normal pl-1 font-poppins'
-                                    >
-                                        {point}
-                                    </li>
-                                ))}
-                            </ul> */}
 
-                            <div className='mt-5 flex items-center gap-2 font-poppins'>
+
+                            {/* LIVE LINK BUTTON */}
+                            {/* <div className='mt-5 flex items-center gap-2 font-poppins'>
                                 <Link
                                     to={project.link}
                                     target="_blank"
@@ -76,7 +70,8 @@ const Projects = () => {
                                     alt="Arrow"
                                     className='w-4 h-4 object-contain' />
 
-                            </div>
+                            </div> */}
+
                         </div>
 
                     </div>

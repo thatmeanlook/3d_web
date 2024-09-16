@@ -32,8 +32,10 @@ import oo7 from './007.png'
 import user from './user.png'
 // import user from './user.svg'
 import gmail from './gmail.png'
+import eth from './eth.png'
 
 export {
+    eth,
     gmail,
     user,
     oo7,
