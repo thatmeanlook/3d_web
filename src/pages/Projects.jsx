@@ -20,6 +20,7 @@ const Projects = () => {
             <div className='flex flex-wrap my-20 gap-8'>
                 {projects.map((project) => (
                     <div className='lg:w-[400px] w-full bg-white p-6 rounded-lg shadow-lg' key={project.name}>
+                        {/* <div className='lg:w-[400px] w-full bg-white p-6 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-110' key={project.name}> */}
                         <div className='block-container w-12 h-12'>
                             <div className={`btn-back rounded-xl ${project.theme}`} />
                             <div className='btn-front rounded-xl flex justify-center items-center'>

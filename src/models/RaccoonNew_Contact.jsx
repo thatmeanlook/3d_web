@@ -26,7 +26,7 @@ const RaccoonNew = ({ currentAnimation, ...props }) => {
     const mixer = useRef();
 
     useEffect(() => {
-        // console.log(actions);
+        console.log(actions);
         // console.log('raccoon action', actions.Action_Crawl)
         const mixerInstance = new AnimationMixer(group.current);
         mixer.current = mixerInstance;

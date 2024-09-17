@@ -17,7 +17,8 @@ const Contact = () => {
     const [form, setForm] = useState({ name: '', email: '', message: '' })
     const [isLoading, setIsLoading] = useState(false);
 
-    const [currentAnimation, setCurrentAnimation] = useState('Lie_Idle_2'); // for New Raccoon
+    const [currentAnimation, setCurrentAnimation] = useState('idle'); // for New Raccoon
+    // const [currentAnimation, setCurrentAnimation] = useState('Lie_Idle_2'); // for New Raccoon
     // const [currentAnimation, setCurrentAnimation] = useState('Idle_Look_Left'); // for New Raccoon
 
     const handleChange = (e) => {
@@ -77,15 +78,16 @@ const Contact = () => {
     const handleRaccoonClick = () => {
         console.log('shadow position', shadowPosition)
 
-        setCurrentAnimation('GetHit_Front_Left_2'); // CURRENT
+        setCurrentAnimation('Idle_Look_Left'); // CURRENT
+        // setCurrentAnimation('GetHit_Front_Left_2'); 
         // setCurrentAnimation('Roll');
         // setCurrentAnimation('Attack_Arms');
         // setCurrentAnimation('Jump_In_Place');
 
-
         setTimeout(() => {
-            setCurrentAnimation('Action_Eat');
-        }, 1500); // for GetHit_Front_Left_2
+            setCurrentAnimation('idle');
+        }, 2850); // for idle
+        // }, 1500); // for GetHit_Front_Left_2
         // }, 1250); // Attack_Arms
         // }, 1200); // for Jump
     };
@@ -105,13 +107,10 @@ const Contact = () => {
             }
 
         } else {
-            screenScale = [0.1, 0.1, 0.1] // raccoon
+            screenScale = [0.08, 0.08, 0.08] // raccoon
             screenPosition = [2, -3, -5];
-            // shadowPosition = [0, -3, 0]; // racccoon
-
             if (currentAnimation == 'Lie_Idle_2') {
                 shadowPosition = [0.05, -3.3, -0.1]; // racccoon
-
             } else {
                 console.log('hereeeeeeeeee')
                 shadowPosition = [0, -3.3, 0]; // racccoon
@@ -235,7 +234,8 @@ const Contact = () => {
 
             {/* Raccoon */}
             {/* <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px] relative' */}
-            <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px] relative z-20'
+            <div className='lg:w-1/2 w-full lg:h-[550px] md:h-[450px] h-[350px] relative z-20'
+            // <div className='lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px] relative z-20'
             // style={{ position: 'absolute', top: '50px', left: '50px', zIndex: '100' }}
             // style={{ zIndex: 1 }}
             >
@@ -279,7 +279,8 @@ const Contact = () => {
                         <RaccoonNew_Contact
                             currentAnimation={currentAnimation}
                             position={raccoonPosition}
-                            rotation={[0, -19.5, 0]} // for Lie_Idle_2
+                            rotation={[0, -20, 0]} // for idle
+                            // rotation={[0, -19.5, 0]} // for Lie_Idle_2
                             // rotation={[0, -1.8, 0]} // for Idle_Look_Left
                             scale={raccoonScale}
                             // scale={[0.1, 0.1, 0.1]}
@@ -303,9 +304,24 @@ const Contact = () => {
 
                 </Canvas>
 
+                <div>
+                    <footer
+                        style={{
+                            position: 'absolute',
+                            bottom: 0, width: '100%',
+                            textAlign: 'center',
+                            font: 4,
+                            paddingTop: '100px',
+                            // color: '',
+                        }}
+                    >
+                        <p>MinhLucArt@gmail.com</p>
+                    </footer>
+                </div>
 
 
                 {/* <div className=' bg-slate-300/20 ' */}
+
                 {/* <div className=' bg-black-500 w-full h-[100px] '
                 >
                     <footer style={{

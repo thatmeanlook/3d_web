@@ -175,7 +175,7 @@ export const experiences = [
         // icon: movie,
         icon: film,
         // icon: cruise,
-        iconBg: "#ABD4F8",
+        iconBg: "#627c85",
         date: "Jan 2017 - March 2020",
         points: [
 

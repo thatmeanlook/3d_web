@@ -23,7 +23,7 @@ const renderContent = {
         neo-brutalism-blue py-4 px-8 text-white mx-5'>
             Hi, I'm <span className='font-semibold'>Minh</span>👋
             <br />
-            A Frontend Engineer based in California
+            A Frontend Developer based in California
             {/* A recent grad from UC San Diego and an aspiring Frontend Engineer. */}
             {/* A Frontend Engineer from San Diego. */}
         </h1>
@@ -42,7 +42,7 @@ const renderContent = {
     ),
     4: (
         <InfoBox
-            text="Looking for a Frontend Engineer?"
+            text="Looking for a Frontend Developer?"
             link='/contact'
             btnText="Let's talk" />
     )

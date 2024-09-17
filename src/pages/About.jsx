@@ -13,7 +13,7 @@ const About = () => {
                     {" "}
                     Minh
                 </span>{" "}
-                👋
+                {/* 👋 */}
             </h1>
 
             <div className='mt-5 flex flex-col gap-3 text-slate-500'>
