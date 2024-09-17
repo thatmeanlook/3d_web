@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import ballonScene from '../assets/3d/balloonBlue.glb'
 import { useFrame } from "@react-three/fiber";
@@ -8,6 +8,9 @@ const BalloonBlue = ({ toggleShowPlane }) => {
     const ref = useRef();
     const { scene, animations } = useGLTF(ballonScene);
     const { actions } = useAnimations(animations, ref);
+
+    // set variable to track if the balloon is clicked or not
+    const [isBalloonClicked, setIsBalloonClicked] = useState(false);
 
     const adjustBalloonForScreenSize = () => {
         let position;
@@ -35,7 +38,22 @@ const BalloonBlue = ({ toggleShowPlane }) => {
         // actions['Action'].play();
     }, []);
 
+    useEffect(() => {
+        // reset the balloon clicked back to false after 3s
+        if (isBalloonClicked) {
+            const timer = setTimeout(() => {
+                setIsBalloonClicked(false);
+            }, 3000);
+
+            // Cleanup the timer if the component is unmounted or `isClicked` changes before 3 seconds
+            return () => clearTimeout(timer);
+        }
+    }, [isBalloonClicked]);
+
+    console.log('is balloon clicked:', isBalloonClicked)
+
     const handleBalloonClick = () => {
+        setIsBalloonClicked(true);
         toggleShowPlane();
         // Open Google.com in a new tab
         // window.open("https://www.google.com", "_blank");
@@ -44,6 +62,12 @@ const BalloonBlue = ({ toggleShowPlane }) => {
     useFrame(({ clock, camera }) => {
         // Update the Y position to simulate balloon-like motion using a sine wave
         ref.current.position.y = Math.sin(clock.elapsedTime) * 0.2 + 4;
+        // const balloonY = Math.sin(clock.elapsedTime) * 0.2 + 4;
+
+        // if (isBalloonClicked) {
+        //     balloonY = ref.current.position.y + 1;
+        // }
+        // ref.current.position.y = balloonY;
 
         // Check if the balloon reached a certain endpoint relative to the camera
         if (ref.current.position.x > camera.position.x + 10) {

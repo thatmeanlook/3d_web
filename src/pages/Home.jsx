@@ -52,7 +52,8 @@ const Home = () => {
         if (!clickDisabled) {
             setShowPlane(prevState => !prevState); // Toggle the value of showBird
             setClickDisabled(true); // Disable click temporarily
-            setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
+            setTimeout(() => setClickDisabled(false), 1000); // current
+            // setTimeout(() => setClickDisabled(false), 500); // current
         }
 
     };
@@ -61,7 +62,7 @@ const Home = () => {
     /// TOGGLE BIRD ON OFF -- 
     const toggleShowBird = () => {
         if (!clickDisabled) {
-            setShowBird(prevState => !prevState); // Toggle the value of showPlane
+            setShowBird(prevState => !prevState); // Toggle the value of showBird
             setClickDisabled(true); // Disable click temporarily
             setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
         }
@@ -144,7 +145,7 @@ const Home = () => {
 
         // if (window.innerWidth < 768) {
         if (window.innerWidth < 700) {
-            screenScale = [0.63, 0.63, 0.63];
+            screenScale = [0.75, 0.75, 0.75];
             // const w = window.innerWidth;
             // screenScale = [w, w, w]
 
@@ -163,9 +164,11 @@ const Home = () => {
         if (window.innerWidth < 700) {
             screenScale = [0.011, 0.011, 0.011] // racoon
             // screenScale = [0.2, 0.2, 0.2]; // Alpaca
-            screenPosition = [0, -1.1, 0];// raccoon
+            screenPosition = [0, -1.28, 0];// raccoon current
+            // screenPosition = [0, -1.1, 0];// raccoon current
             // screenPosition = [0, -1.5, 0];// Alpaca
-            shadowPosition = [0, -1.12, 0]; // racccoon
+            shadowPosition = [0, -1.28, 0]; // racccoon current
+            // shadowPosition = [0, -1.12, 0]; // racccoon current
             // shadowPosition = [0, -1.5, 0]; // Alpaca
             pointLightPower = 50;
 
@@ -326,8 +329,8 @@ const Home = () => {
 
 
 
-
-                    {/* <Balloon // VERY STABLE AND RELIABLE
+                    {/* 
+                    <Balloon // VERY STABLE AND RELIABLE
                         // onClick={handleBalloonClick}
                         toggleShowPlane={toggleShowPlane}
                         clickDisabled={clickDisabled}
@@ -344,6 +347,7 @@ const Home = () => {
                         toggleShowPlane={toggleShowPlane}
                         clickDisabled={clickDisabled}
                         setClickDisabled={setClickDisabled}
+
                     />
 
                     {/* <BalloonRed
@@ -351,6 +355,8 @@ const Home = () => {
                     /> */}
 
 
+
+                    {/* NIGHT SKY */}
                     {!showPlane &&
                         <Sky_Land isRotating={isRotating}
                         // scale={[0.5, 0.5, 0.5]}
@@ -391,6 +397,9 @@ const Home = () => {
                         // scale={[10, 10, 10]}
                         />
                     }
+
+
+
 
                     <Island
                         // scale={[1, 1, 1]}
