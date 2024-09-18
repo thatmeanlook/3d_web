@@ -19,7 +19,7 @@ import { a } from '@react-spring/three'
 import { user } from "../assets/icons";
 import { MeshBasicMaterial, Color } from "three";
 
-import zachScene from '../assets/3d/zach.glb'
+import zachScene from '../assets/3d/zachCopy.glb'
 
 const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleShowPlane, toggleShowBird, ...props }) => {
     const islandRef = useRef();
@@ -28,6 +28,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
     const { gl, viewport } = useThree();
     const { nodes, materials } = useGLTF(islandScene);
     const { nodes: nodes2, materials: materials2, animations } = useGLTF(fireScene);
+
     const { nodes: nodesBird, materials: materialsBird, animations: animationsBird } = useGLTF(birdScene);
     const { nodes: nodesBirdPoly, materials: materialsBirdPoly, animations: animationsBirdPoly } = useGLTF(birdPolyScene);
     const { actions } = useAnimations(animations, islandRef);
@@ -35,15 +36,25 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
     const { actions: actionsBirdPoly } = useAnimations(animationsBirdPoly, islandRef)
     // console.log('birdScene', animationsBird)
 
+    // ZACH STUFF
+    const { nodes: nodesZach, materials: materialsZach, animations: animationsZach } = useGLTF(zachScene);
+    const { actions: actionsZach } = useAnimations(animationsZach, islandRef)
+
+    ////
+
     const { nodes: nodes3, materials: materials3, animations3 } = useGLTF(birdScene3);
     const { nodes: nodesWhite, materials: materialsWhite, animationsWhite } = useGLTF(birdWhite);
 
-    console.log('fire animation', animations)
-    console.log('bird poly animation', animationsBirdPoly)
-    console.log('bird animation', animationsBird)
-    console.log('bird scene', nodesBird)
-    console.log('fire scene', nodes2)
-    console.log('bird animation white', animationsWhite)
+    // console.log('fire animation', animations)
+    // console.log('bird poly animation', animationsBirdPoly)
+    // console.log('bird animation', animationsBird)
+    // console.log('bird scene', nodesBird)
+    // console.log('fire scene', nodes2)
+    // console.log('bird animation white', animationsWhite)
+
+    console.log('Zach Scene in Island, ', zachScene)
+    console.log('Zach animation', animationsZach)
+
 
     const [clickDisabled, setClickDisabled] = useState(false);
     const [fireOpacity, setFireOpacity] = useState(0.8);
@@ -140,6 +151,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
     useEffect(() => {
 
         actions['Default Take'].play(); // fire animation
+
+        actionsZach['Wave'].play(); // ZACH ANIMATION
 
         // actionsBird['Take 001'].play();
 
@@ -340,41 +353,27 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                     </group>
                 </group>
 
-
-
-
-                {/* BIRD///////////////////////////////////// */}
-                {/* <group name="Sketchfab_Scene">
-                    <group name="Sketchfab_model"
-                        rotation={[-Math.PI / 2, 0, 0]}
-                        position={[-15, 0, 5]}
-                        scale={[0.1, 0.1, 0.1]}
+                {/* ZACHHHHHHHHHHHHHHHHHHHHHHHHHHHH */}
+                <group name="Scene">
+                    <group name="CharacterArmature"
+                        position={[4, 2.4, -2]}
+                        rotation={[0, 1.6, 0]}
+                        // position={[0, 2.4, 2]}
+                        // rotation={[0, 1, 0]}
+                        scale={[2, 2, 2]}
+                        castShadow
                     >
-                        <group name="birdFBX"
-                            rotation={[Math.PI / 2, 0, 0]}
-                        >
-                            <group name="Object_2">
-                                <group name="RootNode">
-                                    <group name="Object_4">
-                                        <primitive object={nodesBird._rootJoint} />
-                                        <skinnedMesh
-                                            name="Object_7"
-                                            geometry={nodesBird.Object_7.geometry}
-                                            material={materialsBird["01_-_Default"]}
-                                            skeleton={nodesBird.Object_7.skeleton}
-                                            material-opacity={birdOpacity}
-                                            material-transparent={true}
-
-                                        />
-                                        <group name="Object_6" rotation={[-Math.PI / 2, 0, 0]} />
-                                        <group name="Box002" rotation={[-Math.PI / 2, 0, 0]} />
-                                    </group>
-                                </group>
-                            </group>
-                        </group>
+                        <skinnedMesh
+                            name="Character"
+                            geometry={nodesZach.Character.geometry}
+                            material={materialsZach.Atlas}
+                            skeleton={nodesZach.Character.skeleton}
+                            castShadow
+                        // receiveShadow
+                        />
+                        <primitive object={nodesZach.Root} />
                     </group>
-                </group> */}
-
+                </group>
 
 
 

@@ -206,19 +206,22 @@ const Home = () => {
     const adjustZachForScreenSize = () => {
         let position;
         let screenScale;
+        let shadowPosition;
+
         if (window.innerWidth < 500) {
             position = [-7, 4, -11]
             screenScale = [0.7, 0.7, 0.7]
+            shadowPosition = [0, -1.28, 0]; // 
         }
         else {
-            position = [4, -5, -42]
-            screenScale = [2, 2, 2]
+            position = [4, -4.4, -42]
+            screenScale = [5, 5, 5]
+            shadowPosition = [0, -4, 1];
         }
-
-        return [position, screenScale]
+        return [position, screenScale, shadowPosition]
     }
 
-    const [zachPosition, zachScale] = adjustZachForScreenSize();
+    const [zachPosition, zachScale, zachShadowPosition] = adjustZachForScreenSize();
 
     // const adjustBalloonForScreenSize = () => {
     //     let screenScale;
@@ -260,15 +263,24 @@ const Home = () => {
             <Canvas
                 className={`w-full h-screen bg-transparent ${isRotating ? 'cursor-grabbing' : 'cursor-grab'}`}
                 camera={{ near: 0.1, far: 1000 }}
-            // castShadow
+                shadows
             >
 
                 {/* DAY LIGHT /////// */}
                 {!showPlane &&
                     <directionalLight
-                        castShadow:true
                         position={[1, 1, 10]}
                         intensity={1}
+                    // castShadow
+                    // shadow-mapSize-width={1024} // Shadow map resolution
+                    // shadow-mapSize-height={1024}
+                    // shadow-camera-near={0.5} // Near plane
+                    // shadow-camera-far={50} // Far plane
+                    // shadow-camera-left={-5} // Left plane
+                    // shadow-camera-right={5} // Right plane
+                    // shadow-camera-top={5} // Top plane
+                    // shadow-camera-bottom={-5} // Bottom plane
+
                     />
                 }
 
@@ -277,6 +289,8 @@ const Home = () => {
                         skyColor='#b1e1ff'
                         groundColor='#000000'
                         intensity={2}
+                    // castShadow
+
                     />
                 }
 
@@ -287,7 +301,7 @@ const Home = () => {
                 {!showPlane &&
                     <pointLight
                         position={[-1, 5, 1]} // raccoon on small screen
-                        castShadow:true
+                        castShadow
                         intensity={60}
                     // intensity={pointLightPower}
                     />
@@ -302,16 +316,23 @@ const Home = () => {
                 <spotLight /> */}
 
                 <ContactShadows
-                    // position={planePosition}
-
-                    // position={[0, -3, 0]}
-                    // position={[0, -1.5, 0]}
+                    // for Raccoon
                     position={shadowPosition}
                     opacity={1} scale={20}
                     blur={0.5} far={10}
                     resolution={256}
                     color='#000000'
                 />
+
+                {/* <ContactShadows
+                    // for Zach
+                    // position={shadowPosition}
+                    position={zachShadowPosition}
+                    opacity={1} scale={20}
+                    blur={0.5} far={10}
+                    resolution={256}
+                    color='#000000'
+                /> */}
 
 
                 {/* {showPlane &&

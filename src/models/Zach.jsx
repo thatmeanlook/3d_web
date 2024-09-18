@@ -23,13 +23,16 @@ const Zach = (props) => {
 
     return (
         <a.group ref={zachRef} {...props}>
-            <group name="Scene">
+            <group name="Scene"
+            >
                 <group name="CharacterArmature">
                     <skinnedMesh
                         name="Character"
                         geometry={nodes.Character.geometry}
                         material={materials.Atlas}
                         skeleton={nodes.Character.skeleton}
+                        castShadow
+                    // receiveShadow
                     />
                     <primitive object={nodes.Root} />
                 </group>
