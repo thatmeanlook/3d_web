@@ -19,6 +19,8 @@ import { a } from '@react-spring/three'
 import { user } from "../assets/icons";
 import { MeshBasicMaterial, Color } from "three";
 
+import zachScene from '../assets/3d/zach.glb'
+
 const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleShowPlane, toggleShowBird, ...props }) => {
     const islandRef = useRef();
     const group = useRef();

@@ -118,6 +118,8 @@ const RaccoonNew = ({ currentAnimation, ...props }) => {
                                             geometry={nodes.Object_64.geometry}
                                             material={materials.Material_28}
                                             skeleton={nodes.Object_64.skeleton}
+                                        // onPointerEnter={() => (document.body.style.cursor = 'grab')} // Change cursor on hover
+                                        // onPointerLeave={() => (document.body.style.cursor = 'auto')} // Reset cursor on leave
                                         />
                                         <group name="Object_63" rotation={[-Math.PI / 2, 0, 0]} />
                                     </group>

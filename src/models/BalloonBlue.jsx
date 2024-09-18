@@ -23,14 +23,10 @@ const BalloonBlue = ({ toggleShowPlane }) => {
             position = [-15, 4, -11]
             screenScale = [1, 1, 1]
         }
-
         return [position, screenScale]
     }
 
     const [balloonPosition, balloonScale] = adjustBalloonForScreenSize();
-
-
-
 
     useEffect(() => {
         console.log('blue balloon', actions)
@@ -38,22 +34,22 @@ const BalloonBlue = ({ toggleShowPlane }) => {
         // actions['Action'].play();
     }, []);
 
-    useEffect(() => {
-        // reset the balloon clicked back to false after 3s
-        if (isBalloonClicked) {
-            const timer = setTimeout(() => {
-                setIsBalloonClicked(false);
-            }, 3000);
+    // useEffect(() => {
+    //     // reset the balloon clicked back to false after 3s
+    //     if (isBalloonClicked) {
+    //         const timer = setTimeout(() => {
+    //             setIsBalloonClicked(false);
+    //         }, 3000);
 
-            // Cleanup the timer if the component is unmounted or `isClicked` changes before 3 seconds
-            return () => clearTimeout(timer);
-        }
-    }, [isBalloonClicked]);
+    //         // Cleanup the timer if the component is unmounted or `isClicked` changes before 3 seconds
+    //         return () => clearTimeout(timer);
+    //     }
+    // }, [isBalloonClicked]);
 
-    console.log('is balloon clicked:', isBalloonClicked)
+    // console.log('is balloon clicked:', isBalloonClicked)
 
     const handleBalloonClick = () => {
-        setIsBalloonClicked(true);
+        // setIsBalloonClicked(true);
         toggleShowPlane();
         // Open Google.com in a new tab
         // window.open("https://www.google.com", "_blank");

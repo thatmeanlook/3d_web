@@ -33,8 +33,12 @@ import user from './user.png'
 // import user from './user.svg'
 import gmail from './gmail.png'
 import eth from './eth.png'
+import gmail2 from './gmail2.png'
+import python2 from './python2.png'
 
 export {
+    python2,
+    gmail2,
     eth,
     gmail,
     user,

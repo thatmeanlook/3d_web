@@ -20,6 +20,7 @@ import Sky_Anime from '../models/Sky_Anime'
 import Sky_Land from '../models/SKy_Land'
 import Balloon_Test from '../models/Balloon_Test'
 import Bird from '../models/Bird';
+import Zach from '../models/Zach';
 
 // import { DirectionalLightShadow } from '@react-three/drei'
 
@@ -200,6 +201,25 @@ const Home = () => {
 
     const [balloonPosition, balloonScale] = adjustBalloonForScreenSize();
 
+
+
+    const adjustZachForScreenSize = () => {
+        let position;
+        let screenScale;
+        if (window.innerWidth < 500) {
+            position = [-7, 4, -11]
+            screenScale = [0.7, 0.7, 0.7]
+        }
+        else {
+            position = [4, -5, -42]
+            screenScale = [2, 2, 2]
+        }
+
+        return [position, screenScale]
+    }
+
+    const [zachPosition, zachScale] = adjustZachForScreenSize();
+
     // const adjustBalloonForScreenSize = () => {
     //     let screenScale;
     //     if (window.innerWidth < 768) {
@@ -235,7 +255,6 @@ const Home = () => {
             <div className='absolute top-28 left-0 right-0 z-10 flex items-center justify-center' >
                 {currentStage && <HomeInfo currentStage={currentStage} />}
             </div>
-
 
 
             <Canvas
@@ -352,6 +371,12 @@ const Home = () => {
 
                     {/* <BalloonRed
                         scale={[0.3, 0.3, 0.3]}
+                    /> */}
+
+
+                    {/* <Zach
+                        position={zachPosition}
+                        scale={zachScale}
                     /> */}
 
 

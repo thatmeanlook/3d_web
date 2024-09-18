@@ -98,12 +98,14 @@ const Contact = () => {
 
         if (window.innerWidth < 768) {
             screenScale = [0.1, 0.1, 0.1] // racoon
-            screenPosition = [1.5, -1, -4];// raccoon
+            screenPosition = [2.5, -2, -4];// raccoon
+            // screenPosition = [1.5, -1, -4];// raccoon current
             if (currentAnimation == 'Lie_Idle_2') {
                 shadowPosition = [0.1, -1.1, -0.2]; // racccoon
 
             } else {
-                shadowPosition = [0, -1, 0]; // racccoon
+                shadowPosition = [0, -2, 0]; // racccoon
+                // shadowPosition = [0, -1, 0]; // racccoon current
             }
 
         } else {
@@ -135,20 +137,26 @@ const Contact = () => {
                     {socialLinks.map((social) => (
                         // <div className='block-container w-20 h-20' key={social.name}>
                         <div className='block-container w-20 h-20' key={social.name}>
+                            <div className='btn-back rounded-xl bg-slate-300' />
+                            <div className='btn-front rounded-xl flex justify-center items-center'>
 
-                            <div className='btn-back rounded-xl' />
-                            <a href={social.link} target="_blank" rel="noopener noreferrer">
+                                <a href={social.link} target="_blank" rel="noopener noreferrer">
+                                    {social.name === 'Contact' ? (
+                                        <img
+                                            src={social.iconUrl}
+                                            alt={social.name}
+                                            className='w-12 object-contain'
+                                        />
+                                    ) : (
+                                        <img
+                                            src={social.iconUrl}
+                                            alt={social.name}
+                                            className='w-10 object-contain'
+                                        />
+                                    )}
+                                </a>
 
-                                <div className='btn-front rounded-xl flex justify-center items-center'>
-
-                                    <img
-                                        src={social.iconUrl}
-                                        alt={social.name}
-                                        className='w-1/2 h-1/2 object-contain'
-                                    />
-
-                                </div>
-                            </a>
+                            </div>
 
                         </div>
                     ))}
@@ -280,10 +288,7 @@ const Contact = () => {
                             currentAnimation={currentAnimation}
                             position={raccoonPosition}
                             rotation={[0, -20, 0]} // for idle
-                            // rotation={[0, -19.5, 0]} // for Lie_Idle_2
-                            // rotation={[0, -1.8, 0]} // for Idle_Look_Left
                             scale={raccoonScale}
-                            // scale={[0.1, 0.1, 0.1]}
                             onClick={handleRaccoonClick}
                             onPointerEnter={() => document.body.style.cursor = "grab"} // Change cursor on hover
                             onPointerLeave={() => document.body.style.cursor = "auto"} // Reset cursor on leave

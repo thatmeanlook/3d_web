@@ -66,7 +66,23 @@ body:has(.card[data-color="green"]:hover) {
     .info-box {
         /* @apply mx-5 relative flex text-white flex-col gap-3 max-w-2xl neo-brutalism-blue pt-4 pb-12 px-8; */
         @apply mx-5 relative flex text-white flex-col gap-3 max-w-2xl neo-brutalism-blue pt-4 pb-12 px-8 opacity-100;
+        /* @apply mx-5 relative flex text-white flex-col gap-3 max-w-2xl pt-4 pb-12 px-8 opacity-100; */
     }
+
+    /* .info-box::before { */
+    /* content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 10px;
+        box-shadow: 0.6vmin 0.6vmin #336cc1, 1vmin 1vmin #0092db, 1vmin 1vmin #0092db,
+            0.65vmin 1vmin #0092db, 1vmin 0.65vmin #0092db;
+        background-color: rgba(42, 119, 243, 0.7); */
+    /* Adjust the color and opacity here */
+    /* Ensure it is behind the text by using z-index: -1*/
+    /* } */
 
     .neo-btn {
         /* @apply py-3 px-6 rounded-lg text-blue-500 text-center font-semibold sm:w-1/2 w-[90%] -bottom-5 absolute mx-auto right-0 left-0 flex justify-center items-center gap-3; */
@@ -178,7 +194,7 @@ body:has(.card[data-color="green"]:hover) {
     box-shadow: 0.6vmin 0.6vmin #336cc1, 1vmin 1vmin #0092db, 1vmin 1vmin #0092db,
         0.65vmin 1vmin #0092db, 1vmin 0.65vmin #0092db;
     /* background-blend-mode: burn; */
-    /* opacity: .8; */
+    /* opacity: .5; */
 }
 
 .neo-brutalism-white {
@@ -186,5 +202,9 @@ body:has(.card[data-color="green"]:hover) {
     border: #fff;
     box-shadow: 0.6vmin 0.6vmin #fff, 1vmin 1vmin #d2e4ff, 1vmin 1vmin #d2e4ff,
         0.65vmin 1vmin #d2e4ff, 1vmin 0.65vmin #d2e4ff;
-    /* opacity: 1; */
+    /* opacity: 0.5; */
 }
+
+/* .top-obj {
+    z-index: 10;
+} */

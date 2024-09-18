@@ -29,7 +29,9 @@ import {
     python,
     oo7,
     gmail,
-    eth
+    eth,
+    gmail2,
+    python2
 } from "../assets/icons";
 
 export const skills = [
@@ -123,7 +125,7 @@ export const skills = [
     },
 
     {
-        imageUrl: python,
+        imageUrl: python2,
         name: "Python",
         type: "Backend",
     },
@@ -211,7 +213,7 @@ export const educations = [
         // icon: ucsd,
         // icon: ucsd,
         iconBg: "#5F4868",
-        date: "September 2021 - April 2024",
+        date: "September 2021 - June 2024",
 
     },
     {
@@ -235,7 +237,7 @@ export const educations = [
 export const socialLinks = [
     {
         name: 'Contact',
-        iconUrl: gmail,
+        iconUrl: gmail2,
         // link: '/contact',
         link: 'mailto:MinhLucArt@gmail.com',
     },
