@@ -29,8 +29,12 @@ const Home = () => {
     const [isRotating, setIsRotating] = useState(false);
     const [currentStage, setCurrentStage] = useState(1);
     const [showPlane, setShowPlane] = useState(false); // State to control Plane visibility
-    const [showBird, setShowBird] = useState(false); // State to control Plane visibility
+    const [showBird, setShowBird] = useState(false); // State to control Bird visibility
+    const [showZach, setShowZach] = useState(false); // State to control Zach visibility
     const [clickDisabled, setClickDisabled] = useState(false);
+
+
+    const [zachCurrentAnimation, setZachCurrentAnimation] = useState('Wave'); // for New Raccoon
 
     //////////////////////
     /// TOGGLE PLANE ON OFF
@@ -51,7 +55,7 @@ const Home = () => {
     /// TOGGLE PLANE ON OFF -- ORIGINAL WORKING
     const toggleShowPlane = () => {
         if (!clickDisabled) {
-            setShowPlane(prevState => !prevState); // Toggle the value of showBird
+            setShowPlane(prevState => !prevState); // Toggle the value of showPlane
             setClickDisabled(true); // Disable click temporarily
             setTimeout(() => setClickDisabled(false), 1000); // current
             // setTimeout(() => setClickDisabled(false), 500); // current
@@ -67,11 +71,17 @@ const Home = () => {
             setClickDisabled(true); // Disable click temporarily
             setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
         }
-
     };
 
 
-
+    /// TOGGLE ZACH ON OFF -- 
+    const toggleShowZach = () => {
+        if (!clickDisabled) {
+            setShowZach(prevState => !prevState); // Toggle the value of showZach
+            setClickDisabled(true); // Disable click temporarily
+            setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
+        }
+    };
 
 
     ///////////////////////////////
@@ -215,13 +225,24 @@ const Home = () => {
         }
         else {
             position = [4, -4.4, -42]
-            screenScale = [5, 5, 5]
+            screenScale = [8, 8, 8]
             shadowPosition = [0, -4, 1];
         }
         return [position, screenScale, shadowPosition]
     }
 
     const [zachPosition, zachScale, zachShadowPosition] = adjustZachForScreenSize();
+
+
+    const handleZachClick = () => {
+        // console.log('shadow position', shadowPosition)
+
+        setZachCurrentAnimation('Death'); // CUR
+        setTimeout(() => {
+            setZachCurrentAnimation('Wave');
+        }, 750);
+
+    };
 
     // const adjustBalloonForScreenSize = () => {
     //     let screenScale;
@@ -246,7 +267,7 @@ const Home = () => {
     //     window.open('https://youtu.be/hiwgOWo7mDc?si=ppFvsBFkXo1BVBS6', '_blank');
     // };
 
-    console.log('show plane in home', showPlane)
+    // console.log('show plane in home', showPlane) // THIS IS TO CHECK TURN ON/OFF BALLOON LIGHT
 
     // if (showPlane) {
     //     showPlane = true;
@@ -396,9 +417,11 @@ const Home = () => {
 
 
                     {/* <Zach
-                        position={zachPosition}
-                        scale={zachScale}
-                    /> */}
+                            position={zachPosition}
+                            scale={zachScale}
+                            zachCurrentAnimation={zachCurrentAnimation}
+                            onClick={handleZachClick}
+                        /> */}
 
 
 
@@ -458,6 +481,7 @@ const Home = () => {
 
                         toggleShowPlane={toggleShowPlane}
                         toggleShowBird={toggleShowBird}
+                        toggleShowZach={toggleShowZach}
 
                     />
 

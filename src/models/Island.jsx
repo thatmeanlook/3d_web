@@ -8,6 +8,8 @@ Title: Fox's islands
 
 import { useRef, useEffect, useState } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
+import { AnimationMixer, AnimationUtils } from 'three'
+
 import { useFrame, useThree } from "@react-three/fiber";
 import islandScene from '../assets/3d/cute_island.glb'
 import fireScene from '../assets/3d/fire.glb'
@@ -37,8 +39,11 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
     // console.log('birdScene', animationsBird)
 
     // ZACH STUFF
+    const zachRef = useRef();
     const { nodes: nodesZach, materials: materialsZach, animations: animationsZach } = useGLTF(zachScene);
     const { actions: actionsZach } = useAnimations(animationsZach, islandRef)
+    const [zachCurrentAnimation, setZachCurrentAnimation] = useState('Wave');
+    const mixer = useRef();
 
     ////
 
@@ -52,14 +57,15 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
     // console.log('fire scene', nodes2)
     // console.log('bird animation white', animationsWhite)
 
-    console.log('Zach Scene in Island, ', zachScene)
-    console.log('Zach animation', animationsZach)
+    // console.log('Zach Scene in Island, ', zachScene)
+    // console.log('Zach animation', animationsZach)
 
 
     const [clickDisabled, setClickDisabled] = useState(false);
     const [fireOpacity, setFireOpacity] = useState(0.8);
 
     const [birdOpacity, setBirdOpacity] = useState(0);
+    const [zachOpacity, setZachOpacity] = useState(0);
 
     const glowGreen = new MeshBasicMaterial({ color: new Color(0, 3, 1), toneMapped: false })
 
@@ -67,13 +73,10 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
 
     const handleFireOpacity = () => {
         // toggleShowPlane(); // experimental
-
         // console.log('birdScene', nodesBird)
-
         if (!clickDisabled) {
             if (fireOpacity == 0) {
                 setFireOpacity(0.8); // Toggle the value of showPlane
-
             } else {
                 setFireOpacity(0);
             }
@@ -84,8 +87,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
     }
 
     const handleTreeClick = () => {
-        toggleShowBird();
-
+        // toggleShowBird();
         if (!clickDisabled) {
             if (birdOpacity == 0) {
                 setBirdOpacity(1); // Toggle the value of showPlane
@@ -93,7 +95,6 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                 actionsBirdPoly['Take 001'].play();
                 // setTimeout(() => (actionsBird['Take 001'].stop(),
                 //     setBirdOpacity(0)), 6000)
-
             } else {
                 setBirdOpacity(0);
             }
@@ -102,8 +103,47 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
         }
     }
 
-    const handleBirdClick = () => {
+    const handleTentClick = () => {
+        // toggleShowZach();
+        if (!clickDisabled) {
+            if (zachOpacity == 0) {
+                setZachOpacity(1);
+                // actionsZach[zachCurrentAnimation].play();
+            } else {
+                setZachOpacity(0);
+            }
+            setClickDisabled(true); // Disable click temporarily
+            setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
+        }
+        // console.log('Zach opacity in click:', zachOpacity)
+    }
 
+
+    const handleZachClick = () => {
+        // setZachCurrentAnimation('Death'); 
+        // setZachCurrentAnimation('Jump_Idle'); // Jump_Idle set timeout300ms
+        setZachCurrentAnimation('Jump');
+        setTimeout(() => {
+            setZachCurrentAnimation('Wave');
+        }, 1700);
+        console.log('in Click function, actions:', actionsZach)
+        console.log('Zach current animation: ', zachCurrentAnimation)
+
+        // if (!clickDisabled) {
+        //     if (zachCurrentAnimation === 'Wave') {
+        //         setZachCurrentAnimation('Death');
+        //         setTimeout(() => {
+        //             setZachCurrentAnimation('Run');
+        //         }, 1000);
+        //     } else {
+        //         setZachCurrentAnimation('Jump');
+        //     }
+        //     setClickDisabled(true); // Disable click temporarily
+        //     setTimeout(() => setClickDisabled(false), 1000); // Enable click after 1 second
+        // }
+    }
+
+    const handleBirdClick = () => {
         window.open('https://thatmeanlook.github.io/dino-run/', '_blank');
     }
 
@@ -148,15 +188,54 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
 
     }
 
+    ///////////// ZACH EFFECT
     useEffect(() => {
+        console.log(actionsZach);
+        const mixerInstance = new AnimationMixer(islandRef.current);
+        mixer.current = mixerInstance;
+        console.log('Inside Effect:', actionsZach)
 
+        Object.values(actionsZach).forEach((action) => action.stop());
+
+        if (actionsZach[zachCurrentAnimation]) {
+
+            // console.log('current animation', currentAnimation);
+            // console.log('current action:', actionsZach[currentAnimation]);
+
+            const crawlClip = actionsZach[zachCurrentAnimation].getClip();
+
+            // console.log('clippppppppp', crawlClip)
+            const crawlSubClip = AnimationUtils.subclip(crawlClip, 'crawl_subClip', 0, 1000, true);
+            // console.log('subclip', crawlSubClip)
+            const crawlSubClipAction = mixerInstance.clipAction(crawlSubClip);
+            crawlSubClipAction.enabled = true;
+
+            if (zachCurrentAnimation == 'Jump') {
+                crawlSubClipAction.setDuration(1.2);
+            }
+
+            crawlSubClipAction.play();
+
+            // console.log('current animation: ', currentAnimation);
+        }
+
+    }, [actionsZach, zachCurrentAnimation]);
+
+    useFrame((_, delta) => {
+        if (mixer.current) {
+            // console.log('delta', delta)
+            mixer.current.update(delta);
+            // mixer.current.update(0.010);
+        }
+    }, [actionsZach, zachCurrentAnimation]);
+
+
+
+    ///////////////////////////////////////
+
+    useEffect(() => {
         actions['Default Take'].play(); // fire animation
 
-        actionsZach['Wave'].play(); // ZACH ANIMATION
-
-        // actionsBird['Take 001'].play();
-
-        // actionsBirdPoly['Take 001'].play();
 
         const canvas = gl.domElement;
         // canvas.addEventListener('pointermove', handleCloudClick);
@@ -285,7 +364,6 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                             scale={1}
                             onClick={handleBirdClick}
                             onPointerDown={handleBirdClick}
-
                         >
                             <group name="Object_2">
                                 <group name="RootNode">
@@ -358,9 +436,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                     <group name="CharacterArmature"
                         position={[4, 2.4, -2]}
                         rotation={[0, 1.6, 0]}
-                        // position={[0, 2.4, 2]}
-                        // rotation={[0, 1, 0]}
-                        scale={[2, 2, 2]}
+                        scale={[2.5, 2.5, 2.5]}
                         castShadow
                     >
                         <skinnedMesh
@@ -368,6 +444,10 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                             geometry={nodesZach.Character.geometry}
                             material={materialsZach.Atlas}
                             skeleton={nodesZach.Character.skeleton}
+                            material-transparent={true}
+                            material-opacity={zachOpacity}
+                            onClick={handleZachClick}
+                            onPointerDown={handleZachClick}
                             castShadow
                         // receiveShadow
                         />
@@ -376,10 +456,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                 </group>
 
 
-
-
                 {/* FIRE /////////////////////////////////////////// */}
-
                 <group name="Sketchfab_Scene">
                     <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
                         <group
@@ -653,6 +730,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                         position={[2.041, -139.81, 0]}
                         rotation={[-Math.PI / 2, 0, -0.946]}
                         scale={[350, 350, 140]}
+
                     />
                     <mesh // GREEN SURFACE
                         castShadow
@@ -671,6 +749,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                         position={[-36.291, 129.905, -158.527]}
                         rotation={[-1.748, 0.301, 0.182]}
                         scale={[10.774, 10.895, 9.406]}
+                        onClick={handleTentClick}
+                        onPointerDown={handleTentClick}
                     // onClick={handleFireOpacity}
                     />
                     <mesh // 4TH TREE FROM LEFT
@@ -726,8 +806,12 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                         position={[-109.699, 52.569, -261.662]}
                         rotation={[-Math.PI / 2, 0, -2.874]}
                         scale={[15.706, 15.706, 45.125]}
+
                         onClick={handleTreeClick}
                         onPointerDown={handleTreeClick}
+
+                    // onClick={handleTentClick}
+                    // onPointerDown={handleTentClick}
                     />
                     <mesh // THE TREE LOG
                         castShadow
