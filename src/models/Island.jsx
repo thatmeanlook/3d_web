@@ -121,14 +121,27 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
 
     const handleZachClick = () => {
         if (!clickDisabled) {
+            // animation: fall back - shake head - back to waving
 
-            // setZachCurrentAnimation('Death'); 
+            setZachCurrentAnimation('Death');
             // setZachCurrentAnimation('Jump_Idle'); // Jump_Idle set timeout300ms
+            // setZachCurrentAnimation('Jump');
 
-            setZachCurrentAnimation('Jump');
             setTimeout(() => {
-                setZachCurrentAnimation('Wave');
-            }, 1700);
+                setZachCurrentAnimation('No');
+
+                setTimeout(() => {
+                    setZachCurrentAnimation('Wave');
+                }, 1500);
+
+            }, 1500);
+
+            // }, 1200);for Death
+            // }, 1700); for Jump
+
+            // setTimeout(() => {
+            //     setZachCurrentAnimation('Wave');
+            // }, 1500);
 
             setClickDisabled(true); // Disable click temporarily
             setTimeout(() => setClickDisabled(false), 1000); // Enable click after 1 second
@@ -220,6 +233,9 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
 
             if (zachCurrentAnimation == 'Jump') {
                 crawlSubClipAction.setDuration(1.2);
+            }
+            if (zachCurrentAnimation == 'Death') {
+                crawlSubClipAction.setDuration(1.5);
             }
 
             crawlSubClipAction.play();
