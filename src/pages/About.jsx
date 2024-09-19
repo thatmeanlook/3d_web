@@ -18,9 +18,10 @@ const About = () => {
 
             <div className='mt-5 flex flex-col gap-3 text-slate-500'>
                 <p>
-                    A recent graduate from UC San Diego and an aspiring Frontend Developer.
-                    Skilled in HTML, CSS, JavaScript, and React, with hands-on experience building responsive web applications.
-                    Strong focus on delivering high-quality UX, writing maintainable code, and problem-solving.
+                    A recent graduate of UC San Diego seeking a career in Web development. Experienced in building
+                    responsive websites using JavaScript, React, and modern CSS frameworks with a strong focus on user
+                    experience. My background in art and animation enhances my ability to create visually captivating and
+                    interactive web applications.
 
                 </p>
             </div>
@@ -96,14 +97,6 @@ const About = () => {
                                         {experience.company_name}
                                     </a>
 
-                                    {/* ORIGINAL COMPANY NAME */}
-                                    {/* <p
-                                        className='text-black-500 font-medium text-base'
-                                        style={{ margin: 0 }}
-                                    >
-                                        {experience.company_name}
-                                    </p> */}
-
 
                                 </div>
 
@@ -111,7 +104,8 @@ const About = () => {
                                     {experience.points.map((point, index) => (
                                         <li
                                             key={`experience-point-${index}`}
-                                            className='text-black-500/50 font-normal pl-1 text-sm'
+                                            className='text-slate-500 font-normal pl-1 text-sm'
+                                        // className='text-black-500/50 font-normal pl-1 text-sm'
                                         >
                                             {point}
                                         </li>

@@ -65,12 +65,6 @@ const Zach = ({ zachCurrentAnimation, ...props }) => {
 
 
 
-
-
-
-
-
-
     return (
         <a.group ref={zachRef} {...props}>
             <group name="Scene"
@@ -83,7 +77,6 @@ const Zach = ({ zachCurrentAnimation, ...props }) => {
                         skeleton={nodes.Character.skeleton}
                         castShadow
                     // receiveShadow
-
                     />
                     <primitive object={nodes.Root} />
                 </group>

@@ -120,12 +120,20 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
 
 
     const handleZachClick = () => {
-        // setZachCurrentAnimation('Death'); 
-        // setZachCurrentAnimation('Jump_Idle'); // Jump_Idle set timeout300ms
-        setZachCurrentAnimation('Jump');
-        setTimeout(() => {
-            setZachCurrentAnimation('Wave');
-        }, 1700);
+        if (!clickDisabled) {
+
+            // setZachCurrentAnimation('Death'); 
+            // setZachCurrentAnimation('Jump_Idle'); // Jump_Idle set timeout300ms
+
+            setZachCurrentAnimation('Jump');
+            setTimeout(() => {
+                setZachCurrentAnimation('Wave');
+            }, 1700);
+
+            setClickDisabled(true); // Disable click temporarily
+            setTimeout(() => setClickDisabled(false), 1000); // Enable click after 1 second
+        }
+
         console.log('in Click function, actions:', actionsZach)
         console.log('Zach current animation: ', zachCurrentAnimation)
 
@@ -435,7 +443,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                 <group name="Scene">
                     <group name="CharacterArmature"
                         position={[4, 2.4, -2]}
-                        rotation={[0, 1.6, 0]}
+                        rotation={[0, 2, 0]}
                         scale={[2.5, 2.5, 2.5]}
                         castShadow
                     >
