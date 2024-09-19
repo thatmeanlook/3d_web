@@ -133,7 +133,7 @@ const Contact = () => {
             <div className='flex-1 min-w-[50%] flex flex-col relative z-10'>
                 <h1 className='head-text'>Get in Touch</h1>
 
-                <div className='mt-16 flex flex-wrap gap-12'>
+                <div className='mt-16 flex flex-wrap gap-8 sm:gap-12'>
                     {socialLinks.map((social) => (
                         // <div className='block-container w-20 h-20' key={social.name}>
                         <div className='block-container w-20 h-20' key={social.name}>

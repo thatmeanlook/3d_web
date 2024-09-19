@@ -11,7 +11,9 @@ import {
     oo7,
     eth,
     gmail2,
-    python2
+    python2,
+    tailwindcss,
+    figma
 } from "../assets/icons";
 
 export const skills = [
@@ -98,11 +100,18 @@ export const skills = [
     //     name: "Sass",
     //     type: "Frontend",
     // },
-    // {
-    //     imageUrl: tailwindcss,
-    //     name: "Tailwind CSS",
-    //     type: "Frontend",
-    // },
+
+    {
+        imageUrl: tailwindcss,
+        name: "Tailwind CSS",
+        type: "Frontend",
+    },
+
+    {
+        imageUrl: figma,
+        name: "Figma",
+        type: "Frontend",
+    },
 
     {
         imageUrl: python2,

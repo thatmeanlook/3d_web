@@ -35,8 +35,10 @@ import gmail from './gmail.png'
 import eth from './eth.png'
 import gmail2 from './gmail2.png'
 import python2 from './python2.png'
+import figma from './figma.png'
 
 export {
+    figma,
     python2,
     gmail2,
     eth,

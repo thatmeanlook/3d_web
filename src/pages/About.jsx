@@ -19,8 +19,8 @@ const About = () => {
             <div className='mt-5 flex flex-col gap-3 text-slate-500'>
                 <p>
                     A recent graduate of UC San Diego seeking a career in Web development. Experienced in building
-                    responsive websites using JavaScript, React, and modern CSS frameworks with a strong focus on user
-                    experience. My background in art and animation enhances my ability to create visually captivating and
+                    responsive websites with a strong focus on user experience.
+                    My background in art and animation enhances my ability to create visually captivating and
                     interactive web applications.
 
                 </p>
