@@ -8,7 +8,9 @@ import Navbar from './components/Navbar';
 
 const App = () => {
     return (
+        // <main className='bg-black-500'>
         <main className='bg-slate-300/20'>
+
             <Router>
                 <Navbar />
                 <Routes>

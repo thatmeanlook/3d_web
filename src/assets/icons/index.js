@@ -26,8 +26,23 @@ import arrow from './arrow.svg'
 import contact from './contact.svg'
 import soundon from './soundon.png'
 import soundoff from './soundoff.png'
+import three from './three.png'
+import python from './python.png'
+import oo7 from './007.png'
+import user from './user.png'
+// import user from './user.svg'
+import gmail from './gmail.png'
+import eth from './eth.png'
+import gmail2 from './gmail2.png'
+import python2 from './python2.png'
 
 export {
+    python2,
+    gmail2,
+    eth,
+    gmail,
+    user,
+    oo7,
     css,
     express,
     git,
@@ -55,5 +70,7 @@ export {
     arrow,
     contact,
     soundon,
-    soundoff
+    soundoff,
+    three,
+    python
 }

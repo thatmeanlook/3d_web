@@ -6,6 +6,7 @@ import { arrow } from '../assets/icons';
 const InfoBox = ({ text, link, btnText }) => (
     <div className='info-box'>
         <p className='font-medium sm:text-xl text-center'>{text}</p>
+
         <Link to={link} className='neo-brutalism-white neo-btn'>
             {btnText}
             <img src={arrow} className='w-4 h-4 object-contain' />
@@ -14,12 +15,17 @@ const InfoBox = ({ text, link, btnText }) => (
 )
 
 const renderContent = {
+    // 0: (
+    //     <br></br>
+    // ),
+
     1: (
         <h1 className='sm:text-xl sm:leading-snug text-center 
         neo-brutalism-blue py-4 px-8 text-white mx-5'>
-            Hi, I am <span className='font-semibold'>Minh</span>👋
+            Hi, I'm <span className='font-semibold'>Minh</span>👋
             <br />
-            A recent grad from UC San Diego and an aspired Frontend Engineer.
+            A Frontend Developer based in California
+            {/* A recent grad from UC San Diego and an aspiring Frontend Engineer. */}
             {/* A Frontend Engineer from San Diego. */}
         </h1>
     ),
@@ -37,9 +43,9 @@ const renderContent = {
     ),
     4: (
         <InfoBox
-            text="Please HIRE meeeeeeeee"
+            text="Looking for a Frontend Developer?"
             link='/contact'
-            btnText='Seriously' />
+            btnText="Let's talk" />
     )
 }
 

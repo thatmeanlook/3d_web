@@ -1,0 +1,107 @@
+////////////////////////////////////////////////////
+// DESIGN TOOLS CONFIG                            //
+////////////////////////////////////////////////////
+// Copyright (C) 2017  Utah State University
+var DT_variables = {
+        iframeID: '',
+        // Path to the hosted USU Design Tools
+        path: 'https://designtools.ciditools.com/',
+        templateCourse: '3057',
+        // OPTIONAL: Button will be hidden from view until launched using shortcut keys
+        hideButton: false,
+    	 // OPTIONAL: Limit by course format
+	     limitByFormat: false, // Change to true to limit by format
+	     // adjust the formats as needed. Format must be set for the course and in this array for tools to load
+	     formatArray: [
+            'online',
+            'on-campus',
+            'blended'
+        ],
+        // OPTIONAL: Limit tools loading by users role
+        limitByRole: false, // set to true to limit to roles in the roleArray
+        // adjust roles as needed
+        roleArray: [
+            'student',
+            'teacher',
+            'admin'
+        ],
+        // OPTIONAL: Limit tools to an array of Canvas user IDs
+        limitByUser: true, // Change to true to limit by user
+        // add users to array (Canvas user ID not SIS user ID)
+        userArray: [
+            '12686', //Karen Flammer
+            '3594', //Cindy Perez
+            '121230', //Stephen Wilcox
+            '140133', //Laura Giffin
+            '123037', //Nick Mattos
+            '111056', //Alan Roper
+            '111058', //Laura Rosenzweig
+            '1869', //Edual Ruiz
+            '192335', //I-Pang Fu
+	'207761', //Nicole Manley
+        '207677', //Eric Peloza
+'147769', //John Herd
+	'211731', //Mimi Phung 
+        ]
+};
+
+
+
+// Run the necessary code when a page loads
+$(document).ready(function () {
+    'use strict';
+    // This runs code that looks at each page and determines what controls to create
+    $.getScript(DT_variables.path + 'js/master_controls.js', function () {
+        console.log('master_controls.js loaded');
+    });
+});
+////////////////////////////////////////////////////
+// END DESIGN TOOLS CONFIG                        //
+////////////////////////////////////////////////////
+
+// Checks if page is dashboard
+$(document).ready(function(){
+	if (window.location.pathname=='/') {
+		$('#DashboardCard_Container').before('<div><p>Additional courses, including those from previous quarters, may be found on your <a href="/courses">All Courses</a> page.</p></div>');
+	}});
+
+//Hide Canvas's Course Start Checklist
+$(document).ready(function(){
+
+	// Check if page is course homepage
+	if (/^\/courses\/[0-9]+$/.test(window.location.pathname)) {
+			// Disables the Canvas Course Checklist button
+			$('div.course-options a.btn.button-sidebar-wide.wizard_popup_link').remove();}
+
+});
+
+
+// If the URL has #hash content, and the page has a IMVHKalturaElement div, inject the kaltura player into that div:
+let loadKaltura = () => {
+    if(document.location.hash.length > 1) {
+        let kaltura_elements = document.getElementsByClassName("IMVHKalturaElement");
+
+        if(kaltura_elements.length > 0) {
+			let entry_id = document.location.hash.substring(1);
+
+			let hostname = document.location.hostname;
+			let kaf = (hostname == "ucsd.test.instructure.com") ? 
+				"2323111-3.kaf.kaltura.com" :
+				"canvaskaf.ucsd.edu";
+
+			// Make the main window wider
+			$("#wrapper").css("max-width", "100%")
+
+            let player = kaltura_elements[0];
+
+            let kaf_url = 'https://' + kaf + '/browseandembed/index/media/entryid/' + entry_id + '/showDescription/false/showTitle/false/showTags/false/showDuration/false/showOwner/false/showUploadDate/false/playerSize/800x750/playerSkin/53025212/autoPlay/0/';
+
+            let iframe_src = 'https://' + hostname + '/courses/' + ENV.COURSE_ID + '/external_tools/retrieve?borderless=1&url=' + kaf_url
+
+            player.innerHTML = '<p><iframe class="lti-embed" src="' + iframe_src + '" width="800" height="750" allowfullscreen="allowfullscreen" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allow="geolocation *; microphone *; camera *; midi *; encrypted-media *; autoplay *; clipboard-write *; display-capture *"></iframe></p>';
+        }
+    }
+};
+
+// Delay load, since the content of wiki pages does not appear to be available immediately
+$(document).ready(() => { setTimeout(loadKaltura, 1000); })
