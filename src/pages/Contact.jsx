@@ -1,9 +1,7 @@
 import React, { Suspense, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { Canvas } from '@react-three/fiber';
-// import Raccoon from '../models/Raccoon';
 import Loader from '../components/Loader';
-// import RaccoonNew from '../models/RaccoonNew';
 // import Alpaca from '../models/Alpaca';
 import { Environment, ContactShadows } from '@react-three/drei';
 import { Link } from 'react-router-dom';
@@ -18,14 +16,10 @@ const Contact = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const [currentAnimation, setCurrentAnimation] = useState('idle'); // for New Raccoon
-    // const [currentAnimation, setCurrentAnimation] = useState('Lie_Idle_2'); // for New Raccoon
-    // const [currentAnimation, setCurrentAnimation] = useState('Idle_Look_Left'); // for New Raccoon
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value })
     };
-
-
 
     const handleFocus = () => setCurrentAnimation('Sneak_Idle'); // for Alpaca
     const handleBlur = () => setCurrentAnimation('Action_Eat');  // for Alpaca
@@ -65,14 +59,14 @@ const Contact = () => {
 
     }
 
-    const handleAlpacaClick = () => {
-        // Open Google.com in a new tab
-        setCurrentAnimation('Attack_Headbutt');
-        setTimeout(() => {
-            // window.open('https://www.google.com', '_blank');
-            setCurrentAnimation('Eating');
-        }, 1000);
-    };
+    // const handleAlpacaClick = () => {
+    //     // Open Google.com in a new tab
+    //     setCurrentAnimation('Attack_Headbutt');
+    //     setTimeout(() => {
+    //         // window.open('https://www.google.com', '_blank');
+    //         setCurrentAnimation('Eating');
+    //     }, 1000);
+    // };
 
 
     const handleRaccoonClick = () => {
@@ -280,10 +274,7 @@ const Contact = () => {
                         color='#000000' />
 
                     <Suspense fallback={<Loader />}
-
                     >
-
-
                         <RaccoonNew_Contact
                             currentAnimation={currentAnimation}
                             position={raccoonPosition}
