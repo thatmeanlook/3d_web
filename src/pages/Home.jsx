@@ -365,8 +365,6 @@ const Home = () => {
                     }
 
 
-
-
                     <Island
                         // scale={[1, 1, 1]}
                         position={islandPosition}

@@ -1,7 +1,7 @@
 # 3D Portfolio
 
 ## Description
-This is a personal 3D portfolio showcasing my work in front-end web development. The portfolio is built using React and Three.js. It includes various interactive 3D models and animations. I had a lot of fun working on this project.
+This is a personal 3D portfolio showcasing my work in front-end web development. The website is built using React and Three.js. It includes various interactive 3D models and animations. I had a lot of fun working on this project.
 
 ## Live Demo
 You can view the live version of the portfolio [here](https://justminh.com).

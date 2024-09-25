@@ -227,3 +227,12 @@ body:has(.card[data-color="green"]:hover) {
 .custom-spin {
     animation: custom-spin 2s linear infinite;
 }
+
+.nav-text-shadow {
+    text-shadow:
+        1px 0 rgba(255, 255, 255, 0.5),
+        -1px 0 rgba(255, 255, 255, 0.5),
+        0 1px rgba(255, 255, 255, 0.5),
+        0 -1px rgba(255, 255, 255, 0.5);
+    /* opacity: 0.8; */
+}
