@@ -1,4 +1,4 @@
-import { Suspense, useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import Loader from '../components/Loader'
 import Island from '../models/Island'
@@ -6,7 +6,8 @@ import HomeInfo from '../components/HomeInfo'
 import { ContactShadows } from '@react-three/drei'
 import BalloonBlue from '../models/BalloonBlue'
 import RaccoonNew from '../models/RaccoonNew'
-import Sky_Anime from '../models/Sky_Anime'
+// import Sky_Anime from '../models/Sky_Anime'
+const Sky_Anime = React.lazy(() => import('../models/Sky_Anime'));
 import Sky_Land from '../models/SKy_Land'
 
 // import { DirectionalLightShadow } from '@react-three/drei'
@@ -189,7 +190,6 @@ const Home = () => {
             <div className='absolute top-28 left-0 right-0 z-10 flex items-center justify-center' >
                 {currentStage && <HomeInfo currentStage={currentStage} />}
             </div>
-
 
             <Canvas
                 className={`w-full h-screen bg-transparent ${isRotating ? 'cursor-grabbing' : 'cursor-grab'}`}
@@ -421,10 +421,6 @@ const Home = () => {
 
 
             </Canvas>
-
-
-
-
 
         </section>
     )

@@ -208,3 +208,22 @@ body:has(.card[data-color="green"]:hover) {
 /* .top-obj {
     z-index: 10;
 } */
+
+@keyframes custom-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        border-color: rgb(163, 0, 87);
+        /* border-color: rgb(0, 109, 226); */
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.custom-spin {
+    animation: custom-spin 2s linear infinite;
+}

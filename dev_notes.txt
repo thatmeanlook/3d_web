@@ -1,0 +1,1 @@
+lazy load the night sky bg, bird, and zach in Home page
