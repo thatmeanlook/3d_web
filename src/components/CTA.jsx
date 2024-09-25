@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const CTA = () => {
     return (
         <section className='cta'>
-            <p className='cta-text'>Looking for a Frontend Engineer?
+            <p className='cta-text'>Looking for a Web Developer?
                 <br className='sm:block hidden' />
             </p>
             <Link to='/contact' className='btn'>

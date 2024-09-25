@@ -65,8 +65,8 @@ body:has(.card[data-color="green"]:hover) {
 
     .info-box {
         /* @apply mx-5 relative flex text-white flex-col gap-3 max-w-2xl neo-brutalism-blue pt-4 pb-12 px-8; */
-        @apply mx-5 relative flex text-white flex-col gap-3 max-w-2xl neo-brutalism-blue pt-4 pb-12 px-8 opacity-100;
-        /* @apply mx-5 relative flex text-white flex-col gap-3 max-w-2xl pt-4 pb-12 px-8 opacity-100; */
+        @apply mx-5 relative flex text-white flex-col gap-3 max-w-2xl neo-brutalism-blue pt-4 pb-10 px-8 opacity-100;
+        /* @apply mx-5 relative flex text-white flex-col gap-3 max-w-2xl neo-brutalism-blue pt-4 pb-12 px-8 opacity-100; */
     }
 
     /* .info-box::before { */
@@ -86,7 +86,7 @@ body:has(.card[data-color="green"]:hover) {
 
     .neo-btn {
         /* @apply py-3 px-6 rounded-lg text-blue-500 text-center font-semibold sm:w-1/2 w-[90%] -bottom-5 absolute mx-auto right-0 left-0 flex justify-center items-center gap-3; */
-        @apply py-3 px-1 rounded-lg text-blue-500 text-center font-semibold sm:w-1/2 w-[90%] -bottom-5 absolute mx-auto right-0 left-0 flex justify-center items-center gap-3;
+        @apply py-3 px-1 rounded-lg text-blue-500 text-center font-semibold sm:w-1/2 w-[70%] -bottom-5 absolute mx-auto right-0 left-0 flex justify-center items-center gap-3;
     }
 
     .cta {
@@ -208,3 +208,22 @@ body:has(.card[data-color="green"]:hover) {
 /* .top-obj {
     z-index: 10;
 } */
+
+@keyframes custom-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        border-color: rgb(163, 0, 87);
+        /* border-color: rgb(0, 109, 226); */
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.custom-spin {
+    animation: custom-spin 2s linear infinite;
+}
