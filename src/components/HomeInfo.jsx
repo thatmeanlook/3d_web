@@ -20,7 +20,7 @@ const renderContent = {
         neo-brutalism-blue py-4 px-8 text-white mx-5'>
             Hi, I'm <span className='font-semibold'>Minh</span>👋
             <br />
-            A Web Developer based in California
+            A Front End Developer based in California
         </h1>
     ),
     2: (

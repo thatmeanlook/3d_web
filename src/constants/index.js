@@ -135,8 +135,8 @@ export const experiences = [
         date: "June 2022 - August 2022",
         points: [
             "Developed algorithms to identify structural features within network graphs, enhancing data interpretation and visualization.",
-            "Implemented machine learning models to extract actionable insights and patterns from complex data sets.",
-            "Prepared and presented comprehensive reports and visualizations of analytical results to stakeholders.",
+            "Implemented machine learning models with Scikit-learn and TensorFlow to extract insights and patterns from complex data sets.",
+            "Prepared and presented comprehensive reports and visualizations of analytical results using D3 and Matplotlib to stakeholders.",
         ],
     },
     {

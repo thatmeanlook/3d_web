@@ -6,40 +6,20 @@ import HomeInfo from '../components/HomeInfo'
 import { ContactShadows } from '@react-three/drei'
 import BalloonBlue from '../models/BalloonBlue'
 import RaccoonNew from '../models/RaccoonNew'
-// import Sky_Anime from '../models/Sky_Anime'
 const Sky_Anime = React.lazy(() => import('../models/Sky_Anime'));
 import Sky_Land from '../models/SKy_Land'
 
-// import { DirectionalLightShadow } from '@react-three/drei'
 
 const Home = () => {
     const [isRotating, setIsRotating] = useState(false);
     const [currentStage, setCurrentStage] = useState(1);
     const [showPlane, setShowPlane] = useState(false); // State to control Plane visibility
-    const [showBird, setShowBird] = useState(false); // State to control Bird visibility
     const [showZach, setShowZach] = useState(false); // State to control Zach visibility
     const [clickDisabled, setClickDisabled] = useState(false);
-
-
     const [zachCurrentAnimation, setZachCurrentAnimation] = useState('Wave'); // for New Raccoon
 
-    //////////////////////
-    /// TOGGLE PLANE ON OFF
-    // const toggleShowPlane = () => {
-    //     if (!clickDisabled) {
-    //         setShowPlane(prevState => !prevState); // Toggle the value of showPlane
-    //         console.log('1st change')
-    //         setClickDisabled(true); // Disable click temporarily
-    //         console.log('Disable click')
-    //         setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
-    //     }
-    //     // setShowPlane(prevState => !prevState); // Toggle the value of showPlane
 
-    //     // setShowPlane(true);
-    // };
-
-
-    /// TOGGLE PLANE ON OFF -- ORIGINAL WORKING
+    /// TOGGLE OBJ ON OFF 
     const toggleShowPlane = () => {
         if (!clickDisabled) {
             setShowPlane(prevState => !prevState); // Toggle the value of showPlane
@@ -58,7 +38,6 @@ const Home = () => {
         }
     };
 
-
     /// TOGGLE ZACH ON OFF -- 
     const toggleShowZach = () => {
         if (!clickDisabled) {
@@ -69,46 +48,36 @@ const Home = () => {
     };
 
 
-
-    /////////////////////////
-
+    // Adjust Island for screen sizes
     const adjustIslandForScreenSize = () => {
-
         let screenScale = null;
         let screenPosition = [0, -6.5, -43];
         let rotation = [0.1, 3.85, 0];
 
         if (window.innerWidth < 700) {
             screenScale = [0.75, 0.75, 0.75];
-
         } else {
             screenScale = [1, 1, 1];
-
         }
         return [screenScale, screenPosition, rotation]
     }
 
 
-    const adjustPlaneForScreenSize = () => {
-
+    // Adjust Raccoon for screen sizes
+    const adjustRaccoonForScreenSize = () => {
         let screenScale, screenPosition, shadowPosition, pointLightPower
 
         if (window.innerWidth < 700) {
-            screenScale = [0.011, 0.011, 0.011] // racoon
-            // screenScale = [0.2, 0.2, 0.2]; // Alpaca
-            screenPosition = [0, -1.23, 0];// raccoon current
-            // screenPosition = [0, -1.5, 0];// Alpaca
-            shadowPosition = [0, -1.4, 0]; // racccoon current
-            // shadowPosition = [0, -1.5, 0]; // Alpaca
+            screenScale = [0.011, 0.011, 0.011]
+            screenPosition = [0, -1.23, 0];
+            shadowPosition = [0, -1.4, 0];
             pointLightPower = 50;
 
         } else {
-            screenScale = [0.03, 0.03, 0.03] // raccoon
-            // screenScale = [0.4, 0.4, 0.4]; // Alpaca
+            screenScale = [0.03, 0.03, 0.03]
             screenPosition = [0, -3, -4];
             shadowPosition = [0, -3.5, 0];
             pointLightPower = 20;
-
         }
         return [screenScale, screenPosition, shadowPosition, pointLightPower]
     }
@@ -124,13 +93,8 @@ const Home = () => {
             position = [-15, 4, -11]
             screenScale = [1, 1, 1]
         }
-
         return [position, screenScale]
     }
-
-    const [balloonPosition, balloonScale] = adjustBalloonForScreenSize();
-
-
 
     const adjustZachForScreenSize = () => {
         let position;
@@ -140,7 +104,7 @@ const Home = () => {
         if (window.innerWidth < 500) {
             position = [-1, -5, -40]
             screenScale = [2, 2, 2]
-            shadowPosition = [0, -1.28, 0]; // 
+            shadowPosition = [0, -1.28, 0];
         }
         else {
             position = [-0.5, -4.4, -37]
@@ -154,35 +118,16 @@ const Home = () => {
 
 
     const handleZachClick = () => {
-        // console.log('shadow position', shadowPosition)
-
-        setZachCurrentAnimation('Death'); // CUR
+        setZachCurrentAnimation('Death');
         setTimeout(() => {
             setZachCurrentAnimation('Wave');
         }, 750);
-
     };
 
 
-
     const [islandScale, islandPosition, islandRotation] = adjustIslandForScreenSize();
-    const [planeScale, planePosition, shadowPosition, pointLightPower] = adjustPlaneForScreenSize();
-    // const balloonScale = adjustBalloonForScreenSize();
-    // const balloonScale = [10, 10, 10];
+    const [planeScale, planePosition, shadowPosition, pointLightPower] = adjustRaccoonForScreenSize();
 
-    // console.log('ballon scale: ', balloonScale)
-
-    // const handleBalloonClick = () => {
-    //     setShowPlane(true);
-    //     // Open "99 red balloon" in a new tab
-    //     window.open('https://youtu.be/hiwgOWo7mDc?si=ppFvsBFkXo1BVBS6', '_blank');
-    // };
-
-    // console.log('show plane in home', showPlane) // THIS IS TO CHECK TURN ON/OFF BALLOON LIGHT
-
-    // if (showPlane) {
-    //     showPlane = true;
-    // }
 
     return (
         <section className='w-full h-screen relative'>
@@ -226,14 +171,6 @@ const Home = () => {
                     // intensity={pointLightPower}
                     />
                 }
-                {/* ///////////////////////////////// */}
-
-                {/* <Environment preset='sunset' /> */}
-
-                {/* <Environment preset='warehouse' /> */}
-
-                {/* <pointLight />
-                <spotLight /> */}
 
                 <ContactShadows
                     // for Raccoon
@@ -244,83 +181,13 @@ const Home = () => {
                     color='#000000'
                 />
 
-                {/* <ContactShadows
-                    // for Zach
-                    // position={shadowPosition}
-                    position={zachShadowPosition}
-                    opacity={1} scale={20}
-                    blur={0.5} far={10}
-                    resolution={256}
-                    color='#000000'
-                /> */}
-
-
-                {/* {showPlane &&
-                    <spotLight
-                        position={[0, 0, 0]} // Position at the center of the screen
-                        angle={Math.PI / 4}    // 45 degree angle
-                        penumbra={0.1}         // Soft edge
-                        intensity={1}          // Full brightness
-                        castShadow             // Enable shadow casting
-                    />
-                } */}
-
-                {/* {showPlane &&
-                    // <Environment preset='night' />
-                    <hemisphereLight
-                        skyColor='blue'
-                        // skyColor='#b1e1ff'
-                        groundColor='#010a01'
-                        // groundColor='#000000'
-                        intensity={1}
-                    />
-                } */}
-
-
-
                 <Suspense fallback={<Loader />}>
-                    {/* 
-                    {showBird && <Bird
-                        position={[-20, -50, 30]}
-                        scale={[0.3, 0.3, 0.3]}
-                        toggleShowBird={toggleShowBird}
-                    />
-                    } */}
-
-
-
-                    {/* 
-                    <Balloon // VERY STABLE AND RELIABLE
-                        // onClick={handleBalloonClick}
-                        toggleShowPlane={toggleShowPlane}
-                        clickDisabled={clickDisabled}
-                        setClickDisabled={setClickDisabled}
-                    // scale={balloonScale}
-                    /> */}
-
-                    {/* <Balloon_Test
-                    // position={balloonPosition}
-                    // scale={balloonScale}
-                    /> */}
 
                     <BalloonBlue
                         toggleShowPlane={toggleShowPlane}
                         clickDisabled={clickDisabled}
                         setClickDisabled={setClickDisabled}
                     />
-
-                    {/* <BalloonRed
-                        scale={[0.3, 0.3, 0.3]}
-                    /> */}
-
-
-                    {/* <Zach
-                        position={zachPosition}
-                        scale={zachScale}
-                        zachCurrentAnimation={zachCurrentAnimation}
-                        onClick={handleZachClick}
-                    /> */}
-
 
                     {!showPlane &&
                         <Sky_Land isRotating={isRotating}
@@ -333,7 +200,6 @@ const Home = () => {
                     {showPlane &&
                         <pointLight
                             position={[0, 2, -4]} // raccoon on small screen
-                            // position={[0, 0, 0]} // raccoon on small screen
                             castShadow:true
                             intensity={pointLightPower}
                         />
@@ -341,7 +207,6 @@ const Home = () => {
 
                     {showPlane &&
                         <directionalLight
-                            // color={0xffffff}
                             color={'#fcb849'} //current Yellow/Orange
                             intensity={1.2}
                             position={[0, 1, 0]}
@@ -352,7 +217,6 @@ const Home = () => {
                     {showPlane &&
                         <ambientLight
                             intensity={0.25}
-                            // intensity={0.2}
                             color='white'
                         />
                     }
@@ -367,7 +231,6 @@ const Home = () => {
 
 
                     <Island
-                        // scale={[1, 1, 1]}
                         position={islandPosition}
                         scale={islandScale}
                         rotation={islandRotation}
@@ -381,46 +244,16 @@ const Home = () => {
 
                     />
 
-
-
-                    {/* {showPlane && <FireNew // TURN ON/OFF FIRE
-                        position={islandPosition}
-                        scale={islandScale}
-                        rotation={islandRotation}
-                        isRotating={isRotating}
-                        setIsRotating={setIsRotating}
-                        setCurrentStage={setCurrentStage}
-
-                    />} */}
-
-
-                    {/* <Plane // THE ALPACA
-                        scale={[0.2, 0.2, 0.2]}
-                        // scale={planeScale}
-                        position={planePosition}
-                        isRotating={isRotating}
-                        // setIsRotating={setIsRotating}
-                        rotation={[0, 20.5, 0]}
-
-                    /> */}
-
                     <RaccoonNew
                         scale={planeScale}
-                        // scale={[0.03, 0.03, 0.03]}
                         position={planePosition}
                         isRotating={isRotating}
                         rotation={[0, 20.5, 0]}
                         // rotation={raccoonRotation}
                         showPlane={showPlane}
-
                     />
-
-
                 </Suspense>
-
-
             </Canvas>
-
         </section>
     )
 }

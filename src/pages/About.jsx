@@ -18,7 +18,7 @@ const About = () => {
 
             <div className='mt-5 flex flex-col gap-3 text-slate-500'>
                 <p>
-                    A recent graduate of UC San Diego seeking a career in Web development. Experienced in building
+                    A recent graduate from UC San Diego seeking a career in Software development. Experienced in building
                     responsive websites with a strong focus on user experience.
                     My background in art and animation enhances my ability to create visually captivating and
                     interactive web applications.
@@ -48,12 +48,6 @@ const About = () => {
             {/* EXPERIENCE */}
             <div className='py-16'>
                 <h3 className='subhead-text'>Work Experience</h3>
-                {/* <div className='mt-5 flex flex-col gap-3 text-slate-500'>
-                    <p>
-                        I've worked with all sorts of companies, leveling up my skills and
-                        teaming up with smart people. Here's the rundown:
-                    </p>
-                </div> */}
 
                 <div className='mt-12 flex'>
                     <VerticalTimeline>
@@ -105,7 +99,6 @@ const About = () => {
                                         <li
                                             key={`experience-point-${index}`}
                                             className='text-slate-500 font-normal pl-1 text-sm'
-                                        // className='text-black-500/50 font-normal pl-1 text-sm'
                                         >
                                             {point}
                                         </li>
@@ -121,15 +114,11 @@ const About = () => {
             {/* EDUCATION */}
             <div className='pt-8 pb-16'>
                 <h3 className='subhead-text'>Education</h3>
-                {/* <div className='mt-5 flex flex-col gap-3 text-slate-500'>
-
-                </div> */}
 
                 <div className='mt-5 flex'>
                     <VerticalTimeline>
                         {educations.map((education, index) => (
                             <VerticalTimelineElement
-                                // className='p-[-10]'
                                 key={education.company_name}
                                 date={
                                     <div className=''>
@@ -180,17 +169,8 @@ const About = () => {
                         ))}
                     </VerticalTimeline>
                 </div>
-
-
-
             </div>
-
-
-
-
-
             <hr className='border-slate-200' />
-
             <CTA />
         </section>
     );

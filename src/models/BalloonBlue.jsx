@@ -34,25 +34,10 @@ const BalloonBlue = ({ toggleShowPlane }) => {
         // actions['Action'].play();
     }, []);
 
-    // useEffect(() => {
-    //     // reset the balloon clicked back to false after 3s
-    //     if (isBalloonClicked) {
-    //         const timer = setTimeout(() => {
-    //             setIsBalloonClicked(false);
-    //         }, 3000);
-
-    //         // Cleanup the timer if the component is unmounted or `isClicked` changes before 3 seconds
-    //         return () => clearTimeout(timer);
-    //     }
-    // }, [isBalloonClicked]);
-
-    // console.log('is balloon clicked:', isBalloonClicked)
-
     const handleBalloonClick = () => {
         // setIsBalloonClicked(true);
         toggleShowPlane();
-        // Open Google.com in a new tab
-        // window.open("https://www.google.com", "_blank");
+
     };
 
     useFrame(({ clock, camera }) => {
@@ -97,13 +82,6 @@ const BalloonBlue = ({ toggleShowPlane }) => {
             ref={ref}
             onClick={handleBalloonClick}
             onPointerDown={handleBalloonClick}
-
-
-
-        // position={[-15, 4, -11]}
-        // scale={[1, 1, 1]}
-        // ref={ref}
-        // onClick={handleBalloonClick}
         >
             <primitive object={scene} />
         </mesh>
