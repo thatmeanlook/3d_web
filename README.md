@@ -1,5 +1,7 @@
 # 3D Portfolio
 
+![Web_capture](https://github.com/user-attachments/assets/b16f49e6-8324-4e8e-b3b6-430bb32d3261)
+
 ## Description
 This is a personal 3D portfolio showcasing my work in front-end web development. The website is built using React and Three.js. It includes various interactive 3D models and animations. I had a lot of fun working on this project.
 
