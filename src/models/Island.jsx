@@ -9,32 +9,27 @@ Title: Fox's islands
 import { useRef, useEffect, useState } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { AnimationMixer, AnimationUtils } from 'three'
-
 import { useFrame, useThree } from "@react-three/fiber";
 import islandScene from '../assets/3d/cute_island.glb'
 import fireScene from '../assets/3d/fire.glb'
-import birdScene from '../assets/3d/bird.glb'
+
+
 import birdPolyScene from '../assets/3d/bird_poly.glb'
-import birdScene3 from '../assets/3d/bird_3.glb'
-import birdWhite from '../assets/3d/low_poly_bird_animated.glb'
+
 import { a } from '@react-spring/three'
-import { user } from "../assets/icons";
 import { MeshBasicMaterial, Color } from "three";
 
 import zachScene from '../assets/3d/zachCopy.glb'
 
 const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleShowPlane, toggleShowBird, ...props }) => {
     const islandRef = useRef();
-    const group = useRef();
 
     const { gl, viewport } = useThree();
     const { nodes, materials } = useGLTF(islandScene);
     const { nodes: nodes2, materials: materials2, animations } = useGLTF(fireScene);
 
-    const { nodes: nodesBird, materials: materialsBird, animations: animationsBird } = useGLTF(birdScene);
     const { nodes: nodesBirdPoly, materials: materialsBirdPoly, animations: animationsBirdPoly } = useGLTF(birdPolyScene);
     const { actions } = useAnimations(animations, islandRef);
-    const { actions: actionsBird } = useAnimations(animationsBird, islandRef);
     const { actions: actionsBirdPoly } = useAnimations(animationsBirdPoly, islandRef)
     // console.log('birdScene', animationsBird)
 
@@ -46,20 +41,6 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
     const mixer = useRef();
 
     ////
-
-    const { nodes: nodes3, materials: materials3, animations3 } = useGLTF(birdScene3);
-    const { nodes: nodesWhite, materials: materialsWhite, animationsWhite } = useGLTF(birdWhite);
-
-    // console.log('fire animation', animations)
-    // console.log('bird poly animation', animationsBirdPoly)
-    // console.log('bird animation', animationsBird)
-    // console.log('bird scene', nodesBird)
-    // console.log('fire scene', nodes2)
-    // console.log('bird animation white', animationsWhite)
-
-    // console.log('Zach Scene in Island, ', zachScene)
-    // console.log('Zach animation', animationsZach)
-
 
     const [clickDisabled, setClickDisabled] = useState(false);
     const [fireOpacity, setFireOpacity] = useState(0.8);
@@ -287,7 +268,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
             document.removeEventListener('keydown', handleKeyDown);
             document.removeEventListener('keyup', handleKeyUp);
         }
-    }, [gl, handlePointerDown, handlePointerUp, handlePointerMove, actions, actionsBird, handleFireOpacity])
+    }, [gl, handlePointerDown, handlePointerUp, handlePointerMove, actions, handleFireOpacity])
 
 
     const handleKeyDown = (e) => {

@@ -96,9 +96,9 @@ const Home = () => {
         if (window.innerWidth < 700) {
             screenScale = [0.011, 0.011, 0.011] // racoon
             // screenScale = [0.2, 0.2, 0.2]; // Alpaca
-            screenPosition = [0, -1.28, 0];// raccoon current
+            screenPosition = [0, -1.23, 0];// raccoon current
             // screenPosition = [0, -1.5, 0];// Alpaca
-            shadowPosition = [0, -1.28, 0]; // racccoon current
+            shadowPosition = [0, -1.4, 0]; // racccoon current
             // shadowPosition = [0, -1.5, 0]; // Alpaca
             pointLightPower = 50;
 
@@ -106,7 +106,7 @@ const Home = () => {
             screenScale = [0.03, 0.03, 0.03] // raccoon
             // screenScale = [0.4, 0.4, 0.4]; // Alpaca
             screenPosition = [0, -3, -4];
-            shadowPosition = [0, -3, 0];
+            shadowPosition = [0, -3.5, 0];
             pointLightPower = 20;
 
         }
@@ -324,7 +324,7 @@ const Home = () => {
 
                     {!showPlane &&
                         <Sky_Land isRotating={isRotating}
-                        // scale={[0.5, 0.5, 0.5]}
+                        // scale={[10, 10, 10]}
                         />
                     }
 
@@ -360,7 +360,8 @@ const Home = () => {
                     {showPlane &&
                         <Sky_Anime
                             isRotating={isRotating}
-                        // scale={[10, 10, 10]}
+                            scale={[10, 10, 10]}
+                            position={[1, 1, 1]}
                         />
                     }
 
