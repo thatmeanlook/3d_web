@@ -103,11 +103,11 @@ const Home = () => {
 
                 <Suspense fallback={<Loader />}>
 
-                    {/* <BalloonBlue
+                    <BalloonBlue
                         toggleShowPlane={toggleShowPlane}
                         clickDisabled={clickDisabled}
                         setClickDisabled={setClickDisabled}
-                    /> */}
+                    />
 
                     {/* <Sky_Land></Sky_Land> */}
 
