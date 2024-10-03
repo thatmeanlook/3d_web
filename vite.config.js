@@ -16,7 +16,7 @@ export default defineConfig({
   assetsInclude: ['**/*.glb'],
   build: {
     rollupOptions: {
-      external: ['react-vertical-timeline-component'],
+      // external: ['react-vertical-timeline-component'],
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {

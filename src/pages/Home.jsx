@@ -111,7 +111,7 @@ const Home = () => {
 
                     {/* <Sky_Land></Sky_Land> */}
 
-                    {/* <Sky_Land isRotating={isRotating} /> */}
+                    <Sky_Land isRotating={isRotating} />
 
                     {/* <Island
                         position={islandPosition}
