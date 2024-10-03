@@ -1,8 +1,13 @@
 import React from 'react'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Home, About, Projects, Contact } from './pages';
+// import { Home } from './pages';
 import Navbar from './components/Navbar';
 
+
+// const About = React.lazy(() => import('./pages/About'));
+// const Projects = React.lazy(() => import('./pages/Projects'));
+// const Contact = React.lazy(() => import('./pages/Contact'));
 
 const App = () => {
     return (

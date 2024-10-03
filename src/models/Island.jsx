@@ -1,30 +1,50 @@
-import { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useMemo } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { AnimationMixer, AnimationUtils } from 'three'
 import { useFrame, useThree } from "@react-three/fiber";
+
 import islandScene from '../assets/3d/cute_island.glb'
 import fireScene from '../assets/3d/fire.glb'
 import birdPolyScene from '../assets/3d/bird_poly.glb'
+
+// const birdPolyScene = React.lazy(() => ('../assets/3d/bird_poly.glb'))
+// const islandScene = React.lazy(() => import('../models/Island'));
+
 import { a } from '@react-spring/three'
-import { MeshBasicMaterial, Color } from "three";
 
 import zachScene from '../assets/3d/zachCopy.glb'
 
-const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleShowPlane, toggleShowBird, ...props }) => {
+const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
+    ////////////////////////////
     const islandRef = useRef();
     const { gl, viewport } = useThree();
     const { nodes, materials } = useGLTF(islandScene);
-    const { nodes: nodes2, materials: materials2, animations } = useGLTF(fireScene);
+    const { nodes: nodesFire, materials: materialsFire, animations: animationsFire } = useGLTF(fireScene);
     const { nodes: nodesBirdPoly, materials: materialsBirdPoly, animations: animationsBirdPoly } = useGLTF(birdPolyScene);
-    const { actions } = useAnimations(animations, islandRef);
+    const { actions: actionsFire } = useAnimations(animationsFire, islandRef);
     const { actions: actionsBirdPoly } = useAnimations(animationsBirdPoly, islandRef)
 
     // ZACH STUFF
-    const zachRef = useRef();
     const { nodes: nodesZach, materials: materialsZach, animations: animationsZach } = useGLTF(zachScene);
     const { actions: actionsZach } = useAnimations(animationsZach, islandRef)
     const [zachCurrentAnimation, setZachCurrentAnimation] = useState('Wave');
     const mixer = useRef();
+
+
+    // Memoize the large objects
+    const memoizedNodes = useMemo(() => nodes, [nodes]);
+    const memoizedMaterials = useMemo(() => materials, [materials]);
+    const memoizedAnimations = useMemo(() => animationsFire, [animationsFire]);
+
+    const memoizedNodesFire = useMemo(() => nodesFire, [nodesFire]);
+    // const memoizedMaterialsFire = useMemo(() => materialsFire, [materialsFire]);
+
+    const memoizedNodesBirdPoly = useMemo(() => nodesBirdPoly, [nodesBirdPoly]);
+    const memoizedAnimationsBirdPoly = useMemo(() => animationsBirdPoly, [animationsBirdPoly]);
+
+    const memoizedNodesZach = useMemo(() => nodesZach, [nodesZach]);
+    const memoizedAnimationsZach = useMemo(() => animationsZach, [animationsZach]);
+    const memoizedActionsZach = useMemo(() => actionsZach, [actionsZach]);
 
     ////
 
@@ -34,78 +54,119 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
     const [birdOpacity, setBirdOpacity] = useState(0);
     const [zachOpacity, setZachOpacity] = useState(0);
 
-    const glowGreen = new MeshBasicMaterial({ color: new Color(0, 3, 1), toneMapped: false })
-
+    // Reusable function to disable clicks temporarily
+    const disableClickTemporarily = (duration = 500) => {
+        setClickDisabled(true);
+        setTimeout(() => setClickDisabled(false), duration);
+    };
 
     const handleFireOpacity = () => {
         if (!clickDisabled) {
-            if (fireOpacity == 0) {
-                setFireOpacity(0.8);
-            } else {
-                setFireOpacity(0);
-            }
-            setClickDisabled(true); // Disable click temporarily
-            setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
-            console.log('fire opacity after', fireOpacity)
+            setFireOpacity((prev) => (prev === 0 ? 0.8 : 0));
+            disableClickTemporarily();  // Use the helper function
+            console.log('fire opacity after', fireOpacity);
         }
-    }
+    };
+
+    // const handleFireOpacity = () => {
+    //     if (!clickDisabled) {
+    //         if (fireOpacity == 0) {
+    //             setFireOpacity(0.8);
+    //         } else {
+    //             setFireOpacity(0);
+    //         }
+    //         setClickDisabled(true); // Disable click temporarily
+    //         setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
+    //         console.log('fire opacity after', fireOpacity)
+    //     }
+    // }
+
 
     // Click on Tree will show the Bird
     const handleTreeClick = () => {
         if (!clickDisabled) {
-            if (birdOpacity == 0) {
-                setBirdOpacity(1); // Toggle the value of showPlane
-                // actionsBird['Take 001'].play();
+            setBirdOpacity((prev) => (prev === 0 ? 1 : 0));
+            if (birdOpacity === 0) {
                 actionsBirdPoly['Take 001'].play();
-                // setTimeout(() => (actionsBird['Take 001'].stop(),
-                //     setBirdOpacity(0)), 6000)
-            } else {
-                setBirdOpacity(0);
             }
-            setClickDisabled(true); // Disable click temporarily
-            setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
+            disableClickTemporarily();
         }
-    }
+    };
+
+    // // Click on Tree will show the Bird
+    // const handleTreeClick = () => {
+    //     if (!clickDisabled) {
+    //         if (birdOpacity == 0) {
+    //             setBirdOpacity(1);
+    //             actionsBirdPoly['Take 001'].play();
+    //         } else {
+    //             setBirdOpacity(0);
+    //         }
+    //         setClickDisabled(true); // Disable click temporarily
+    //         setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
+    //     }
+    // }
+
 
     // Click on Tent will show Zach
     const handleTentClick = () => {
-        // toggleShowZach();
         if (!clickDisabled) {
-            if (zachOpacity == 0) {
-                setZachOpacity(1);
-                // actionsZach[zachCurrentAnimation].play();
-            } else {
-                setZachOpacity(0);
-            }
-            setClickDisabled(true); // Disable click temporarily
-            setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
+            setZachOpacity((prev) => (prev === 0 ? 1 : 0));
+            disableClickTemporarily();
         }
-        // console.log('Zach opacity in click:', zachOpacity)
-    }
+    };
 
+    // // Click on Tent will show Zach
+    // const handleTentClick = () => {
+    //     if (!clickDisabled) {
+    //         if (zachOpacity == 0) {
+    //             setZachOpacity(1);
+    //         } else {
+    //             setZachOpacity(0);
+    //         }
+    //         setClickDisabled(true); // Disable click temporarily
+    //         setTimeout(() => setClickDisabled(false), 500); // Enable click after 1 second
+    //     }
+    // }
 
     // Trigger Zach's animation when clicked on
     const handleZachClick = () => {
         if (!clickDisabled) {
             // animation: fall back - shake head - back to waving
             setZachCurrentAnimation('Death');
-            // setZachCurrentAnimation('Jump_Idle'); // Jump_Idle set timeout300ms
-            // setZachCurrentAnimation('Jump');
             setTimeout(() => {
                 setZachCurrentAnimation('No');
                 setTimeout(() => {
                     setZachCurrentAnimation('Wave');
                 }, 1500);
-
             }, 1500);
 
-            setClickDisabled(true); // Disable click temporarily
-            setTimeout(() => setClickDisabled(false), 1000); // Enable click after 1 second
+            disableClickTemporarily(1000);  // Custom duration for Zach click
+            console.log('in Click function, actions:', actionsZach);
+            console.log('Zach current animation: ', zachCurrentAnimation);
         }
+    };
 
-        console.log('in Click function, actions:', actionsZach)
-        console.log('Zach current animation: ', zachCurrentAnimation)
-    }
+
+    // // Trigger Zach's animation when clicked on
+    // const handleZachClick = () => {
+    //     if (!clickDisabled) {
+    //         // animation: fall back - shake head - back to waving
+    //         setZachCurrentAnimation('Death');
+    //         setTimeout(() => {
+    //             setZachCurrentAnimation('No');
+    //             setTimeout(() => {
+    //                 setZachCurrentAnimation('Wave');
+    //             }, 1500);
+    //         }, 1500);
+
+    //         setClickDisabled(true); // Disable click temporarily
+    //         setTimeout(() => setClickDisabled(false), 1000); // Enable click after 1 second
+    //     }
+
+    //     console.log('in Click function, actions:', actionsZach)
+    //     console.log('Zach current animation: ', zachCurrentAnimation)
+    // }
 
     const handleBirdClick = () => {
         window.open('https://thatmeanlook.github.io/dino-run/', '_blank');
@@ -153,70 +214,59 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
 
     ///////////// ZACH EFFECT
     useEffect(() => {
-        console.log(actionsZach);
         const mixerInstance = new AnimationMixer(islandRef.current);
         mixer.current = mixerInstance;
-        console.log('Inside Effect:', actionsZach)
 
-        Object.values(actionsZach).forEach((action) => action.stop());
+        // Stop all current actions
+        Object.values(memoizedActionsZach).forEach((action) => action.stop());
 
-        // Trim animations so they loop properly
-        if (actionsZach[zachCurrentAnimation]) {
-            const crawlClip = actionsZach[zachCurrentAnimation].getClip();
-            const crawlSubClip = AnimationUtils.subclip(crawlClip, 'crawl_subClip', 0, 1000, true);
-            const crawlSubClipAction = mixerInstance.clipAction(crawlSubClip);
-            crawlSubClipAction.enabled = true;
-
-            if (zachCurrentAnimation == 'Jump') {
-                crawlSubClipAction.setDuration(1.2);
-            }
+        // Trim animations and play the current one
+        if (memoizedActionsZach[zachCurrentAnimation]) {
+            const animationClip = memoizedActionsZach[zachCurrentAnimation].getClip();
+            const subClip = AnimationUtils.subclip(animationClip, 'subClip', 0, 1000, true);
+            const action = mixerInstance.clipAction(subClip);
             if (zachCurrentAnimation == 'Death') {
-                crawlSubClipAction.setDuration(1.5);
+                action.setDuration(1.5);
             }
-
-            crawlSubClipAction.play();
+            action.play();
         }
+    }, [memoizedActionsZach, zachCurrentAnimation]);
 
-    }, [actionsZach, zachCurrentAnimation]);
+
+
+    // ///// ZAch Effect
+    // useEffect(() => {
+    //     console.log(actionsZach);
+    //     const mixerInstance = new AnimationMixer(islandRef.current);
+    //     mixer.current = mixerInstance;
+    //     console.log('Inside Effect:', actionsZach)
+
+    //     Object.values(actionsZach).forEach((action) => action.stop());
+
+    //     // Trim animations so they loop properly
+    //     if (actionsZach[zachCurrentAnimation]) {
+    //         const crawlClip = actionsZach[zachCurrentAnimation].getClip();
+    //         const crawlSubClip = AnimationUtils.subclip(crawlClip, 'crawl_subClip', 0, 1000, true);
+    //         const crawlSubClipAction = mixerInstance.clipAction(crawlSubClip);
+    //         crawlSubClipAction.enabled = true;
+
+    //         if (zachCurrentAnimation == 'Jump') {
+    //             crawlSubClipAction.setDuration(1.2);
+    //         }
+    //         if (zachCurrentAnimation == 'Death') {
+    //             crawlSubClipAction.setDuration(1.5);
+    //         }
+    //         crawlSubClipAction.play();
+    //     }
+    // }, [actionsZach, zachCurrentAnimation]);
+
 
     useFrame((_, delta) => {
         if (mixer.current) {
             mixer.current.update(delta);
         }
     }, [actionsZach, zachCurrentAnimation]);
-
-
-    useEffect(() => {
-        actions['Default Take'].play(); // fire animation
-
-        const canvas = gl.domElement;
-
-        canvas.addEventListener('pointerdown', handlePointerDown);
-        canvas.addEventListener('pointerup', handlePointerUp);
-        canvas.addEventListener('pointermove', handlePointerMove);
-
-        canvas.addEventListener("touchstart", handlePointerDown);
-        canvas.addEventListener("touchmove", handlePointerMove);
-        canvas.addEventListener("touchend", handlePointerUp);
-
-        document.addEventListener('keydown', handleKeyDown);
-        document.addEventListener('keyup', handleKeyUp);
-
-        return () => {
-            canvas.removeEventListener('pointerdown', handlePointerDown);
-            canvas.removeEventListener('pointerup', handlePointerUp);
-            canvas.removeEventListener('pointermove', handlePointerMove);
-
-            canvas.removeEventListener("touchstart", handlePointerDown);
-            canvas.removeEventListener("touchmove", handlePointerMove);
-            canvas.removeEventListener("touchend", handlePointerUp);
-
-            document.removeEventListener('keydown', handleKeyDown);
-            document.removeEventListener('keyup', handleKeyUp);
-        }
-    }, [gl, handlePointerDown, handlePointerUp, handlePointerMove, actions, handleFireOpacity])
-
-
+    //////////////////////////
     const handleKeyDown = (e) => {
         if (e.key === 'ArrowLeft') {
             if (!isRotating) setIsRotating(true);
@@ -232,6 +282,86 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
             setIsRotating(false);
         }
     }
+    /////////////////////////
+
+    // Function to add event listeners
+    const addEventListeners = (canvas) => {
+        canvas.addEventListener('pointerdown', handlePointerDown);
+        canvas.addEventListener('pointerup', handlePointerUp);
+        canvas.addEventListener('pointermove', handlePointerMove);
+
+        canvas.addEventListener("touchstart", handlePointerDown);
+        canvas.addEventListener("touchmove", handlePointerMove);
+        canvas.addEventListener("touchend", handlePointerUp);
+
+        document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('keyup', handleKeyUp);
+    };
+
+    // Function to remove event listeners
+    const removeEventListeners = (canvas) => {
+        canvas.removeEventListener('pointerdown', handlePointerDown);
+        canvas.removeEventListener('pointerup', handlePointerUp);
+        canvas.removeEventListener('pointermove', handlePointerMove);
+
+        canvas.removeEventListener("touchstart", handlePointerDown);
+        canvas.removeEventListener("touchmove", handlePointerMove);
+        canvas.removeEventListener("touchend", handlePointerUp);
+
+        document.removeEventListener('keydown', handleKeyDown);
+        document.removeEventListener('keyup', handleKeyUp);
+    };
+
+    useEffect(() => {
+        actionsFire['Default Take'].play(); // fire animation
+
+        const canvas = gl.domElement;
+
+        addEventListeners(canvas); // Add event listeners
+
+        // Cleanup function
+        return () => {
+            removeEventListeners(canvas); // Remove event listeners
+        };
+    }, [gl, actionsFire, handlePointerDown, handlePointerUp, handlePointerMove, handleKeyDown, handleKeyUp]);
+
+
+
+    //////////////////////////
+    // useEffect(() => {
+    //     // const firePlay = actionsFire['Default Take'];
+    //     // firePlay.play();
+    //     actionsFire['Default Take'].play(); // fire animation
+
+    //     const canvas = gl.domElement;
+
+    //     canvas.addEventListener('pointerdown', handlePointerDown);
+    //     canvas.addEventListener('pointerup', handlePointerUp);
+    //     canvas.addEventListener('pointermove', handlePointerMove);
+
+    //     canvas.addEventListener("touchstart", handlePointerDown);
+    //     canvas.addEventListener("touchmove", handlePointerMove);
+    //     canvas.addEventListener("touchend", handlePointerUp);
+
+    //     document.addEventListener('keydown', handleKeyDown);
+    //     document.addEventListener('keyup', handleKeyUp);
+
+    //     return () => {
+    //         canvas.removeEventListener('pointerdown', handlePointerDown);
+    //         canvas.removeEventListener('pointerup', handlePointerUp);
+    //         canvas.removeEventListener('pointermove', handlePointerMove);
+
+    //         canvas.removeEventListener("touchstart", handlePointerDown);
+    //         canvas.removeEventListener("touchmove", handlePointerMove);
+    //         canvas.removeEventListener("touchend", handlePointerUp);
+
+    //         document.removeEventListener('keydown', handleKeyDown);
+    //         document.removeEventListener('keyup', handleKeyUp);
+    //     }
+    // }, [gl, handlePointerDown, handlePointerUp, handlePointerMove, actionsFire, handleFireOpacity])
+
+
+
 
     // const handleCloudClick = () => {
     //     // Open Google.com in a new tab
@@ -331,7 +461,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 name="Bird_roll_env_07lambert10_0"
                                                 castShadow
                                                 receiveShadow
-                                                geometry={nodesBirdPoly.Bird_roll_env_07lambert10_0.geometry}
+                                                geometry={memoizedNodesBirdPoly.Bird_roll_env_07lambert10_0.geometry}
                                                 material={materialsBirdPoly.roll_env_07lambert10}
                                                 material-transparent={true}
                                                 material-opacity={birdOpacity}
@@ -391,9 +521,9 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                     >
                         <skinnedMesh
                             name="Character"
-                            geometry={nodesZach.Character.geometry}
+                            geometry={memoizedNodesZach.Character.geometry}
                             material={materialsZach.Atlas}
-                            skeleton={nodesZach.Character.skeleton}
+                            skeleton={memoizedNodesZach.Character.skeleton}
                             material-transparent={true}
                             material-opacity={zachOpacity}
                             onClick={handleZachClick}
@@ -401,7 +531,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                             castShadow
                         // receiveShadow
                         />
-                        <primitive object={nodesZach.Root} />
+                        <primitive object={memoizedNodesZach.Root} />
                     </group>
                 </group>
 
@@ -434,8 +564,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 name="fireA_005_fire_0"
                                                 castShadow
                                                 receiveShadow
-                                                geometry={nodes2.fireA_005_fire_0.geometry}
-                                                material={materials2.fire}
+                                                geometry={memoizedNodesFire.fireA_005_fire_0.geometry}
+                                                material={materialsFire.fire}
                                                 material-transparent
                                                 material-opacity={fireOpacity}
                                             // material={glowGreen}
@@ -453,8 +583,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 name="fireB_048_fire_0"
                                                 castShadow
                                                 receiveShadow
-                                                geometry={nodes2.fireB_048_fire_0.geometry}
-                                                material={materials2.fire}
+                                                geometry={memoizedNodesFire.fireB_048_fire_0.geometry}
+                                                material={materialsFire.fire}
                                                 material-opacity={fireOpacity}
                                             // material-color={'red'}
 
@@ -470,8 +600,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 name="fireB_047_fire_0"
                                                 castShadow
                                                 receiveShadow
-                                                geometry={nodes2.fireB_047_fire_0.geometry}
-                                                material={materials2.fire}
+                                                geometry={memoizedNodesFire.fireB_047_fire_0.geometry}
+                                                material={materialsFire.fire}
                                                 material-opacity={fireOpacity}
                                             // material-color={'red'}
 
@@ -487,8 +617,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 name="fireB_046_fire_0"
                                                 castShadow
                                                 receiveShadow
-                                                geometry={nodes2.fireB_046_fire_0.geometry}
-                                                material={materials2.fire}
+                                                geometry={memoizedNodesFire.fireB_046_fire_0.geometry}
+                                                material={materialsFire.fire}
                                                 material-opacity={fireOpacity}
 
                                             />
@@ -503,8 +633,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 name="fireB_045_fire_0"
                                                 castShadow
                                                 receiveShadow
-                                                geometry={nodes2.fireB_045_fire_0.geometry}
-                                                material={materials2.fire}
+                                                geometry={memoizedNodesFire.fireB_045_fire_0.geometry}
+                                                material={materialsFire.fire}
                                                 material-opacity={fireOpacity}
 
                                             />
@@ -519,8 +649,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 name="fireB_044_fire_0"
                                                 castShadow
                                                 receiveShadow
-                                                geometry={nodes2.fireB_044_fire_0.geometry}
-                                                material={materials2.fire}
+                                                geometry={memoizedNodesFire.fireB_044_fire_0.geometry}
+                                                material={materialsFire.fire}
                                                 material-opacity={fireOpacity}
 
                                             />
@@ -535,8 +665,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 name="fireB_043_fire_0"
                                                 castShadow
                                                 receiveShadow
-                                                geometry={nodes2.fireB_043_fire_0.geometry}
-                                                material={materials2.fire}
+                                                geometry={memoizedNodesFire.fireB_043_fire_0.geometry}
+                                                material={materialsFire.fire}
                                                 material-opacity={fireOpacity}
 
                                             />
@@ -551,8 +681,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 name="smoke_087_fire_0"
                                                 castShadow
                                                 receiveShadow
-                                                geometry={nodes2.smoke_087_fire_0.geometry}
-                                                material={materials2.fire}
+                                                geometry={memoizedNodesFire.smoke_087_fire_0.geometry}
+                                                material={materialsFire.fire}
                                                 material-opacity={fireOpacity}
 
                                             />
@@ -567,8 +697,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 name="smoke_086_fire_0"
                                                 castShadow
                                                 receiveShadow
-                                                geometry={nodes2.smoke_086_fire_0.geometry}
-                                                material={materials2.fire}
+                                                geometry={memoizedNodesFire.smoke_086_fire_0.geometry}
+                                                material={materialsFire.fire}
                                                 material-opacity={fireOpacity}
 
                                             />
@@ -583,8 +713,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 name="smoke_085_fire_0"
                                                 castShadow
                                                 receiveShadow
-                                                geometry={nodes2.smoke_085_fire_0.geometry}
-                                                material={materials2.fire}
+                                                geometry={memoizedNodesFire.smoke_085_fire_0.geometry}
+                                                material={materialsFire.fire}
                                                 material-opacity={fireOpacity}
 
                                             />
@@ -599,8 +729,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 name="smoke_084_fire_0"
                                                 castShadow
                                                 receiveShadow
-                                                geometry={nodes2.smoke_084_fire_0.geometry}
-                                                material={materials2.fire}
+                                                geometry={memoizedNodesFire.smoke_084_fire_0.geometry}
+                                                material={materialsFire.fire}
                                                 material-opacity={fireOpacity}
 
                                             />
@@ -616,8 +746,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 name="fireB_042_fire_0"
                                                 castShadow
                                                 receiveShadow
-                                                geometry={nodes2.fireB_042_fire_0.geometry}
-                                                material={materials2.fire}
+                                                geometry={memoizedNodesFire.fireB_042_fire_0.geometry}
+                                                material={materialsFire.fire}
                                                 material-opacity={fireOpacity}
 
                                             />
@@ -632,8 +762,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 name="smoke_083_fire_0"
                                                 castShadow
                                                 receiveShadow
-                                                geometry={nodes2.smoke_083_fire_0.geometry}
-                                                material={materials2.fire}
+                                                geometry={memoizedNodesFire.smoke_083_fire_0.geometry}
+                                                material={materialsFire.fire}
                                                 material-opacity={fireOpacity}
 
                                             />
@@ -648,8 +778,8 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, showPlane, toggleS
                                                 name="fireB_041_fire_0"
                                                 castShadow
                                                 receiveShadow
-                                                geometry={nodes2.fireB_041_fire_0.geometry}
-                                                material={materials2.fire}
+                                                geometry={memoizedNodesFire.fireB_041_fire_0.geometry}
+                                                material={materialsFire.fire}
                                                 material-opacity={fireOpacity}
 
 
